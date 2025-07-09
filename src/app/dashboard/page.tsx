@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { DashboardLayout } from "@/components/dashboard-layout";
 import { useUser } from "@/app/dashboard/context/user-context";
 import {
@@ -29,6 +28,7 @@ import type {
   PortfolioDto,
   TicketDto,
 } from "@/app/api/types/trading";
+import { AuthConfirmer } from "../auth/components/authConfirmer";
 
 interface DashboardData {
   tradingAccounts: TradingAccountDto[];
@@ -40,8 +40,20 @@ interface DashboardData {
 }
 
 export default function DashboardPage() {
-  const router = useRouter();
-  const { user, loading: userLoading, error: userError } = useUser();
+  console.log("📊 [DashboardPage] Component rendering");
+
+  const {
+    user,
+    loading: userLoading,
+    error: userError,
+    refreshUser,
+  } = useUser();
+
+  console.log("📊 [DashboardPage] User context state:", {
+    user: user?.email,
+    userLoading,
+    userError,
+  });
 
   const [dashboardData, setDashboardData] = useState<DashboardData>({
     tradingAccounts: [],
@@ -51,76 +63,80 @@ export default function DashboardPage() {
     totalBalance: 0,
     totalUsdValue: 0,
   });
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const fetchDashboardData = async () => {
-      try {
-        setLoading(true);
-        setError("");
+  const fetchDashboardData = async () => {
+    try {
+      setLoading(true);
+      setError("");
 
-        const accountsResponse = await getTradingAccounts();
-        if (!accountsResponse.success) {
-          setError(
-            accountsResponse.message || "Failed to load trading accounts"
-          );
-          return;
-        }
-
-        const accounts = accountsResponse.data || [];
-        if (accounts.length === 0) {
-          setDashboardData((prev) => ({ ...prev, tradingAccounts: [] }));
-          setLoading(false);
-          return;
-        }
-
-        const primaryAccount = accounts[0];
-
-        const [walletsResponse, portfolioResponse, ticketsResponse] =
-          await Promise.all([
-            getWallets(primaryAccount.id),
-            getPortfolio(primaryAccount.id),
-            getTickets({ tradingAccountId: primaryAccount.id, pageSize: 10 }),
-          ]);
-
-        const wallets = walletsResponse.success
-          ? walletsResponse.data || []
-          : [];
-        const portfolio = portfolioResponse.success
-          ? portfolioResponse.data ?? null
-          : null;
-        const tickets = ticketsResponse.success
-          ? ticketsResponse.data || []
-          : [];
-
-        const totalBalance = wallets.reduce(
-          (sum, wallet) => sum + wallet.totalBalance,
-          0
-        );
-        const totalUsdValue = portfolio?.totalUsdValue || 0;
-
-        setDashboardData({
-          tradingAccounts: accounts,
-          wallets,
-          portfolio,
-          tickets,
-          totalBalance,
-          totalUsdValue,
-        });
-      } catch (err) {
-        console.error("Dashboard data fetch error:", err);
-        setError("Failed to load dashboard data");
-      } finally {
-        setLoading(false);
+      // Get trading accounts first
+      const accountsResponse = await getTradingAccounts();
+      if (!accountsResponse.success) {
+        setError(accountsResponse.message || "Failed to load trading accounts");
+        return;
       }
-    };
 
+      const accounts = accountsResponse.data || [];
+      if (accounts.length === 0) {
+        setDashboardData((prev) => ({ ...prev, tradingAccounts: [] }));
+        setLoading(false);
+        return;
+      }
+
+      // Use the first trading account
+      const primaryAccount = accounts[0];
+
+      // Fetch wallets, portfolio, and tickets in parallel
+      const [walletsResponse, portfolioResponse, ticketsResponse] =
+        await Promise.all([
+          getWallets(primaryAccount.id),
+          getPortfolio(primaryAccount.id),
+          getTickets({ tradingAccountId: primaryAccount.id, pageSize: 10 }),
+        ]);
+
+      const wallets = walletsResponse.success ? walletsResponse.data || [] : [];
+      const portfolio = portfolioResponse.success
+        ? portfolioResponse.data
+        : null;
+      const tickets = ticketsResponse.success ? ticketsResponse.data || [] : [];
+
+      // Calculate total balance from wallets
+      const totalBalance = wallets.reduce(
+        (sum, wallet) => sum + wallet.totalBalance,
+        0
+      );
+      const totalUsdValue = portfolio?.totalUsdValue || 0;
+
+      setDashboardData({
+        tradingAccounts: accounts,
+        wallets,
+        portfolio,
+        tickets,
+        totalBalance,
+        totalUsdValue,
+      });
+    } catch (error: unknown) {
+      console.error("Dashboard data fetch error:", error);
+      setError("Failed to load dashboard data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     if (!userLoading) {
       fetchDashboardData();
     }
   }, [userLoading]);
+
+  // Handle auth confirmation callback
+  const handleAuthConfirmed = async () => {
+    console.log("🔄 [DashboardPage] Auth confirmed, refreshing user data...");
+    await refreshUser();
+    await fetchDashboardData();
+  };
 
   if (userLoading || loading) {
     return (
@@ -136,6 +152,7 @@ export default function DashboardPage() {
   if (error || userError) {
     return (
       <DashboardLayout>
+        <AuthConfirmer onAuthConfirmed={handleAuthConfirmed} />
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
@@ -157,11 +174,12 @@ export default function DashboardPage() {
 
   const primaryAccount = dashboardData.tradingAccounts[0];
   const activeTickets = dashboardData.tickets.filter(
-    (ticket) => ticket.ticketStatus === 0 || ticket.ticketStatus === 1
+    (ticket) => ticket.ticketStatus === 0 || ticket.ticketStatus === 1 // Pending or Processing
   );
 
   return (
     <DashboardLayout>
+      <AuthConfirmer onAuthConfirmed={handleAuthConfirmed} />
       <div className="space-y-6">
         {/* Welcome Section */}
         <div>
@@ -170,7 +188,7 @@ export default function DashboardPage() {
             !
           </h1>
           <p className="text-muted-foreground">
-            Heres what&apos;s happening with your trading account today.
+            Here&apos;s what&apos;s happening with your trading account today.
           </p>
         </div>
 
