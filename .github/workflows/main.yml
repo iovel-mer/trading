@@ -21,8 +21,7 @@ jobs:
       - name: 🧰 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          node-version: ${{ env.NODE_VERSION }} 
 
       - name: 📦 Install Dependencies & Build
         run: |
