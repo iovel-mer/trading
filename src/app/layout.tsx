@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { UserProvider } from "@/contexts/user-context";
+import { UserProvider } from "@/app/dashboard/context/user-context";
 import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
@@ -17,7 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Trading Platform - Secure Trading Solutions",
-  description: "Advanced trading platform with secure authentication and real-time trading capabilities",
+  description:
+    "Advanced trading platform with secure authentication and real-time trading capabilities",
 };
 
 export default function RootLayout({

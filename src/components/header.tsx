@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,25 +9,55 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { Bell, Settings, LogOut, User } from "lucide-react"
-import { authManager } from "@/lib/auth"
-import { useRouter } from "next/navigation"
-import { useUser } from "@/contexts/user-context"
+} from "@/components/ui/dropdown-menu";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Bell, Settings, LogOut, User, RefreshCw } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/app/dashboard/context/user-context";
+import { useState } from "react";
+import { postLogout } from "@/app/api/auth/postLogout";
 
 interface HeaderProps {
-  className?: string
+  className?: string;
 }
 
 export function Header({ className }: HeaderProps) {
-  const router = useRouter()
-  const { user } = useUser()
+  const router = useRouter();
+  const { user, loading, error, refreshUser } = useUser();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  const handleLogout = () => {
-    authManager.clearTokens()
-    router.push('/')
-  }
+  console.log("🔍 [Header] Current state:", { user, loading, error });
+
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true);
+      await postLogout();
+      router.push("/login");
+    } catch (error) {
+      console.error("Logout error:", error);
+      router.push("/login");
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
+
+  const getUserInitials = () => {
+    if (!user) return "U";
+    const firstInitial = user.firstName?.[0] || "";
+    const lastInitial = user.lastName?.[0] || "";
+    return `${firstInitial}${lastInitial}` || "U";
+  };
+
+  const getUserDisplayName = () => {
+    if (loading) return "Loading...";
+    if (!user) return "User";
+    return `${user.firstName || ""} ${user.lastName || ""}`.trim() || "User";
+  };
+
+  const getUserEmail = () => {
+    if (loading) return "Loading...";
+    return user?.email || "No email";
+  };
 
   return (
     <header className={className}>
@@ -35,26 +65,26 @@ export function Header({ className }: HeaderProps) {
         <div className="flex flex-1 items-center gap-4">
           <div className="flex items-center gap-2">
             <h1 className="text-lg font-semibold">Dashboard</h1>
+            {/* Debug info */}
+            {error && (
+              <span className="text-xs text-red-500">Error: {error}</span>
+            )}
           </div>
         </div>
-        <div className="flex items-center gap-4">
-          {/* Notifications */}
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="h-5 w-5" />
-            <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500" />
-            <span className="sr-only">Notifications</span>
-          </Button>
 
-          {/* Theme Toggle */}
+        <div className="flex items-center gap-4">
           <ThemeToggle />
 
-          {/* User Menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                 <Avatar className="h-8 w-8">
+                  <AvatarImage
+                    src={user?.profileImage || "/placeholder.svg"}
+                    alt={getUserDisplayName()}
+                  />
                   <AvatarFallback className="bg-gradient-to-br from-green-400 to-blue-500 text-white">
-                    {user ? `${user.firstName[0]}${user.lastName[0]}` : 'DU'}
+                    {getUserInitials()}
                   </AvatarFallback>
                 </Avatar>
               </Button>
@@ -63,31 +93,31 @@ export function Header({ className }: HeaderProps) {
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    {user ? `${user.firstName} ${user.lastName}` : 'Loading...'}
+                    {getUserDisplayName()}
                   </p>
                   <p className="text-xs leading-none text-muted-foreground">
-                    {user?.email || 'Loading...'}
+                    {getUserEmail()}
                   </p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push("/profile")}>
                 <User className="mr-2 h-4 w-4" />
                 <span>Profile</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push("/settings")}>
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Settings</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleLogout}>
+              <DropdownMenuItem onClick={handleLogout} disabled={isLoggingOut}>
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
+                <span>{isLoggingOut ? "Logging out..." : "Log out"}</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </div>
     </header>
-  )
-} 
+  );
+}

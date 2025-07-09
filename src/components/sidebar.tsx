@@ -1,24 +1,23 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { 
-  DollarSign, 
-  TrendingUp, 
-  User, 
-  Home,
-  Menu,
-  X
-} from "lucide-react"
-import { useState } from "react"
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { useUser } from "@/contexts/user-context"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { DollarSign, TrendingUp, User, Home, Menu, X } from "lucide-react";
+import { useState } from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { useUser } from "@/app/dashboard/context/user-context";
 
 interface SidebarProps {
-  className?: string
+  className?: string;
 }
 
 const navigation = [
@@ -42,17 +41,20 @@ const navigation = [
     href: "/dashboard/profile",
     icon: User,
   },
-]
+];
 
 export function Sidebar({ className }: SidebarProps) {
-  const pathname = usePathname()
-  const [isOpen, setIsOpen] = useState(false)
-  const { user } = useUser()
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const { user } = useUser();
 
   const SidebarContent = () => (
     <div className="flex h-full flex-col gap-2">
       <div className="flex h-[60px] items-center px-2">
-        <Link href="/dashboard" className="flex items-center gap-2 font-semibold">
+        <Link
+          href="/dashboard"
+          className="flex items-center gap-2 font-semibold"
+        >
           <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
             <TrendingUp className="h-4 w-4 text-white" />
           </div>
@@ -62,7 +64,7 @@ export function Sidebar({ className }: SidebarProps) {
       <Separator />
       <nav className="flex-1 space-y-1 px-2">
         {navigation.map((item) => {
-          const isActive = pathname === item.href
+          const isActive = pathname === item.href;
           return (
             <Link
               key={item.name}
@@ -78,7 +80,7 @@ export function Sidebar({ className }: SidebarProps) {
               <item.icon className="mr-3 h-4 w-4" />
               {item.name}
             </Link>
-          )
+          );
         })}
       </nav>
       <Separator />
@@ -88,17 +90,17 @@ export function Sidebar({ className }: SidebarProps) {
             <div className="h-8 w-8 rounded-full bg-gradient-to-br from-green-400 to-blue-500" />
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium truncate">
-                {user ? `${user.firstName} ${user.lastName}` : 'Loading...'}
+                {user ? `${user.firstName} ${user.lastName}` : "Loading..."}
               </p>
               <p className="text-xs text-muted-foreground truncate">
-                {user?.email || 'Loading...'}
+                {user?.email || "Loading..."}
               </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 
   return (
     <>
@@ -112,11 +114,7 @@ export function Sidebar({ className }: SidebarProps) {
       {/* Mobile Sidebar */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
-          <Button
-            variant="ghost"
-            className="lg:hidden"
-            size="icon"
-          >
+          <Button variant="ghost" className="lg:hidden" size="icon">
             <Menu className="h-5 w-5" />
             <span className="sr-only">Open sidebar</span>
           </Button>
@@ -129,5 +127,5 @@ export function Sidebar({ className }: SidebarProps) {
         </SheetContent>
       </Sheet>
     </>
-  )
-} 
+  );
+}
