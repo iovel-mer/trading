@@ -8,8 +8,6 @@ interface DashboardLayoutProps {
 }
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
-  console.log("🏗️ [DashboardLayout] Rendering");
-
   return (
     <div className="flex h-screen bg-background">
       <Sidebar />

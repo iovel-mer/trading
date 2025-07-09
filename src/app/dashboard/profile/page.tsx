@@ -18,8 +18,6 @@ import { useUser } from "@/app/dashboard/context/user-context";
 export default function ProfilePage() {
   const { user, loading } = useUser();
 
-  console.log(user, " USERRRR");
-
   if (loading) {
     return (
       <DashboardLayout>
