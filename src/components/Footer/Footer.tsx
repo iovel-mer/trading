@@ -84,12 +84,10 @@ export default function Footer() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
 
   const handleOpenModal = (modalType: string) => {
-    console.log("Opening modal:", modalType); // Debug log
     setActiveModal(modalType);
   };
 
   const handleCloseModal = () => {
-    console.log("Closing modal"); // Debug log
     setActiveModal(null);
   };
 
@@ -108,7 +106,12 @@ export default function Footer() {
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-2 mb-4">
-                <Image src="/Vector.png" alt="SalesVault" width={30} height={30} />
+                <Image
+                  src="/Vector.png"
+                  alt="SalesVault"
+                  width={30}
+                  height={30}
+                />
                 <span className="text-2xl font-bold">SalesVault</span>
               </div>
               <p className="text-gray-400 mb-6 max-w-sm">
