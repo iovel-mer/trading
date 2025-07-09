@@ -42,11 +42,6 @@ interface DashboardData {
 export default function DashboardPage() {
   const router = useRouter();
   const { user, loading: userLoading, error: userError } = useUser();
-  console.log("📊 [DashboardPage] User context state:", {
-    user: user?.email,
-    userLoading,
-    userError,
-  });
 
   const [dashboardData, setDashboardData] = useState<DashboardData>({
     tradingAccounts: [],
@@ -89,8 +84,6 @@ export default function DashboardPage() {
             getPortfolio(primaryAccount.id),
             getTickets({ tradingAccountId: primaryAccount.id, pageSize: 10 }),
           ]);
-
-        console.log(ticketsResponse, "Tick Response");
 
         const wallets = walletsResponse.success
           ? walletsResponse.data || []

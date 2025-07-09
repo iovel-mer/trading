@@ -1,7 +1,5 @@
 "use client";
 
-console.log("🔥 [UserContext] Module loaded");
-
 import type React from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 import { getCurrentUser } from "@/app/api/auth/getCurrentUser";
@@ -18,8 +16,6 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  console.log("🚀 [UserProvider] Component initialized - THIS SHOULD SHOW UP!");
-
   const [user, setUser] = useState<UserSettings | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -59,24 +55,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     fetchUserData();
   }, []);
 
-  useEffect(() => {
-    console.log("👤 [UserContext] User state changed:", {
-      user: user,
-      userEmail: user?.email,
-      loading,
-      error,
-      isAuthenticated,
-    });
-  }, [user, loading, error, isAuthenticated]);
-
   const contextValue = { user, loading, error, refreshUser, isAuthenticated };
-
-  console.log("🎨 [UserProvider] Rendering with state:", {
-    user: user?.email || "null",
-    loading,
-    error,
-    contextValue: contextValue,
-  });
 
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
@@ -88,13 +67,6 @@ export function useUser() {
   if (context === undefined) {
     throw new Error("useUser must be used within a UserProvider");
   }
-
-  console.log("🔍 [useUser] Hook called, context value:", {
-    user: context.user?.email || "null",
-    loading: context.loading,
-    error: context.error,
-    fullUser: context.user,
-  });
 
   return context;
 }

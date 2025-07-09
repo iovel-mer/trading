@@ -26,8 +26,6 @@ export function Header({ className }: HeaderProps) {
   const { user, loading, error } = useUser();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  console.log("🔍 [Header] Current state:", { user, loading, error });
-
   const handleLogout = async () => {
     try {
       setIsLoggingOut(true);
