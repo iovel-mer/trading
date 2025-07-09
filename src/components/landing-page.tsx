@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
@@ -415,9 +416,9 @@ const LandingPage = () => {
               <motion.div
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.5 }}
-                className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center"
+                className="w-10 h-10 rounded-xl flex items-center justify-center"
               >
-                <LineChart className="w-6 h-6" />
+                <Image src="/Vector.png" alt="SalesVault" width={30} height={30} />
               </motion.div>
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 SalesVault

@@ -10,6 +10,7 @@ import {
   Send,
   Github,
 } from "lucide-react";
+import Image from "next/image";
 
 const modalContent = {
   terms: {
@@ -107,16 +108,14 @@ export default function Footer() {
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                  <LineChart className="w-6 h-6" />
-                </div>
+                <Image src="/Vector.png" alt="SalesVault" width={30} height={30} />
                 <span className="text-2xl font-bold">SalesVault</span>
               </div>
               <p className="text-gray-400 mb-6 max-w-sm">
                 The most trusted cryptocurrency trading platform with advanced
                 tools and security.
               </p>
-              <div className="flex space-x-4">
+              {/* <div className="flex space-x-4">
                 {Object.entries(socialIcons).map(([social, Icon]) => (
                   <motion.a
                     key={social}
@@ -127,7 +126,7 @@ export default function Footer() {
                     <Icon className="w-5 h-5" />
                   </motion.a>
                 ))}
-              </div>
+              </div> */}
             </div>
 
             {[

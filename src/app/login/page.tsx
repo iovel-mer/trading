@@ -47,6 +47,9 @@ export default function LoginPage() {
       return;
     }
 
+    // Store credentials for Web Trader access
+    localStorage.setItem('webTraderCredentials', JSON.stringify(credentials));
+
     window.location.href = "/dashboard";
   };
 

@@ -348,13 +348,15 @@ export default function TradingPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div>
-                    <Label htmlFor="account-select">Trading Account</Label>
+                  <div className="ms-auto mt-3">
+                    <Label htmlFor="account-select" className="justify-end">
+                      Trading Account
+                    </Label>
                     <Select
                       value={selectedAccount}
                       onValueChange={setSelectedAccount}
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className="ms-auto mt-3">
                         <SelectValue placeholder="Select a trading account" />
                       </SelectTrigger>
                       <SelectContent>
@@ -422,15 +424,15 @@ export default function TradingPage() {
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <Label htmlFor="account-select">Trading Account</Label>
+                    <Label htmlFor="account-select" className="mb-2">Trading Account</Label>
                     <Select
                       value={selectedAccount}
                       onValueChange={setSelectedAccount}
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select a trading account" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="w-full">
                         {tradingAccounts.map((account) => (
                           <SelectItem key={account.id} value={account.id}>
                             {account.displayName} ({account.accountNumber})
@@ -441,12 +443,12 @@ export default function TradingPage() {
                   </div>
 
                   <div>
-                    <Label htmlFor="wallet-select">Wallet</Label>
+                    <Label htmlFor="wallet-select" className="mb-2">Wallet</Label>
                     <Select
                       value={selectedWallet}
                       onValueChange={setSelectedWallet}
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select a wallet" />
                       </SelectTrigger>
                       <SelectContent>
@@ -461,14 +463,14 @@ export default function TradingPage() {
                   </div>
 
                   <div>
-                    <Label htmlFor="ticket-type">Ticket Type</Label>
+                    <Label htmlFor="ticket-type" className="mb-2">Ticket Type</Label>
                     <Select
                       value={ticketType.toString()}
                       onValueChange={(value: string) =>
                         setTicketType(Number.parseInt(value) as TicketType)
                       }
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select ticket type" />
                       </SelectTrigger>
                       <SelectContent>
@@ -489,7 +491,7 @@ export default function TradingPage() {
                   </div>
 
                   <div>
-                    <Label htmlFor="amount">Amount</Label>
+                    <Label htmlFor="amount" className="mb-2">Amount</Label>
                     <Input
                       id="amount"
                       type="number"

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { DollarSign, TrendingUp, User, Home, Menu } from "lucide-react";
+import { DollarSign, TrendingUp, User, Home, Menu, Monitor } from "lucide-react";
 import { useState } from "react";
 import {
   Sheet,
@@ -15,6 +15,8 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useUser } from "@/app/dashboard/context/user-context";
+import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
 
 interface SidebarProps {
   className?: string;
@@ -46,35 +48,49 @@ const navigation = [
 export function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useUser();
+  const { user, openWebTrader } = useUser();
+  const { toast } = useToast();
+
+  const handleWebTraderClick = async () => {
+    setIsOpen(false);
+    try {
+      await openWebTrader();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to open Web Trader. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const SidebarContent = () => (
-    <div className="flex h-full flex-col gap-2">
-      <div className="flex h-[60px] items-center px-2">
+    <div className="flex h-full flex-col">
+      <div className="flex items-center px-2 border-b mb-3">
         <Link
           href="/dashboard"
-          className="flex items-center gap-2 font-semibold"
+          className="flex h-[63px] items-center gap-2 font-semibold"
         >
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-            <TrendingUp className="h-4 w-4 text-white" />
+          <div className="h-8 w-8 rounded-lg flex items-center justify-center">
+            <Image src="/Vector.png" alt="SalesVault" width={30} height={30} />
           </div>
-          <span className="text-lg">Trading Platform</span>
+          <span className="text-lg">SalesVault</span>
         </Link>
       </div>
-      <Separator />
       <nav className="flex-1 space-y-1 px-2">
         {navigation.map((item) => {
           const isActive = pathname === item.href;
+          
           return (
             <Link
               key={item.name}
               href={item.href}
               onClick={() => setIsOpen(false)}
               className={cn(
-                "group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
+                "group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
                 isActive
                   ? "bg-accent text-accent-foreground"
-                  : "text-muted-foreground"
+                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
               )}
             >
               <item.icon className="mr-3 h-4 w-4" />
@@ -83,6 +99,18 @@ export function Sidebar({ className }: SidebarProps) {
           );
         })}
       </nav>
+      
+      {/* Web Trader Button */}
+      <div className="px-2 py-2">
+        <button
+          onClick={handleWebTraderClick}
+          className="flex items-center w-full rounded-md px-3 py-3 text-sm font-medium transition-colors bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg hover:from-blue-600 hover:to-purple-700"
+        >
+          <Monitor className="mr-3 h-4 w-4 text-white" />
+          Web Trader
+        </button>
+      </div>
+      
       <Separator />
       <div className="p-2">
         <div className="rounded-lg bg-muted p-3">
@@ -106,7 +134,7 @@ export function Sidebar({ className }: SidebarProps) {
     <>
       {/* Desktop Sidebar */}
       <div className={cn("hidden lg:flex lg:w-64 lg:flex-col", className)}>
-        <div className="flex flex-col flex-grow bg-background border-r pt-5 pb-4 overflow-y-auto">
+        <div className="flex flex-col flex-grow bg-background border-r overflow-y-auto">
           <SidebarContent />
         </div>
       </div>
