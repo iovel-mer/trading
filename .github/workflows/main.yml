@@ -26,12 +26,13 @@ jobs:
 
       - name: 📦 Install dependencies & Build
         run: |
-          npm ci
+          npm install
           npm run build
 
           APP_NAME_LOWER=$(echo "${{ env.APP_NAME }}" | tr '[:upper:]' '[:lower:]')
           DEPLOY_PATH="/www/wwwroot/${APP_NAME_LOWER}.crm-system.com"
           echo "DEPLOY_PATH=${DEPLOY_PATH}" >> $GITHUB_ENV
+
 
       - name: 🔐 Setup SSH
         run: |
