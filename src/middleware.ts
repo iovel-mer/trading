@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { postRefreshToken } from "@/app/api/auth/postRefreshToken";
-import { COOKIE_CONFIG } from "@/app/api/const/session";
+import { COOKIE_CONFIG } from "./app/api/const/session";
 
 const parseJwtSync = (token: string) => {
   try {
@@ -39,6 +39,19 @@ export async function middleware(request: NextRequest) {
     request.nextUrl.pathname.startsWith(path)
   );
 
+  // Check if there's an authkey in the URL - if so, allow access to dashboard
+  const authkey = url.searchParams.get("authkey");
+  if (authkey && pathname === "/dashboard") {
+    console.log(
+      "\x1b[43m\x1b[30m[AUTHKEY DETECTED]\x1b[0m Allowing dashboard access for auth confirmation"
+    );
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
+
   // If accessing auth pages with valid session, redirect to dashboard
   if (isAuthPath) {
     const sessionCookie = request.cookies.get(COOKIE_CONFIG.SESSION.name);
@@ -74,6 +87,7 @@ export async function middleware(request: NextRequest) {
       "\x1b[41m\x1b[97m[INVALID SESSION DATA]\x1b[0m Redirecting to /login"
     );
     const response = NextResponse.redirect(new URL("/login", request.url));
+    // Clear the invalid session cookie
     response.cookies.delete(COOKIE_CONFIG.SESSION.name);
     response.cookies.delete("accessToken");
     response.cookies.delete("refreshToken");
@@ -82,6 +96,7 @@ export async function middleware(request: NextRequest) {
 
   const { token, refreshToken } = sessionData;
 
+  // Token expired → try to refresh
   const needsRefresh = isJWTExpiredSync(token);
   if (needsRefresh) {
     console.log("\x1b[44m\x1b[97m[TOKEN EXPIRED]\x1b[0m Trying refresh...");
@@ -127,6 +142,7 @@ export async function middleware(request: NextRequest) {
       },
     });
 
+    // Update session cookie
     response.cookies.set(
       COOKIE_CONFIG.SESSION.name,
       JSON.stringify(updatedSession),
@@ -134,16 +150,17 @@ export async function middleware(request: NextRequest) {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
-        maxAge: 60 * 60 * 24 * 7,
+        maxAge: 60 * 60 * 24 * 7, // 7 days
         path: "/",
       }
     );
 
+    // Update individual token cookies for backward compatibility
     response.cookies.set("accessToken", refreshed.data.accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 60 * 15,
+      maxAge: 60 * 15, // 15 minutes
       path: "/",
     });
 
@@ -151,7 +168,7 @@ export async function middleware(request: NextRequest) {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7,
+      maxAge: 60 * 60 * 24 * 7, // 7 days
       path: "/",
     });
 
