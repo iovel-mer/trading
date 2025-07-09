@@ -21,7 +21,6 @@ export function AuthConfirmer({ onAuthConfirmed }: AuthConfirmerProps) {
     const authKey = searchParams.get("authkey");
 
     if (authKey) {
-      console.log("🔑 [AuthConfirmer] Found authkey in URL:", authKey);
       handleAuthConfirmation(authKey);
     }
   }, [searchParams]);
@@ -31,26 +30,20 @@ export function AuthConfirmer({ onAuthConfirmed }: AuthConfirmerProps) {
       setStatus("checking");
       setMessage("Confirming authentication...");
 
-      console.log("🔄 [AuthConfirmer] Confirming auth with key:", authKey);
-
       const result = await confirmAuth(authKey);
 
       if (result.success) {
-        console.log("✅ [AuthConfirmer] Auth confirmed successfully");
         setStatus("success");
         setMessage("Authentication confirmed! Loading dashboard...");
 
-        // Clean the URL by removing the authkey parameter
         const url = new URL(window.location.href);
         url.searchParams.delete("authkey");
         window.history.replaceState({}, "", url.toString());
 
-        // Call the callback if provided
         if (onAuthConfirmed) {
           onAuthConfirmed();
         }
 
-        // Force a page reload to ensure the new session is recognized
         setTimeout(() => {
           window.location.reload();
         }, 1000);
@@ -61,7 +54,6 @@ export function AuthConfirmer({ onAuthConfirmed }: AuthConfirmerProps) {
         );
         setStatus("error");
 
-        // Redirect to login after error
         setTimeout(() => {
           router.push("/login");
         }, 3000);
@@ -74,7 +66,6 @@ export function AuthConfirmer({ onAuthConfirmed }: AuthConfirmerProps) {
       setStatus("error");
       setMessage("An unexpected error occurred");
 
-      // Redirect to login after error
       setTimeout(() => {
         router.push("/login");
       }, 3000);

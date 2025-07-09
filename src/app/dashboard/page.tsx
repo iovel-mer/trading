@@ -49,12 +49,6 @@ export default function DashboardPage() {
     refreshUser,
   } = useUser();
 
-  console.log("📊 [DashboardPage] User context state:", {
-    user: user?.email,
-    userLoading,
-    userError,
-  });
-
   const [dashboardData, setDashboardData] = useState<DashboardData>({
     tradingAccounts: [],
     wallets: [],
@@ -98,7 +92,7 @@ export default function DashboardPage() {
 
       const wallets = walletsResponse.success ? walletsResponse.data || [] : [];
       const portfolio = portfolioResponse.success
-        ? portfolioResponse.data
+        ? portfolioResponse.data ?? null
         : null;
       const tickets = ticketsResponse.success ? ticketsResponse.data || [] : [];
 
@@ -133,7 +127,6 @@ export default function DashboardPage() {
 
   // Handle auth confirmation callback
   const handleAuthConfirmed = async () => {
-    console.log("🔄 [DashboardPage] Auth confirmed, refreshing user data...");
     await refreshUser();
     await fetchDashboardData();
   };
