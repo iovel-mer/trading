@@ -10,18 +10,9 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import {
-  User,
-  Mail,
-  Phone,
-  MapPin,
-  Shield,
-  Settings,
-  Edit,
-  Camera,
-} from "lucide-react";
+import { User, Shield, Camera } from "lucide-react";
 import { useUser } from "@/app/dashboard/context/user-context";
 
 export default function ProfilePage() {

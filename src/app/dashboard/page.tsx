@@ -177,7 +177,7 @@ export default function DashboardPage() {
             !
           </h1>
           <p className="text-muted-foreground">
-            Here's what's happening with your trading account today.
+            Heres what&apos;s happening with your trading account today.
           </p>
         </div>
 
