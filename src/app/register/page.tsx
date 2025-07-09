@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { ChevronLeft } from 'lucide-react';
 import { postRegistration } from "../api/auth/postRegistration";
 
 export default function RegisterPage() {
@@ -42,19 +43,28 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="max-w-md w-full">
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+    <div className="min-h-screen flex bg-[#1b1f7b]">
+      {/* Left side - Auth Form */}
+      <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="mx-auto w-full max-w-sm">
+          <Link
+            href="/"
+            className="inline-flex items-center text-sm text-gray-400 hover:text-white mb-8 transition-colors"
+          >
+            <ChevronLeft className="h-4 w-4 mr-1" />
+            Back to home
+          </Link>
+
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl font-bold text-white mb-2">
               Create Account
             </h1>
-            <p className="text-gray-600">Join our trading platform today</p>
+            <p className="text-gray-400">Join our trading platform today</p>
           </div>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-              <p className="text-red-600 text-sm">{error}</p>
+            <div className="mb-4 p-3 bg-red-900/50 border border-red-500/50 rounded-lg">
+              <p className="text-red-400 text-sm">{error}</p>
             </div>
           )}
 
@@ -63,7 +73,7 @@ export default function RegisterPage() {
               <div>
                 <label
                   htmlFor="firstName"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="block text-sm font-medium text-gray-300 mb-1"
                 >
                   First Name
                 </label>
@@ -74,7 +84,8 @@ export default function RegisterPage() {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  disabled={isLoading}
+                  className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
                   placeholder="First name"
                 />
               </div>
@@ -82,7 +93,7 @@ export default function RegisterPage() {
               <div>
                 <label
                   htmlFor="lastName"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="block text-sm font-medium text-gray-300 mb-1"
                 >
                   Last Name
                 </label>
@@ -93,7 +104,8 @@ export default function RegisterPage() {
                   value={formData.lastName}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  disabled={isLoading}
+                  className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
                   placeholder="Last name"
                 />
               </div>
@@ -102,7 +114,7 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-300 mb-1"
               >
                 Email
               </label>
@@ -113,7 +125,8 @@ export default function RegisterPage() {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                disabled={isLoading}
+                className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
                 placeholder="Enter your email"
               />
             </div>
@@ -121,7 +134,7 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="username"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-300 mb-1"
               >
                 Username
               </label>
@@ -132,7 +145,8 @@ export default function RegisterPage() {
                 value={formData.username}
                 onChange={handleInputChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                disabled={isLoading}
+                className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
                 placeholder="Choose a username"
               />
             </div>
@@ -140,7 +154,7 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-300 mb-1"
               >
                 Password
               </label>
@@ -151,7 +165,8 @@ export default function RegisterPage() {
                 value={formData.password}
                 onChange={handleInputChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                disabled={isLoading}
+                className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
                 placeholder="Create a password"
               />
             </div>
@@ -159,7 +174,7 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="phoneNumber"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-300 mb-1"
               >
                 Phone Number
               </label>
@@ -170,7 +185,8 @@ export default function RegisterPage() {
                 value={formData.phoneNumber}
                 onChange={handleInputChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                disabled={isLoading}
+                className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
                 placeholder="Enter your phone number"
               />
             </div>
@@ -178,31 +194,87 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 px-6 rounded-lg transition duration-200"
+              className="w-full bg-gradient-to-r mt-3 cursor-pointer from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Creating account..." : "Create Account"}
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  Creating account...
+                </div>
+              ) : (
+                "Create Account"
+              )}
             </button>
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-400">
               Already have an account?{" "}
               <Link
                 href="/login"
-                className="text-blue-600 hover:text-blue-700 font-medium"
+                className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
               >
                 Sign in
               </Link>
             </p>
           </div>
+        </div>
+      </div>
 
-          <div className="mt-4 text-center">
-            <Link
-              href="/"
-              className="text-sm text-gray-500 hover:text-gray-700"
-            >
-              ← Back to home
-            </Link>
+      {/* Right side - Background */}
+      <div className="hidden lg:block relative flex-1">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black to-black" />
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+        
+        <div className="relative h-full flex items-center justify-center p-12">
+          <div className="max-w-md">
+            <h2 className="text-3xl font-bold text-white mb-6">
+              Start Trading Today
+            </h2>
+            <div className="space-y-4 text-gray-400">
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
+                  <div className="w-2 h-2 rounded-full bg-blue-500" />
+                </div>
+                <p>Access to 100+ cryptocurrency trading pairs</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
+                  <div className="w-2 h-2 rounded-full bg-blue-500" />
+                </div>
+                <p>Advanced trading tools and real-time market data</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
+                  <div className="w-2 h-2 rounded-full bg-blue-500" />
+                </div>
+                <p>Secure wallet with industry-leading protection</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
+                  <div className="w-2 h-2 rounded-full bg-blue-500" />
+                </div>
+                <p>24/7 customer support and educational resources</p>
+              </div>
+            </div>
+            
+            <div className="mt-10 pt-10 border-t border-gray-700">
+              <div className="flex items-center justify-between text-sm">
+                <div>
+                  <p className="text-gray-400">Total Trading Volume</p>
+                  <p className="text-2xl font-bold text-white">$2.8B+</p>
+                </div>
+                <div>
+                  <p className="text-gray-400">Active Traders</p>
+                  <p className="text-2xl font-bold text-white">500K+</p>
+                </div>
+                <div>
+                  <p className="text-gray-400">Countries</p>
+                  <p className="text-2xl font-bold text-white">180+</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
