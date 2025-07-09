@@ -33,7 +33,6 @@ jobs:
           DEPLOY_PATH="/www/wwwroot/${APP_NAME_LOWER}.crm-system.com"
           echo "DEPLOY_PATH=${DEPLOY_PATH}" >> $GITHUB_ENV
 
-
       - name: 🔐 Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -54,13 +53,13 @@ jobs:
             cd ${{ env.DEPLOY_PATH }}
 
             # Install only production dependencies
-            npm ci --omit=dev
+            npm install --omit=dev
 
-            # Set permissions (optional)
+            # Set file permissions
             find . -type f -exec chmod 644 {} \;
             find . -type d -exec chmod 755 {} \;
 
-            # Create or update startup script
+            # Create start script
             cat > start-app.sh << 'EOT'
             #!/bin/bash
             cd $(dirname "$0")
