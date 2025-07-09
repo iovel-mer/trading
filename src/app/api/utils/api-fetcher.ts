@@ -1,5 +1,6 @@
 "use server";
 import { logApiError, errorCodes, getAccessToken } from "@/app/api/utils";
+import { cookies } from "next/headers";
 
 /**
  * API Fetcher - A utility for making API requests in Next.js server actions
@@ -61,7 +62,11 @@ export const apiFetcher = async <T = unknown>(
   endpoint: string,
   options: FetcherOptions = {}
 ): Promise<ApiResponse<T>> => {
-  const { accessToken }: any = await getAccessToken();
+  let accessToken = null;
+  if (!options.noAuth) {
+    const cookieStore = await cookies();
+    accessToken = cookieStore.get("accessToken")?.value || null;
+  }
   const baseUrl = process.env.API_URL;
   const defaultOptions: FetcherOptions = {
     method: "GET",

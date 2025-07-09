@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trading Platform v2
+
+A modern trading platform built with Next.js 15, TypeScript, and Tailwind CSS.
+
+## Features
+
+- 🔐 **Secure Authentication**: Login and registration with JWT tokens
+- 🎨 **Modern UI**: Beautiful, responsive design with Tailwind CSS
+- ⚡ **Fast Performance**: Built with Next.js 15 and optimized for speed
+- 🔄 **Token Refresh**: Automatic token refresh handling
+- 🛡️ **Middleware Protection**: Route protection with Next.js middleware
+
+## Authentication Flow
+
+### Login
+- **Endpoint**: `POST /api/auth/login`
+- **Request Body**:
+  ```json
+  {
+    "emailOrUsername": "user@example.com",
+    "password": "password123",
+    "twoFactorCode": null,
+    "rememberMe": false
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "accessToken": "jwt_access_token",
+    "refreshToken": "jwt_refresh_token"
+  }
+  ```
+
+### Register
+- **Endpoint**: `POST /api/users/register`
+- **Request Body**:
+  ```json
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john@example.com",
+    "username": "johndoe",
+    "password": "password123",
+    "phoneNumber": "+1234567890"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "username": "johndoe",
+    "email": "john@example.com",
+    "password": "hashed_password"
+  }
+  ```
+
+## Environment Setup
+
+Create a `.env.local` file in the root directory:
+
+```env
+NEXT_PUBLIC_BASE_URL=https://api.salesvault.dev
+```
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies**:
+   ```bash
+   pnpm install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+2. **Run the development server**:
+   ```bash
+   pnpm dev
+   ```
+
+3. **Open your browser** and navigate to `http://localhost:3000`
+
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   ├── dashboard/         # Protected dashboard page
+│   ├── login/            # Login page
+│   ├── register/         # Registration page
+│   └── page.tsx          # Landing page
+├── lib/                   # Utility libraries
+│   ├── api.ts            # API client functions
+│   ├── auth.ts           # Authentication manager
+│   └── cookies.ts        # Cookie utilities
+└── middleware.ts         # Next.js middleware for route protection
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Authentication Manager
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The `AuthManager` class provides centralized token management:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Token Storage**: Automatically stores access and refresh tokens
+- **Token Refresh**: Handles automatic token refresh
+- **Cookie Management**: Syncs tokens between localStorage and cookies
+- **Authentication Check**: Provides easy authentication status checking
 
-## Learn More
+## API Integration
 
-To learn more about Next.js, take a look at the following resources:
+The platform integrates with the SalesVault API at `https://api.salesvault.dev`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- All API calls include proper error handling
+- Bearer token authentication for protected endpoints
+- Automatic token refresh on 401 responses
+- TypeScript interfaces for type safety
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Security Features
 
-## Deploy on Vercel
+- **JWT Tokens**: Secure token-based authentication
+- **Route Protection**: Middleware protects private routes
+- **Token Refresh**: Automatic token renewal
+- **Secure Storage**: Tokens stored in both localStorage and cookies
+- **CSRF Protection**: Built-in Next.js security features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Development
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **TypeScript**: Full type safety throughout the application
+- **ESLint**: Code quality and consistency
+- **Tailwind CSS**: Utility-first CSS framework
+- **Next.js 15**: Latest React framework with App Router
+
+## Deployment
+
+The application is ready for deployment on Vercel, Netlify, or any other Next.js-compatible platform.
+
+## License
+
+This project is proprietary and confidential.
