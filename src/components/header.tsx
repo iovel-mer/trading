@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Bell, Settings, LogOut, User, RefreshCw } from "lucide-react";
+import { Settings, LogOut, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/app/dashboard/context/user-context";
 import { useState } from "react";
@@ -23,7 +23,7 @@ interface HeaderProps {
 
 export function Header({ className }: HeaderProps) {
   const router = useRouter();
-  const { user, loading, error, refreshUser } = useUser();
+  const { user, loading, error } = useUser();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   console.log("🔍 [Header] Current state:", { user, loading, error });

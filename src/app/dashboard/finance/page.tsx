@@ -320,7 +320,7 @@ export default function FinancePage() {
                   </p>
                 ) : (
                   financeData.tradingAccounts.map((account) => {
-                    const accountWallets = financeData.allWallets.filter((w) =>
+                    const accountWallets = financeData.allWallets.filter(() =>
                       financeData.tradingAccounts.find(
                         (a) => a.id === account.id
                       )

@@ -3,14 +3,11 @@
 import type React from "react";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { LoginCredentials } from "@/app/api/types/auth";
 import { postLogin } from "@/app/api/auth/postLogin";
 
 export default function LoginPage() {
-  const router = useRouter();
-
   const [formData, setFormData] = useState({
     emailOrUsername: "",
     password: "",
@@ -50,7 +47,6 @@ export default function LoginPage() {
       return;
     }
 
-    // Force a hard redirect to ensure the cookies are properly set
     window.location.href = "/dashboard";
   };
 
@@ -180,7 +176,7 @@ export default function LoginPage() {
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link
                 href="/register"
                 className="text-blue-600 hover:text-blue-700 font-medium"

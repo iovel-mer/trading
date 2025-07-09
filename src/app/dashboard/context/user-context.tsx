@@ -42,6 +42,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       setUser(response.data);
       setIsAuthenticated(true);
     } catch (err) {
+      console.error(err);
       setError("Failed to fetch user data");
       setIsAuthenticated(false);
       setUser(null);

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { DollarSign, TrendingUp, User, Home, Menu, X } from "lucide-react";
+import { DollarSign, TrendingUp, User, Home, Menu } from "lucide-react";
 import { useState } from "react";
 import {
   Sheet,

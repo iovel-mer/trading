@@ -1,5 +1,5 @@
 "use server";
-import { logApiError, errorCodes, getAccessToken } from "@/app/api/utils";
+import { logApiError, errorCodes } from "@/app/api/utils";
 import { cookies } from "next/headers";
 
 /**
