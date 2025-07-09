@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout code
+      - name: 📥 Checkout Code
         uses: actions/checkout@v4
 
       - name: 🧰 Setup Node.js
@@ -24,7 +24,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      - name: 📦 Install dependencies & Build
+      - name: 📦 Install Dependencies & Build
         run: |
           npm install
           npm run build
@@ -33,14 +33,14 @@ jobs:
           DEPLOY_PATH="/www/wwwroot/${APP_NAME_LOWER}.crm-system.com"
           echo "DEPLOY_PATH=${DEPLOY_PATH}" >> $GITHUB_ENV
 
-      - name: 🔐 Setup SSH
+      - name: 🔐 Setup SSH Access
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
-      - name: 🚀 Deploy to Server
+      - name: 🚀 Deploy via SSH
         run: |
           rsync -avz --delete \
             --exclude='.git' \
@@ -51,23 +51,17 @@ jobs:
 
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << EOF
             cd ${{ env.DEPLOY_PATH }}
-
-            # Install only production dependencies
             npm install --omit=dev
 
-            # Set file permissions
-            find . -type f -exec chmod 644 {} \;
-            find . -type d -exec chmod 755 {} \;
-
-            # Create start script
             cat > start-app.sh << 'EOT'
             #!/bin/bash
             cd $(dirname "$0")
             exec npx next start -p ${{ env.PORT }}
             EOT
+
             chmod +x start-app.sh
             EOF
 
-      - name: 🧹 Cleanup
+      - name: 🧹 Cleanup SSH Keys
         if: always()
         run: rm -rf ~/.ssh
