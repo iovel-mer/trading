@@ -104,7 +104,7 @@ export function Sidebar({ className }: SidebarProps) {
       <div className="px-2 py-2">
         <button
           onClick={handleWebTraderClick}
-          className="flex items-center w-full rounded-md px-3 py-3 text-sm font-medium transition-colors bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg hover:from-blue-600 hover:to-purple-700"
+          className="flex items-center cursor-pointer w-full rounded-md px-3 py-3 text-sm font-medium transition-colors bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg hover:from-blue-600 hover:to-purple-700"
         >
           <Monitor className="mr-3 h-4 w-4 text-white" />
           Web Trader

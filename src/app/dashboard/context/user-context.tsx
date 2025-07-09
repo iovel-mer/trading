@@ -91,7 +91,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       }
 
       // Redirect to Web Trader with token
-      window.open(`https://webtrader.salesvault.dev/trading-view?ctx=${token}`, '_blank');
+      window.open(`http://localhost:3000/trading-view?ctx=${token}`, '_blank');
     } catch (err) {
       console.error(err);
       toast({

@@ -47,10 +47,10 @@ const modalContent = {
     title: "Terms of Service",
     content: `
         <h3>1. Acceptance of Terms</h3>
-        <p>By accessing and using TradePro, you accept and agree to be bound by the terms and provision of this agreement.</p>
+        <p>By accessing and using SalesVault, you accept and agree to be bound by the terms and provision of this agreement.</p>
         
         <h3>2. Trading Services</h3>
-        <p>TradePro provides cryptocurrency trading services. All trades are executed at your own risk.</p>
+        <p>SalesVault provides cryptocurrency trading services. All trades are executed at your own risk.</p>
         
         <h3>3. Account Security</h3>
         <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
@@ -65,7 +65,7 @@ const modalContent = {
         <p>Users may not engage in market manipulation, money laundering, or any other illegal activities on our platform.</p>
         
         <h3>7. Limitation of Liability</h3>
-        <p>TradePro shall not be liable for any indirect, incidental, special, consequential, or punitive damages.</p>
+        <p>SalesVault shall not be liable for any indirect, incidental, special, consequential, or punitive damages.</p>
         
         <h3>8. Termination</h3>
         <p>We reserve the right to terminate or suspend your account at any time for violation of these terms.</p>
@@ -1207,7 +1207,7 @@ const LandingPage = () => {
                 <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
                   <LineChart className="w-6 h-6" />
                 </div>
-                <span className="text-2xl font-bold">TradePro</span>
+                <span className="text-2xl font-bold">SalesVault</span>
               </div>
               <p className="text-gray-400 mb-6 max-w-sm">
                 The most trusted cryptocurrency trading platform with advanced
@@ -1267,7 +1267,7 @@ const LandingPage = () => {
           <div className="pt-8 border-t border-gray-800">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <p className="text-gray-400 text-sm">
-                © 2024 TradePro. All rights reserved.
+                © 2024 SalesVault. All rights reserved.
               </p>
               <div className="flex space-x-6 text-sm">
                 <a
