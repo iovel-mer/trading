@@ -12,6 +12,11 @@ export interface RegisterUserData {
   username: string;
   password: string;
   phoneNumber: string;
+  telephone?: string | null;
+  country?: string | null;
+  language?: string | null;
+  dateOfBirth?: string;
+  source?: string | null;
 }
 
 export interface LoginResponse {

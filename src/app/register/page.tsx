@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from 'lucide-react';
@@ -15,15 +15,30 @@ export default function RegisterPage() {
     username: "",
     password: "",
     phoneNumber: "",
+    telephone: "",
+    country: "",
+    language: "",
+    dateOfBirth: "",
+    source: ""
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Set the source to the current domain URL
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setFormData(prev => ({
+        ...prev,
+        source: window.location.origin as string
+      }));
+    }
+  }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: value === "" ? null : value,
     }));
   };
 
@@ -188,6 +203,75 @@ export default function RegisterPage() {
                 disabled={isLoading}
                 className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
                 placeholder="Enter your phone number"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="country"
+                className="block text-sm font-medium text-gray-300 mb-1"
+              >
+                Country
+              </label>
+              <select
+                id="country"
+                name="country"
+                value={formData.country || ""}
+                onChange={handleInputChange}
+                disabled={isLoading}
+                className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
+              >
+                <option value="">Select your country</option>
+                <option value="US">United States</option>
+                <option value="GE">Georgia</option>
+                <option value="UK">United Kingdom</option>
+                <option value="DE">Germany</option>
+                <option value="FR">France</option>
+                {/* Add more countries as needed */}
+              </select>
+            </div>
+
+            <div>
+              <label
+                htmlFor="language"
+                className="block text-sm font-medium text-gray-300 mb-1"
+              >
+                Language
+              </label>
+              <select
+                id="language"
+                name="language"
+                value={formData.language || ""}
+                onChange={handleInputChange}
+                disabled={isLoading}
+                className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
+              >
+                <option value="">Select your language</option>
+                <option value="en">English</option>
+                <option value="ka">Georgian</option>
+                <option value="de">German</option>
+                <option value="fr">French</option>
+                {/* Add more languages as needed */}
+              </select>
+            </div>
+
+            <div>
+              <label
+                htmlFor="dateOfBirth"
+                className="block text-sm font-medium text-gray-300 mb-1"
+              >
+                Date of Birth
+              </label>
+              <input
+                type="date"
+                id="dateOfBirth"
+                name="dateOfBirth"
+                value={formData.dateOfBirth}
+                onChange={handleInputChange}
+                required
+                disabled={isLoading}
+                className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
+                placeholder="YYYY-MM-DD"
               />
             </div>
 

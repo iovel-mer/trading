@@ -4,9 +4,12 @@ import { apiFetcher } from "@/app/api/utils/api-fetcher";
 import type { RegisterUserData, RegisterResponse } from "@/app/api/types/auth";
 
 export const postRegistration = async (userData: RegisterUserData) => {
-  return apiFetcher<RegisterResponse>("identity/api/users/register", {
+  return apiFetcher<RegisterResponse>("identity/api/clients/create-client-via-web", {
     method: "POST",
-    body: userData,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
     noAuth: true,
     fallbackErrorMessages: {
       400: "Invalid registration data provided",
