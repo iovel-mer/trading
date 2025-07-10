@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Search, ChevronDown } from 'lucide-react';
 import { postRegistration } from "../api/auth/postRegistration";
 import { getCountries } from "@/app/api/countries/getCountries";
 import { getLanguages } from "@/app/api/languages/getLanguages";
@@ -29,6 +29,12 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const [countries, setCountries] = useState<Country[]>([]);
   const [languages, setLanguages] = useState<Language[]>([]);
+  
+  // Search states
+  const [countrySearch, setCountrySearch] = useState("");
+  const [languageSearch, setLanguageSearch] = useState("");
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
 
   // Set the source to the current domain URL and fetch countries/languages
   useEffect(() => {
@@ -81,6 +87,35 @@ export default function RegisterPage() {
 
     setIsLoading(false);
   };
+
+  // Filter countries and languages based on search
+  const filteredCountries = countries.filter(country =>
+    country.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
+    country.code.toLowerCase().includes(countrySearch.toLowerCase())
+  );
+
+  const filteredLanguages = languages.filter(language =>
+    language.name.toLowerCase().includes(languageSearch.toLowerCase()) ||
+    language.code.toLowerCase().includes(languageSearch.toLowerCase())
+  );
+
+  // Handle country selection
+  const handleCountrySelect = (countryCode: string) => {
+    setFormData(prev => ({ ...prev, country: countryCode }));
+    setCountrySearch("");
+    setShowCountryDropdown(false);
+  };
+
+  // Handle language selection
+  const handleLanguageSelect = (languageCode: string) => {
+    setFormData(prev => ({ ...prev, language: languageCode }));
+    setLanguageSearch("");
+    setShowLanguageDropdown(false);
+  };
+
+  // Get selected country and language names for display
+  const selectedCountry = countries.find(c => c.code === formData.country);
+  const selectedLanguage = languages.find(l => l.code === formData.language);
 
   return (
     <div className="min-h-screen flex bg-[#1b1f7b]">
@@ -231,52 +266,108 @@ export default function RegisterPage() {
               />
             </div>
 
-            <div>
+            <div className="relative">
               <label
                 htmlFor="country"
                 className="block text-sm font-medium text-gray-300 mb-1"
               >
                 Country
               </label>
-              <select
-                id="country"
-                name="country"
-                value={formData.country || ""}
-                onChange={handleInputChange}
-                disabled={isLoading}
-                className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
-              >
-                <option value="">Select your country</option>
-                {countries.map((country) => (
-                  <option key={country.code} value={country.code}>
-                    {country.name}
-                  </option>
-                ))}
-              </select>
+              <div className="relative">
+                <div
+                  className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] cursor-pointer flex items-center justify-between"
+                  onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                >
+                  <span className={selectedCountry ? "text-white" : "text-gray-500"}>
+                    {selectedCountry ? selectedCountry.name : "Select your country"}
+                  </span>
+                  <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform ${showCountryDropdown ? 'rotate-180' : ''}`} />
+                </div>
+                
+                {showCountryDropdown && (
+                  <div className="absolute z-10 w-full mt-1 bg-[#1b1f7b] border border-gray-700 rounded-lg shadow-lg max-h-60 overflow-hidden">
+                    <div className="p-2 border-b border-gray-700">
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                        <input
+                          type="text"
+                          placeholder="Search countries..."
+                          value={countrySearch}
+                          onChange={(e) => setCountrySearch(e.target.value)}
+                          className="w-full pl-10 pr-3 py-2 bg-[#1b1f7b] border border-gray-600 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
+                        />
+                      </div>
+                    </div>
+                    <div className="max-h-48 overflow-y-auto">
+                      {filteredCountries.length > 0 ? (
+                        filteredCountries.map((country) => (
+                          <div
+                            key={country.code}
+                            onClick={() => handleCountrySelect(country.code)}
+                            className="px-3 py-2 hover:bg-gray-700 cursor-pointer text-white"
+                          >
+                            {country.name}
+                          </div>
+                        ))
+                      ) : (
+                        <div className="px-3 py-2 text-gray-400">No countries found</div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
-            <div>
+            <div className="relative">
               <label
                 htmlFor="language"
                 className="block text-sm font-medium text-gray-300 mb-1"
               >
                 Language
               </label>
-              <select
-                id="language"
-                name="language"
-                value={formData.language || ""}
-                onChange={handleInputChange}
-                disabled={isLoading}
-                className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
-              >
-                <option value="">Select your language</option>
-                {languages.map((language) => (
-                  <option key={language.code} value={language.code}>
-                    {language.name}
-                  </option>
-                ))}
-              </select>
+              <div className="relative">
+                <div
+                  className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] cursor-pointer flex items-center justify-between"
+                  onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
+                >
+                  <span className={selectedLanguage ? "text-white" : "text-gray-500"}>
+                    {selectedLanguage ? selectedLanguage.name : "Select your language"}
+                  </span>
+                  <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform ${showLanguageDropdown ? 'rotate-180' : ''}`} />
+                </div>
+                
+                {showLanguageDropdown && (
+                  <div className="absolute z-10 w-full mt-1 bg-[#1b1f7b] border border-gray-700 rounded-lg shadow-lg max-h-60 overflow-hidden">
+                    <div className="p-2 border-b border-gray-700">
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                        <input
+                          type="text"
+                          placeholder="Search languages..."
+                          value={languageSearch}
+                          onChange={(e) => setLanguageSearch(e.target.value)}
+                          className="w-full pl-10 pr-3 py-2 bg-[#1b1f7b] border border-gray-600 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
+                        />
+                      </div>
+                    </div>
+                    <div className="max-h-48 overflow-y-auto">
+                      {filteredLanguages.length > 0 ? (
+                        filteredLanguages.map((language) => (
+                          <div
+                            key={language.code}
+                            onClick={() => handleLanguageSelect(language.code)}
+                            className="px-3 py-2 hover:bg-gray-700 cursor-pointer text-white"
+                          >
+                            {language.name}
+                          </div>
+                        ))
+                      ) : (
+                        <div className="px-3 py-2 text-gray-400">No languages found</div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div>
