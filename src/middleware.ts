@@ -29,6 +29,7 @@ export async function middleware(request: NextRequest) {
   requestHeaders.set("x-origin", origin);
   requestHeaders.set("x-pathname", pathname);
 
+  const publicPaths = ["/login", "/register", "/"];
   const protectedPaths = ["/dashboard", "/trading", "/finance"];
   const authPaths = ["/login", "/register"];
 
@@ -76,7 +77,7 @@ export async function middleware(request: NextRequest) {
     console.log(
       "\x1b[41m\x1b[97m[NO SESSION COOKIE]\x1b[0m Redirecting to /login"
     );
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   let sessionData;

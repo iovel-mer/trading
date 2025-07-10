@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from 'lucide-react';
 import { postRegistration } from "../api/auth/postRegistration";
+import { getCountries } from "@/app/api/countries/getCountries";
+import { getLanguages } from "@/app/api/languages/getLanguages";
+import { Country } from "@/app/api/types/countries";
+import { Language } from "@/app/api/types/languages";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -23,8 +27,10 @@ export default function RegisterPage() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [languages, setLanguages] = useState<Language[]>([]);
 
-  // Set the source to the current domain URL
+  // Set the source to the current domain URL and fetch countries/languages
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setFormData(prev => ({
@@ -32,6 +38,25 @@ export default function RegisterPage() {
         source: window.location.origin as string
       }));
     }
+
+    // Fetch countries and languages
+    const fetchData = async () => {
+      try {
+        const [countriesResponse, languagesData] = await Promise.all([
+          getCountries(),
+          getLanguages()
+        ]);
+        
+        if (countriesResponse.success && countriesResponse.data) {
+          setCountries(countriesResponse.data);
+        }
+        setLanguages(languagesData);
+      } catch (error) {
+        console.error('Error fetching countries or languages:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -222,12 +247,11 @@ export default function RegisterPage() {
                 className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
               >
                 <option value="">Select your country</option>
-                <option value="US">United States</option>
-                <option value="GE">Georgia</option>
-                <option value="UK">United Kingdom</option>
-                <option value="DE">Germany</option>
-                <option value="FR">France</option>
-                {/* Add more countries as needed */}
+                {countries.map((country) => (
+                  <option key={country.code} value={country.code}>
+                    {country.name}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -247,11 +271,11 @@ export default function RegisterPage() {
                 className="w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
               >
                 <option value="">Select your language</option>
-                <option value="en">English</option>
-                <option value="ka">Georgian</option>
-                <option value="de">German</option>
-                <option value="fr">French</option>
-                {/* Add more languages as needed */}
+                {languages.map((language) => (
+                  <option key={language.code} value={language.code}>
+                    {language.name}
+                  </option>
+                ))}
               </select>
             </div>
 
