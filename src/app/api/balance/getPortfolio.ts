@@ -4,7 +4,7 @@ import { apiFetcher } from "@/app/api/utils/api-fetcher";
 import type { PortfolioDto } from "@/app/api/types/trading";
 
 export const getPortfolio = async (tradingAccountId: string) => {
-  return apiFetcher<PortfolioDto>(
+  const response = await apiFetcher<PortfolioDto>(
     `traiding/api/Wallets/${tradingAccountId}/portfolio`,
     {
       method: "GET",
@@ -16,4 +16,7 @@ export const getPortfolio = async (tradingAccountId: string) => {
       },
     }
   );
+
+  console.log(response, "  - - - - - - - - - - - -");
+  return response;
 };
