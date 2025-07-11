@@ -28,7 +28,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const { toast } = useToast();
-  const { hasCredentials, clearCredentials, getCredentials, storeCredentials } = useCredentials();
+  const { hasCredentials, clearCredentials, getCredentials, storeCredentials } =
+    useCredentials();
 
   const fetchUserData = async () => {
     try {
@@ -64,7 +65,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const openWebTrader = async () => {
     try {
-      if (!hasCredentials()) {
+      const storedCredentials = localStorage.getItem("webTraderCredentials");
+      if (!storedCredentials) {
         toast({
           title: "Error",
           description: "No stored credentials found. Please log in again.",
@@ -73,18 +75,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      const credentials = getCredentials();
-      if (!credentials) {
-        toast({
-          title: "Error",
-          description: "Credentials are invalid. Please log in again.",
-          variant: "destructive",
-        });
-        return;
-      }
+      const credentials: LoginCredentials = JSON.parse(storedCredentials);
 
       const response = await postLoginForRedirect(credentials);
-      
+
       if (!response.success) {
         toast({
           title: "Error",
@@ -177,20 +171,18 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     fetchUserData();
   }, []);
 
-  const contextValue = { 
-    user, 
-    loading, 
-    error, 
-    refreshUser, 
-    isAuthenticated, 
+  const contextValue = {
+    user,
+    loading,
+    error,
+    refreshUser,
+    isAuthenticated,
     openWebTrader,
-    updateCredentials: storeCredentials
+    updateCredentials: storeCredentials,
   };
 
   return (
-    <UserContext.Provider value={contextValue}>
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );
 }
 

@@ -80,7 +80,6 @@ export const getCurrentUser = async () => {
       };
     }
 
-    console.log("❌ [getCurrentUser] Failed to get user data from API");
     return {
       success: false,
       message: userResponse.errors || "Failed to get user data",

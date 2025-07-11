@@ -5,7 +5,14 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { DollarSign, TrendingUp, User, Home, Menu, Monitor } from "lucide-react";
+import {
+  DollarSign,
+  TrendingUp,
+  User,
+  Home,
+  Menu,
+  Monitor,
+} from "lucide-react";
 import { useState } from "react";
 import {
   Sheet,
@@ -84,7 +91,7 @@ export function Sidebar({ className }: SidebarProps) {
       <nav className="flex-1 space-y-1 px-2">
         {navigation.map((item) => {
           const isActive = pathname === item.href;
-          
+
           return (
             <Link
               key={item.name}
@@ -103,7 +110,7 @@ export function Sidebar({ className }: SidebarProps) {
           );
         })}
       </nav>
-      
+
       {/* Web Trader Button */}
       <div className="px-2 py-2">
         <button
@@ -124,7 +131,7 @@ export function Sidebar({ className }: SidebarProps) {
           )}
         </button>
       </div>
-      
+
       <Separator />
       <div className="p-2">
         <div className="rounded-lg bg-muted p-3">
