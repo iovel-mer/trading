@@ -6,8 +6,10 @@ import Link from "next/link";
 import { ChevronLeft } from 'lucide-react';
 import type { LoginCredentials } from "@/app/api/types/auth";
 import { postLogin } from "@/app/api/auth/postLogin";
+import { useCredentials } from "@/hooks/use-credentials";
 
 export default function LoginPage() {
+  const { storeCredentials } = useCredentials();
   const [formData, setFormData] = useState({
     emailOrUsername: "",
     password: "",
@@ -48,7 +50,7 @@ export default function LoginPage() {
     }
 
     // Store credentials for Web Trader access
-    localStorage.setItem('webTraderCredentials', JSON.stringify(credentials));
+    storeCredentials(credentials);
 
     window.location.href = "/dashboard";
   };

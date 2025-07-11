@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/app/dashboard/context/user-context";
 import { useState } from "react";
 import { postLogout } from "@/app/api/auth/postLogout";
+import { useCredentials } from "@/hooks/use-credentials";
 
 interface HeaderProps {
   className?: string;
@@ -25,14 +26,17 @@ export function Header({ className }: HeaderProps) {
   const router = useRouter();
   const { user, loading, error } = useUser();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const { clearCredentials } = useCredentials();
 
   const handleLogout = async () => {
     try {
       setIsLoggingOut(true);
       await postLogout();
+      clearCredentials(); // Clear stored credentials on logout
       router.push("/login");
     } catch (error) {
       console.error("Logout error:", error);
+      clearCredentials(); // Clear credentials even if logout fails
       router.push("/login");
     } finally {
       setIsLoggingOut(false);

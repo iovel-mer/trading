@@ -6,6 +6,7 @@ import { getCurrentUser } from "@/app/api/auth/getCurrentUser";
 import { postLoginForRedirect } from "@/app/api/auth/postLoginForRedirect";
 import type { UserSettings, LoginCredentials } from "@/app/api/types/auth";
 import { useToast } from "@/hooks/use-toast";
+import { useCredentials } from "@/hooks/use-credentials";
 
 interface UserContextType {
   user: UserSettings | null;
@@ -14,6 +15,7 @@ interface UserContextType {
   refreshUser: () => Promise<void>;
   isAuthenticated: boolean;
   openWebTrader: () => Promise<void>;
+  updateCredentials: (credentials: LoginCredentials) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -24,6 +26,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { toast } = useToast();
+  const { hasCredentials, clearCredentials, getCredentials, storeCredentials } = useCredentials();
 
   const fetchUserData = async () => {
     try {
@@ -36,6 +39,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setError(response.message as any);
         setIsAuthenticated(false);
         setUser(null);
+        clearCredentials(); // Clear credentials if user data fetch fails
         return;
       }
 
@@ -46,6 +50,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       setError("Failed to fetch user data");
       setIsAuthenticated(false);
       setUser(null);
+      clearCredentials(); // Clear credentials if user data fetch fails
     } finally {
       setLoading(false);
     }
@@ -57,8 +62,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const openWebTrader = async () => {
     try {
-      const storedCredentials = localStorage.getItem('webTraderCredentials');
-      if (!storedCredentials) {
+      if (!hasCredentials()) {
         toast({
           title: "Error",
           description: "No stored credentials found. Please log in again.",
@@ -67,8 +71,16 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      const credentials: LoginCredentials = JSON.parse(storedCredentials);
-      
+      const credentials = getCredentials();
+      if (!credentials) {
+        toast({
+          title: "Error",
+          description: "Credentials are invalid. Please log in again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
       const response = await postLoginForRedirect(credentials);
       
       if (!response.success) {
@@ -112,7 +124,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     error, 
     refreshUser, 
     isAuthenticated, 
-    openWebTrader
+    openWebTrader,
+    updateCredentials: storeCredentials
   };
 
   return (
