@@ -30,17 +30,23 @@ import {
   Key,
 } from "lucide-react";
 import Footer from "../components/Footer/Footer";
-import { 
-  getTradingPairs, 
-  getTicker, 
+import {
+  getTradingPairs,
+  getTicker,
   getAllTickers,
   get24hrTickerStats,
   getPrice,
   getOrderBook,
   getRecentTrades,
-  getExchangeInfo
+  getExchangeInfo,
 } from "@/app/api/binance/getBinance";
-import type { TradingPair as BinanceTradingPair, Ticker as BinanceTicker } from "@/app/api/types/binance";
+import type {
+  TradingPair as BinanceTradingPair,
+  Ticker as BinanceTicker,
+} from "@/app/api/types/binance";
+import ModernTradingAnimation from "./Animation/Animation";
+import UltraModernTradingInterface from "./Animation/Animation";
+import RealisticTradingPlatform from "./Animation/Animation";
 
 const modalContent = {
   terms: {
@@ -190,8 +196,9 @@ const LandingPage = () => {
         });
 
         const tickers = await Promise.all(tickerPromises);
-        const validTickers = tickers.filter((ticker): ticker is BinanceTicker => 
-          ticker !== null && ticker !== undefined
+        const validTickers = tickers.filter(
+          (ticker): ticker is BinanceTicker =>
+            ticker !== null && ticker !== undefined
         );
 
         // Transform ticker data for display
@@ -203,16 +210,19 @@ const LandingPage = () => {
         }));
 
         // Transform pairs data for trading pairs section
-        const transformedPairs = pairs.slice(0, 6).map((pair: BinanceTradingPair, index: number) => {
-          // Use deterministic volume based on index to avoid hydration mismatch
-          const seed = index * 98765;
-          const volume = ((seed * 9301 + 49297) % 233280) / 233280 * 1000000000;
-          return {
-            base: pair.baseAsset,
-            quote: pair.quoteAsset,
-            volume: formatVolume(volume), // Deterministic volume formatting
-          };
-        });
+        const transformedPairs = pairs
+          .slice(0, 6)
+          .map((pair: BinanceTradingPair, index: number) => {
+            // Use deterministic volume based on index to avoid hydration mismatch
+            const seed = index * 98765;
+            const volume =
+              (((seed * 9301 + 49297) % 233280) / 233280) * 1000000000;
+            return {
+              base: pair.baseAsset,
+              quote: pair.quoteAsset,
+              volume: formatVolume(volume), // Deterministic volume formatting
+            };
+          });
 
         setMarketData(transformedMarketData);
         setTradingPairs(transformedPairs);
@@ -248,8 +258,9 @@ const LandingPage = () => {
         });
 
         const tickers = await Promise.all(tickerPromises);
-        const validTickers = tickers.filter((ticker): ticker is BinanceTicker => 
-          ticker !== null && ticker !== undefined
+        const validTickers = tickers.filter(
+          (ticker): ticker is BinanceTicker =>
+            ticker !== null && ticker !== undefined
         );
 
         if (validTickers.length > 0) {
@@ -372,12 +383,13 @@ const LandingPage = () => {
         {[...Array(50)].map((_, i) => {
           // Use deterministic values based on index to avoid hydration mismatch
           const seed = i * 12345; // Simple seed for deterministic randomness
-          const x1 = ((seed * 9301 + 49297) % 233280) / 233280 * 1200;
-          const y1 = (((seed + 1) * 9301 + 49297) % 233280) / 233280 * 800;
-          const x2 = (((seed + 2) * 9301 + 49297) % 233280) / 233280 * 1200;
-          const y2 = (((seed + 3) * 9301 + 49297) % 233280) / 233280 * 800;
-          const duration = 20 + ((seed * 9301 + 49297) % 233280) / 233280 * 20;
-          
+          const x1 = (((seed * 9301 + 49297) % 233280) / 233280) * 1200;
+          const y1 = ((((seed + 1) * 9301 + 49297) % 233280) / 233280) * 800;
+          const x2 = ((((seed + 2) * 9301 + 49297) % 233280) / 233280) * 1200;
+          const y2 = ((((seed + 3) * 9301 + 49297) % 233280) / 233280) * 800;
+          const duration =
+            20 + (((seed * 9301 + 49297) % 233280) / 233280) * 20;
+
           return (
             <motion.div
               key={i}
@@ -418,7 +430,12 @@ const LandingPage = () => {
                 transition={{ duration: 0.5 }}
                 className="w-10 h-10 rounded-xl flex items-center justify-center"
               >
-                <Image src="/Vector.png" alt="SalesVault" width={30} height={30} />
+                <Image
+                  src="/Vector.png"
+                  alt="SalesVault"
+                  width={30}
+                  height={30}
+                />
               </motion.div>
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 SalesVault
@@ -603,126 +620,7 @@ const LandingPage = () => {
               </div>
             </motion.div>
 
-            {/* Hero Image/Animation */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="relative"
-            >
-              <div className="relative w-full h-[600px]">
-                {/* 3D Trading Interface Preview */}
-                <motion.div
-                  animate={{
-                    rotateY: [0, 10, 0],
-                    rotateX: [0, -5, 0],
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden shadow-2xl"
-                  style={{ perspective: 1000 }}
-                >
-                  {/* Chart Lines */}
-                  <svg className="absolute inset-0 w-full h-full">
-                    <motion.path
-                      d="M0,300 Q150,200 300,250 T600,200"
-                      stroke="url(#gradient)"
-                      strokeWidth="3"
-                      fill="none"
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
-                    <defs>
-                      <linearGradient
-                        id="gradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="0%"
-                      >
-                        <stop offset="0%" stopColor="#3B82F6" />
-                        <stop offset="50%" stopColor="#8B5CF6" />
-                        <stop offset="100%" stopColor="#EC4899" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-
-                  {/* UI Elements */}
-                  <div className="absolute top-4 left-4 right-4">
-                    <div className="flex justify-between items-center mb-4">
-                      <div className="flex space-x-2">
-                        {["1m", "5m", "15m", "1h", "4h", "1d"].map((tf) => (
-                          <div
-                            key={tf}
-                            className="px-3 py-1 bg-gray-700/50 rounded text-xs"
-                          >
-                            {tf}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Live Order Book Preview */}
-                  <div className="absolute bottom-4 right-4 w-48 bg-gray-800/80 backdrop-blur rounded-lg p-3">
-                    <div className="text-xs font-medium mb-2">Order Book</div>
-                    {marketData.slice(0, 3).map((coin, i) => {
-                      // Use deterministic values based on index to avoid hydration mismatch
-                      const seed = i * 54321;
-                      const volume1 = ((seed * 9301 + 49297) % 233280) / 233280 * 2;
-                      return (
-                        <div
-                          key={i}
-                          className="flex justify-between text-xs mb-1"
-                        >
-                          <span className="text-red-400">
-                            {formatPrice(coin.price * 1.001)}
-                          </span>
-                          <span className="text-gray-400">
-                            {volume1.toFixed(4)}
-                          </span>
-                        </div>
-                      );
-                    })}
-                    <div className="border-t border-gray-700 my-1" />
-                    {marketData.slice(0, 3).map((coin, i) => {
-                      // Use deterministic values based on index to avoid hydration mismatch
-                      const seed = (i + 10) * 54321;
-                      const volume2 = ((seed * 9301 + 49297) % 233280) / 233280 * 2;
-                      return (
-                        <div
-                          key={i}
-                          className="flex justify-between text-xs mb-1"
-                        >
-                          <span className="text-green-400">
-                            {formatPrice(coin.price * 0.999)}
-                          </span>
-                          <span className="text-gray-400">
-                            {volume2.toFixed(4)}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </motion.div>
-
-                {/* Floating Elements */}
-                <motion.div
-                  animate={{ y: [-10, 10, -10] }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                  className="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
-                />
-                <motion.div
-                  animate={{ y: [10, -10, 10] }}
-                  transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-                  className="absolute -bottom-8 -left-8 w-40 h-40 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
-                />
-              </div>
-            </motion.div>
+            <RealisticTradingPlatform />
           </div>
         </div>
 
@@ -902,83 +800,6 @@ const LandingPage = () => {
                   <button className="w-full py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors">
                     Trade Now
                   </button>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Plans */}
-      <section id="pricing" className="py-20 px-6 relative">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-              Choose Your Trading Plan
-            </h2>
-            <p className="text-xl text-gray-400">
-              Start free and upgrade as you grow
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {plans.map((plan, i) => (
-              <motion.div
-                key={plan.name}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`relative p-8 rounded-2xl ${
-                  plan.popular
-                    ? "bg-gradient-to-b from-blue-500/20 to-purple-500/20 border-2 border-blue-500"
-                    : "bg-gray-900/50 border border-gray-800"
-                }`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="px-4 py-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full text-sm font-medium">
-                      Most Popular
-                    </div>
-                  </div>
-                )}
-
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                  <div className="text-4xl font-bold mb-1">
-                    {plan.price}
-                    {plan.price !== "Free" && (
-                      <span className="text-lg text-gray-400">/month</span>
-                    )}
-                  </div>
-                </div>
-
-                <ul className="space-y-4 mb-8">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-center space-x-3">
-                      <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
-                      <span className="text-gray-300">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Link href="/register">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`w-full py-3 rounded-lg font-medium transition-all ${
-                      plan.popular
-                        ? "bg-gradient-to-r from-blue-500 to-purple-500"
-                        : "bg-gray-800 hover:bg-gray-700"
-                    }`}
-                  >
-                    Get Started
-                  </motion.button>
                 </Link>
               </motion.div>
             ))}

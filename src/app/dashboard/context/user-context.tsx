@@ -65,8 +65,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const openWebTrader = async () => {
     try {
-      const storedCredentials = localStorage.getItem("webTraderCredentials");
-      if (!storedCredentials) {
+      if (!hasCredentials()) {
         toast({
           title: "Error",
           description: "No stored credentials found. Please log in again.",
@@ -75,7 +74,15 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      const credentials: LoginCredentials = JSON.parse(storedCredentials);
+      const credentials = getCredentials();
+      if (!credentials) {
+        toast({
+          title: "Error",
+          description: "Credentials are invalid. Please log in again.",
+          variant: "destructive",
+        });
+        return;
+      }
 
       const response = await postLoginForRedirect(credentials);
 
@@ -99,51 +106,51 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       }
 
       // Redirect to Web Trader with token
-      const webTraderUrl = `http://localhost:3000/trading-view?ctx=${token}`;
-      
+      const webTraderUrl = `http://localhost:3002/trading-view?ctx=${token}`;
+
       // Try multiple methods to open Web Trader directly
       let success = false;
-      
+
       // Method 1: Try window.open with _blank
       try {
-        const newWindow = window.open(webTraderUrl, '_blank');
+        const newWindow = window.open(webTraderUrl, "_blank");
         if (newWindow && !newWindow.closed) {
           success = true;
         }
       } catch (error) {
-        console.warn('window.open failed:', error);
+        console.warn("window.open failed:", error);
       }
-      
+
       // Method 2: Try location.href (works better on mobile)
       if (!success) {
         try {
           window.location.href = webTraderUrl;
           success = true;
         } catch (error) {
-          console.warn('location.href failed:', error);
+          console.warn("location.href failed:", error);
         }
       }
-      
+
       // Method 3: Try location.assign as fallback
       if (!success) {
         try {
           window.location.assign(webTraderUrl);
           success = true;
         } catch (error) {
-          console.warn('location.assign failed:', error);
+          console.warn("location.assign failed:", error);
         }
       }
-      
+
       // Method 4: Try location.replace as last resort
       if (!success) {
         try {
           window.location.replace(webTraderUrl);
           success = true;
         } catch (error) {
-          console.warn('location.replace failed:', error);
+          console.warn("location.replace failed:", error);
         }
       }
-      
+
       if (success) {
         toast({
           title: "Success",

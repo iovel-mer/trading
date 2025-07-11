@@ -55,8 +55,6 @@ export default function FinancePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  console.log(financeData, " - - - -");
-
   useEffect(() => {
     fetchFinanceData();
   }, []);
@@ -232,24 +230,6 @@ export default function FinancePage() {
 
         {/* Financial Overview */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                Total Assets
-              </CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {formatCurrency(financeData.totalAssets)}
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Across {financeData.tradingAccounts.length} trading account
-                {financeData.tradingAccounts.length !== 1 ? "s" : ""}
-              </p>
-            </CardContent>
-          </Card>
-
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">

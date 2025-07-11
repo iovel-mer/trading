@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { DashboardLayout } from "@/components/dashboard-layout";
-import { useUser } from "@/app/dashboard/context/user-context";
 import {
   Card,
   CardContent,
@@ -14,116 +13,26 @@ import { Badge } from "@/components/ui/badge";
 import {
   TrendingUp,
   DollarSign,
-  Users,
   AlertCircle,
   Wallet,
+  ArrowUpDown,
+  PiggyBank,
+  Activity,
 } from "lucide-react";
+import { getWalletSummary } from "@/app/api/balance/getWalletSummary";
 import { getTradingAccounts } from "@/app/api/balance/getTradingAccounts";
-import { getWallets } from "@/app/api/balance/getWallets";
-import { getPortfolio } from "@/app/api/balance/getPortfolio";
-import { getTickets } from "@/app/api/balance/getTickets";
 import type {
-  TradingAccountDto,
-  WalletDto,
-  PortfolioDto,
-  TicketDto,
-} from "@/app/api/types/trading";
+  WalletSummaryResponse,
+  CurrencyBreakdown,
+} from "@/app/api/types/wallet-summary";
+import type { TradingAccountDto } from "@/app/api/types/trading";
 import { AuthConfirmer } from "../auth/components/authConfirmer";
+import { useUser } from "./context/user-context";
 
 interface DashboardData {
+  walletSummary: WalletSummaryResponse | null;
   tradingAccounts: TradingAccountDto[];
-  wallets: WalletDto[];
-  portfolio: PortfolioDto | null;
-  tickets: TicketDto[];
-  primaryWallet: WalletDto | null;
-  totalUsdValue: number;
 }
-
-// Approximate USD prices for major cryptocurrencies (fallback values)
-const FALLBACK_PRICES: Record<string, number> = {
-  BTC: 45000,
-  ETH: 2500,
-  SOL: 100,
-  ADA: 0.5,
-  DOT: 7,
-  LINK: 15,
-  UNI: 8,
-  USDT: 1,
-  USDC: 1,
-  USD: 1,
-};
-
-// Helper function to calculate USD equivalent with fallback
-const calculateUsdEquivalent = (
-  amount: number,
-  currency: string,
-  apiUsdValue: number
-): number => {
-  // If API provides a valid USD value, use it
-  if (apiUsdValue && apiUsdValue > 0) {
-    return apiUsdValue;
-  }
-
-  // Otherwise, use fallback calculation
-  const fallbackPrice = FALLBACK_PRICES[currency.toUpperCase()] || 0;
-  return amount * fallbackPrice;
-};
-
-// Helper function to get the primary wallet (prioritize wallets with balance)
-const getPrimaryWallet = (wallets: WalletDto[]): WalletDto | null => {
-  if (wallets.length === 0) return null;
-
-  const walletsWithBalance = wallets.filter((w) => w.availableBalance > 0);
-
-  if (walletsWithBalance.length > 0) {
-    // Priority order for wallets with balance: BTC, ETH, USDT, USD
-    const priorityCurrencies = ["BTC", "ETH", "USDT", "USD"];
-
-    for (const currency of priorityCurrencies) {
-      const wallet = walletsWithBalance.find((w) => w.currency === currency);
-      if (wallet) return wallet;
-    }
-
-    // If no priority currency found, return wallet with largest USD equivalent
-    return walletsWithBalance.reduce((prev, current) => {
-      const prevUsd = calculateUsdEquivalent(
-        prev.totalBalance,
-        prev.currency,
-        prev.usdEquivalent
-      );
-      const currentUsd = calculateUsdEquivalent(
-        current.totalBalance,
-        current.currency,
-        current.usdEquivalent
-      );
-      return currentUsd > prevUsd ? current : prev;
-    });
-  }
-
-  const priorityCurrencies = ["BTC", "ETH", "USDT", "USD"];
-
-  for (const currency of priorityCurrencies) {
-    const wallet = wallets.find(
-      (w) => w.currency === currency && w.totalBalance > 0
-    );
-    if (wallet) return wallet;
-  }
-
-  // Return wallet with largest total balance
-  return wallets.reduce((prev, current) => {
-    const prevUsd = calculateUsdEquivalent(
-      prev.totalBalance,
-      prev.currency,
-      prev.usdEquivalent
-    );
-    const currentUsd = calculateUsdEquivalent(
-      current.totalBalance,
-      current.currency,
-      current.usdEquivalent
-    );
-    return currentUsd > prevUsd ? current : prev;
-  });
-};
 
 // Helper function to format currency amount
 const formatCurrencyAmount = (amount: number, currency: string): string => {
@@ -155,39 +64,164 @@ const getWalletIcon = (currency: string) => {
     DOT: "●",
     LINK: "⬡",
     UNI: "🦄",
+    BNB: "🔶",
+    XRP: "◊",
+    AUD: "A$",
+    EUR: "€",
+    GBP: "£",
   };
   return iconMap[currency] || "◊";
 };
 
-// Helper function to sort wallets (available balance first, then by USD value)
-const sortWallets = (wallets: WalletDto[]): WalletDto[] => {
-  return wallets.sort((a, b) => {
-    // First priority: wallets with available balance > 0
-    const aHasBalance = a.availableBalance > 0 ? 1 : 0;
-    const bHasBalance = b.availableBalance > 0 ? 1 : 0;
+// Helper function to get currency-specific background colors
+const getCurrencyColors = (currency: string) => {
+  const colorMap: Record<
+    string,
+    { bg: string; text: string; darkBg: string; darkText: string }
+  > = {
+    BTC: {
+      bg: "bg-orange-500",
+      text: "text-white",
+      darkBg: "dark:bg-orange-600",
+      darkText: "dark:text-white",
+    },
+    ETH: {
+      bg: "bg-blue-600",
+      text: "text-white",
+      darkBg: "dark:bg-blue-700",
+      darkText: "dark:text-white",
+    },
+    USDT: {
+      bg: "bg-green-500",
+      text: "text-white",
+      darkBg: "dark:bg-green-600",
+      darkText: "dark:text-white",
+    },
+    USDC: {
+      bg: "bg-blue-500",
+      text: "text-white",
+      darkBg: "dark:bg-blue-600",
+      darkText: "dark:text-white",
+    },
+    USD: {
+      bg: "bg-green-600",
+      text: "text-white",
+      darkBg: "dark:bg-green-700",
+      darkText: "dark:text-white",
+    },
+    SOL: {
+      bg: "bg-purple-500",
+      text: "text-white",
+      darkBg: "dark:bg-purple-600",
+      darkText: "dark:text-white",
+    },
+    ADA: {
+      bg: "bg-blue-700",
+      text: "text-white",
+      darkBg: "dark:bg-blue-800",
+      darkText: "dark:text-white",
+    },
+    DOT: {
+      bg: "bg-pink-500",
+      text: "text-white",
+      darkBg: "dark:bg-pink-600",
+      darkText: "dark:text-white",
+    },
+    LINK: {
+      bg: "bg-blue-600",
+      text: "text-white",
+      darkBg: "dark:bg-blue-700",
+      darkText: "dark:text-white",
+    },
+    UNI: {
+      bg: "bg-pink-600",
+      text: "text-white",
+      darkBg: "dark:bg-pink-700",
+      darkText: "dark:text-white",
+    },
+    BNB: {
+      bg: "bg-yellow-500",
+      text: "text-black",
+      darkBg: "dark:bg-yellow-600",
+      darkText: "dark:text-white",
+    },
+    XRP: {
+      bg: "bg-gray-800",
+      text: "text-white",
+      darkBg: "dark:bg-gray-900",
+      darkText: "dark:text-white",
+    },
+    AUD: {
+      bg: "bg-green-700",
+      text: "text-white",
+      darkBg: "dark:bg-green-800",
+      darkText: "dark:text-white",
+    },
+    EUR: {
+      bg: "bg-blue-800",
+      text: "text-white",
+      darkBg: "dark:bg-blue-900",
+      darkText: "dark:text-white",
+    },
+    GBP: {
+      bg: "bg-red-600",
+      text: "text-white",
+      darkBg: "dark:bg-red-700",
+      darkText: "dark:text-white",
+    },
+  };
+
+  return (
+    colorMap[currency] || {
+      bg: "bg-gray-500",
+      text: "text-white",
+      darkBg: "dark:bg-gray-600",
+      darkText: "dark:text-white",
+    }
+  );
+};
+
+// Helper function to get primary currency (highest USD equivalent with balance)
+const getPrimaryCurrency = (
+  currencyBreakdown: CurrencyBreakdown[]
+): CurrencyBreakdown | null => {
+  const currenciesWithBalance = currencyBreakdown.filter(
+    (currency) => currency.totalBalance > 0
+  );
+
+  if (currenciesWithBalance.length === 0) {
+    return (
+      currencyBreakdown.find((currency) => currency.currency === "USDT") ||
+      currencyBreakdown[0] ||
+      null
+    );
+  }
+
+  // Return currency with highest USD equivalent
+  return currenciesWithBalance.reduce((prev, current) => {
+    return current.usdEquivalent > prev.usdEquivalent ? current : prev;
+  });
+};
+
+// Helper function to sort currencies (with balance first, then by USD value)
+const sortCurrencies = (
+  currencies: CurrencyBreakdown[]
+): CurrencyBreakdown[] => {
+  return currencies.sort((a, b) => {
+    // First priority: currencies with balance > 0
+    const aHasBalance = a.totalBalance > 0 ? 1 : 0;
+    const bHasBalance = b.totalBalance > 0 ? 1 : 0;
 
     if (aHasBalance !== bHasBalance) {
       return bHasBalance - aHasBalance;
     }
 
-    const aUsdValue = calculateUsdEquivalent(
-      a.totalBalance,
-      a.currency,
-      a.usdEquivalent
-    );
-    const bUsdValue = calculateUsdEquivalent(
-      b.totalBalance,
-      b.currency,
-      b.usdEquivalent
-    );
-
-    return bUsdValue - aUsdValue;
+    // Second priority: USD equivalent value
+    return b.usdEquivalent - a.usdEquivalent;
   });
 };
 
 export default function DashboardPage() {
-  console.log("📊 [DashboardPage] Component rendering");
-
   const {
     user,
     loading: userLoading,
@@ -196,14 +230,9 @@ export default function DashboardPage() {
   } = useUser();
 
   const [dashboardData, setDashboardData] = useState<DashboardData>({
+    walletSummary: null,
     tradingAccounts: [],
-    wallets: [],
-    portfolio: null,
-    tickets: [],
-    primaryWallet: null,
-    totalUsdValue: 0,
   });
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -211,61 +240,39 @@ export default function DashboardPage() {
     setLoading(true);
     setError("");
 
-    // Get trading accounts first
-    const accountsResponse = await getTradingAccounts();
-    if (!accountsResponse.success) {
-      setError(accountsResponse.message || "Failed to load trading accounts");
-      setLoading(false);
-      return;
-    }
-
-    const accounts = accountsResponse.data || [];
-    if (accounts.length === 0) {
-      setDashboardData((prev) => ({ ...prev, tradingAccounts: [] }));
-      setLoading(false);
-      return;
-    }
-
-    // Use the first trading account
-    const primaryAccount = accounts[0];
-
-    // Fetch wallets, portfolio, and tickets in parallel
-    const [walletsResponse, portfolioResponse, ticketsResponse] =
-      await Promise.all([
-        getWallets(primaryAccount.id),
-        getPortfolio(primaryAccount.id),
-        getTickets({ tradingAccountId: primaryAccount.id, pageSize: 10 }),
+    try {
+      // Fetch wallet summary and trading accounts in parallel
+      const [walletSummaryResponse, accountsResponse] = await Promise.all([
+        getWalletSummary(),
+        getTradingAccounts(),
       ]);
 
-    const wallets = walletsResponse.success ? walletsResponse.data || [] : [];
-    const portfolio = portfolioResponse.success
-      ? portfolioResponse.data ?? null
-      : null;
-    const tickets = ticketsResponse.success ? ticketsResponse.data || [] : [];
+      if (!walletSummaryResponse.success) {
+        setError(
+          walletSummaryResponse.message || "Failed to load wallet summary"
+        );
+        setLoading(false);
+        return;
+      }
 
-    // Get primary wallet and calculate totals with fallback USD calculation
-    const primaryWallet = getPrimaryWallet(wallets);
-    const totalUsdValue = wallets.reduce(
-      (sum, wallet) =>
-        sum +
-        calculateUsdEquivalent(
-          wallet.totalBalance,
-          wallet.currency,
-          wallet.usdEquivalent
-        ),
-      0
-    );
+      const walletSummary = walletSummaryResponse.data;
+      const accounts = accountsResponse.success
+        ? accountsResponse.data || []
+        : [];
 
-    setDashboardData({
-      tradingAccounts: accounts,
-      wallets,
-      portfolio,
-      tickets,
-      primaryWallet,
-      totalUsdValue,
-    });
+      // Tickets are now included in wallet summary as ticketBreakdown
 
-    setLoading(false);
+      setDashboardData({
+        walletSummary: walletSummary ?? null,
+        tradingAccounts: accounts,
+      });
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "An unexpected error occurred"
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -314,20 +321,18 @@ export default function DashboardPage() {
     );
   }
 
-  const primaryAccount = dashboardData.tradingAccounts[0];
-  const activeTickets = dashboardData.tickets.filter(
+  const { walletSummary, tradingAccounts } = dashboardData;
+  const primaryAccount = tradingAccounts[0];
+  const primaryCurrency = walletSummary
+    ? getPrimaryCurrency(walletSummary.currencyBreakdown)
+    : null;
+
+  // Filter active tickets from wallet summary
+  const tickets = walletSummary?.ticketBreakdown || [];
+  const activeTickets = tickets.filter(
     (ticket) => ticket.ticketStatus === 0 || ticket.ticketStatus === 1 // Pending or Processing
   );
-
-  // Calculate USD equivalent for primary wallet with fallback
-  const primaryWalletUsdValue = dashboardData.primaryWallet
-    ? calculateUsdEquivalent(
-        dashboardData.primaryWallet.totalBalance,
-        dashboardData.primaryWallet.currency,
-        dashboardData.primaryWallet.usdEquivalent
-      )
-    : 0;
-
+  console.log(dashboardData);
   return (
     <DashboardLayout>
       <AuthConfirmer onAuthConfirmed={handleAuthConfirmed} />
@@ -350,9 +355,19 @@ export default function DashboardPage() {
               <CardTitle className="text-sm font-medium">
                 Primary Balance
               </CardTitle>
-              <div className="h-4 w-4 text-muted-foreground flex items-center justify-center text-xs font-bold">
-                {dashboardData.primaryWallet ? (
-                  getWalletIcon(dashboardData.primaryWallet.currency)
+              <div
+                className={`h-6 w-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                  walletSummary?.totalBtcEquivalent
+                    ? `${getCurrencyColors("BTC").bg} ${
+                        getCurrencyColors("BTC").text
+                      } ${getCurrencyColors("BTC").darkBg} ${
+                        getCurrencyColors("BTC").darkText
+                      }`
+                    : "text-muted-foreground"
+                }`}
+              >
+                {walletSummary?.totalBtcEquivalent ? (
+                  getWalletIcon("BTC")
                 ) : (
                   <Wallet className="h-4 w-4" />
                 )}
@@ -360,41 +375,38 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {dashboardData.primaryWallet ? (
+                {walletSummary?.totalBtcEquivalent ? (
                   <>
                     {formatCurrencyAmount(
-                      dashboardData.primaryWallet.totalBalance,
-                      dashboardData.primaryWallet.currency
+                      walletSummary.totalBtcEquivalent,
+                      "BTC"
                     )}{" "}
-                    <span className="text-lg text-muted-foreground">
-                      {dashboardData.primaryWallet.currency}
-                    </span>
+                    <span className="text-lg text-muted-foreground">BTC</span>
                   </>
                 ) : (
                   "No Balance"
                 )}
               </div>
-              <p className="text-xs text-muted-foreground">
-                {dashboardData.primaryWallet ? (
-                  <>
-                    ≈ $
-                    {primaryWalletUsdValue.toLocaleString("en-US", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
-                    {primaryWalletUsdValue === 0 &&
-                      dashboardData.primaryWallet.usdEquivalent === 0 && (
-                        <span className="text-orange-500 ml-1">
-                          (estimated)
-                        </span>
+              <div className="space-y-1">
+                <p className="text-xs text-muted-foreground">
+                  {walletSummary?.totalUsdEquivalent ? (
+                    <>
+                      ≈ $
+                      {walletSummary.totalUsdEquivalent.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        }
                       )}
-                  </>
-                ) : (
-                  `${dashboardData.wallets.length} wallet${
-                    dashboardData.wallets.length !== 1 ? "s" : ""
-                  }`
-                )}
-              </p>
+                    </>
+                  ) : (
+                    `${
+                      walletSummary?.currencyBreakdown.length || 0
+                    } currencies available`
+                  )}
+                </p>
+              </div>
             </CardContent>
           </Card>
 
@@ -408,14 +420,17 @@ export default function DashboardPage() {
             <CardContent>
               <div className="text-2xl font-bold">
                 $
-                {dashboardData.totalUsdValue.toLocaleString("en-US", {
+                {walletSummary?.totalUsdEquivalent.toLocaleString("en-US", {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
-                })}
+                }) || "0.00"}
               </div>
               <p className="text-xs text-muted-foreground">
-                Across {dashboardData.wallets.length} wallet
-                {dashboardData.wallets.length !== 1 ? "s" : ""}
+                Available: $
+                {walletSummary?.totalAvailableBalance.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }) || "0.00"}
               </p>
             </CardContent>
           </Card>
@@ -428,9 +443,11 @@ export default function DashboardPage() {
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{activeTickets.length}</div>
+              <div className="text-2xl font-bold">
+                {walletSummary?.activeTickets || 0}
+              </div>
               <p className="text-xs text-muted-foreground">
-                {dashboardData.tickets.length} total tickets
+                {walletSummary?.totalTickets || 0} total tickets
               </p>
             </CardContent>
           </Card>
@@ -438,35 +455,80 @@ export default function DashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Account Status
+                Trading Activity
               </CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <Activity className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                <Badge
-                  variant={
-                    primaryAccount?.status === "Active"
-                      ? "default"
-                      : "secondary"
-                  }
-                  className={
-                    primaryAccount?.status === "Active" ? "bg-green-500" : ""
-                  }
-                >
-                  {primaryAccount?.status || "Unknown"}
-                </Badge>
+                {walletSummary?.totalTradingOrders || 0}
               </div>
               <p className="text-xs text-muted-foreground">
-                {primaryAccount?.verifiedAt
-                  ? "Verified account"
-                  : "Pending verification"}
+                {walletSummary?.totalAccounts || 0} account
+                {(walletSummary?.totalAccounts || 0) !== 1 ? "s" : ""}
               </p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Recent Activity and Wallets */}
+        {/* Additional Stats Row */}
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Total Deposits
+              </CardTitle>
+              <ArrowUpDown className="h-4 w-4 text-green-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-green-600">
+                $
+                {walletSummary?.totalDeposits.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }) || "0.00"}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Total Withdrawals
+              </CardTitle>
+              <ArrowUpDown className="h-4 w-4 text-red-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-red-600">
+                $
+                {walletSummary?.totalWithdrawals.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }) || "0.00"}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Locked Balance
+              </CardTitle>
+              <PiggyBank className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                $
+                {walletSummary?.totalLockedBalance.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }) || "0.00"}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Recent Activity and Currency Breakdown */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
           <Card className="col-span-4">
             <CardHeader>
@@ -477,12 +539,12 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {dashboardData.tickets.length === 0 ? (
+                {tickets.length === 0 ? (
                   <p className="text-sm text-muted-foreground">
                     No recent tickets
                   </p>
                 ) : (
-                  dashboardData.tickets.slice(0, 5).map((ticket) => (
+                  tickets.slice(0, 5).map((ticket) => (
                     <div
                       key={ticket.id}
                       className="flex items-center space-x-4"
@@ -533,37 +595,36 @@ export default function DashboardPage() {
 
           <Card className="col-span-3">
             <CardHeader>
-              <CardTitle>Wallets</CardTitle>
-              <CardDescription>
-                Your wallet balances by currency.
-              </CardDescription>
+              <CardTitle>Currency Breakdown</CardTitle>
+              <CardDescription>Your balances by currency.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
-              {dashboardData.wallets.length === 0 ? (
+              {!walletSummary?.currencyBreakdown.length ? (
                 <p className="text-sm text-muted-foreground">
-                  No wallets found
+                  No currencies found
                 </p>
               ) : (
-                sortWallets(dashboardData.wallets).map((wallet) => {
-                  const walletUsdValue = calculateUsdEquivalent(
-                    wallet.totalBalance,
-                    wallet.currency,
-                    wallet.usdEquivalent
-                  );
-                  const isEstimated =
-                    wallet.usdEquivalent === 0 && walletUsdValue > 0;
-
-                  return (
-                    <div key={wallet.id} className="rounded-lg border p-3">
+                sortCurrencies(walletSummary.currencyBreakdown).map(
+                  (currency) => (
+                    <div
+                      key={currency.currency}
+                      className="rounded-lg border p-3"
+                    >
                       <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-2">
-                          <div className="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-sm font-bold">
-                            {getWalletIcon(wallet.currency)}
+                          <div
+                            className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                              getCurrencyColors(currency.currency).bg
+                            } ${getCurrencyColors(currency.currency).text} ${
+                              getCurrencyColors(currency.currency).darkBg
+                            } ${getCurrencyColors(currency.currency).darkText}`}
+                          >
+                            {getWalletIcon(currency.currency)}
                           </div>
                           <div>
                             <div className="flex items-center space-x-2">
-                              <p className="font-medium">{wallet.currency}</p>
-                              {wallet.availableBalance > 0 && (
+                              <p className="font-medium">{currency.currency}</p>
+                              {currency.availableBalance > 0 && (
                                 <Badge
                                   variant="outline"
                                   className="text-xs px-1 py-0"
@@ -575,8 +636,8 @@ export default function DashboardPage() {
                             <p className="text-sm text-muted-foreground">
                               Available:{" "}
                               {formatCurrencyAmount(
-                                wallet.availableBalance,
-                                wallet.currency
+                                currency.availableBalance,
+                                currency.currency
                               )}
                             </p>
                           </div>
@@ -584,48 +645,37 @@ export default function DashboardPage() {
                         <div className="text-right">
                           <p className="font-medium">
                             {formatCurrencyAmount(
-                              wallet.totalBalance,
-                              wallet.currency
+                              currency.totalBalance,
+                              currency.currency
                             )}{" "}
-                            {wallet.currency}
+                            {currency.currency}
                           </p>
                           <p className="text-xs text-muted-foreground">
                             ≈ $
-                            {walletUsdValue.toLocaleString("en-US", {
+                            {currency.usdEquivalent.toLocaleString("en-US", {
                               minimumFractionDigits: 2,
                               maximumFractionDigits: 2,
                             })}
-                            {isEstimated && (
-                              <span className="text-orange-500 ml-1">*</span>
-                            )}
                           </p>
                         </div>
                       </div>
-                      {wallet.lockedBalance > 0 && (
+                      {currency.lockedBalance > 0 && (
                         <div className="mt-2 text-xs text-muted-foreground">
                           Locked:{" "}
                           {formatCurrencyAmount(
-                            wallet.lockedBalance,
-                            wallet.currency
+                            currency.lockedBalance,
+                            currency.currency
                           )}{" "}
-                          {wallet.currency}
+                          {currency.currency}
                         </div>
                       )}
+                      <div className="mt-1 text-xs text-muted-foreground">
+                        {currency.walletCount} wallet
+                        {currency.walletCount !== 1 ? "s" : ""}
+                      </div>
                     </div>
-                  );
-                })
-              )}
-              {dashboardData.wallets.some(
-                (w) =>
-                  calculateUsdEquivalent(
-                    w.totalBalance,
-                    w.currency,
-                    w.usdEquivalent
-                  ) > 0 && w.usdEquivalent === 0
-              ) && (
-                <p className="text-xs text-muted-foreground mt-2">
-                  * Estimated values based on approximate market prices
-                </p>
+                  )
+                )
               )}
             </CardContent>
           </Card>

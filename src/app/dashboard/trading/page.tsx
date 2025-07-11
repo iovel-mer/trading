@@ -82,6 +82,8 @@ export default function TradingPage() {
     totalPages: 0,
   });
 
+  console.log(selectedAccount, "SelectedAccount");
+
   const { toast } = useToast();
 
   // Load trading accounts on component mount
@@ -209,7 +211,9 @@ export default function TradingPage() {
     } else {
       toast({
         title: "Error",
-        description: response.message || "Failed to create ticket",
+        description:
+          response.message ||
+          "Unable to create ticket due to insufficient funds. Please check your balance and try again.",
         variant: "destructive",
       });
     }
@@ -424,7 +428,9 @@ export default function TradingPage() {
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <Label htmlFor="account-select" className="mb-2">Trading Account</Label>
+                    <Label htmlFor="account-select" className="mb-2">
+                      Trading Account
+                    </Label>
                     <Select
                       value={selectedAccount}
                       onValueChange={setSelectedAccount}
@@ -443,7 +449,9 @@ export default function TradingPage() {
                   </div>
 
                   <div>
-                    <Label htmlFor="wallet-select" className="mb-2">Wallet</Label>
+                    <Label htmlFor="wallet-select" className="mb-2">
+                      Wallet
+                    </Label>
                     <Select
                       value={selectedWallet}
                       onValueChange={setSelectedWallet}
@@ -463,7 +471,9 @@ export default function TradingPage() {
                   </div>
 
                   <div>
-                    <Label htmlFor="ticket-type" className="mb-2">Ticket Type</Label>
+                    <Label htmlFor="ticket-type" className="mb-2">
+                      Ticket Type
+                    </Label>
                     <Select
                       value={ticketType.toString()}
                       onValueChange={(value: string) =>
@@ -491,7 +501,9 @@ export default function TradingPage() {
                   </div>
 
                   <div>
-                    <Label htmlFor="amount" className="mb-2">Amount</Label>
+                    <Label htmlFor="amount" className="mb-2">
+                      Amount
+                    </Label>
                     <Input
                       id="amount"
                       type="number"

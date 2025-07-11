@@ -50,41 +50,12 @@ export default function ProfilePage() {
                     {user ? `${user.firstName[0]}${user.lastName[0]}` : "DU"}
                   </AvatarFallback>
                 </Avatar>
-                <Button
-                  size="icon"
-                  variant="outline"
-                  className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full"
-                >
-                  <Camera className="h-4 w-4" />
-                </Button>
               </div>
               <CardTitle>
                 {user ? `${user.firstName} ${user.lastName}` : "Loading..."}
               </CardTitle>
               <CardDescription>{user?.email || "Loading..."}</CardDescription>
-              <div className="flex justify-center mt-2">
-                <Badge variant="default" className="bg-green-500">
-                  {user?.isEmailConfirmed
-                    ? "Email Verified"
-                    : "Email Unverified"}
-                </Badge>
-              </div>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center space-x-2 text-sm">
-                <User className="h-4 w-4 text-muted-foreground" />
-                <span className="text-muted-foreground">Role:</span>
-                <span>{user?.role || "N/A"}</span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm">
-                <Shield className="h-4 w-4 text-muted-foreground" />
-                <span className="text-muted-foreground">Email Status:</span>
-                <span>
-                  {user?.isEmailConfirmed ? "Confirmed" : "Unconfirmed"}
-                </span>
-              </div>
-              <Separator />
-            </CardContent>
           </Card>
 
           {/* Personal Information */}
