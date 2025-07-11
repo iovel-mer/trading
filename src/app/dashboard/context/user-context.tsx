@@ -7,6 +7,7 @@ import { postLoginForRedirect } from "@/app/api/auth/postLoginForRedirect";
 import type { UserSettings, LoginCredentials } from "@/app/api/types/auth";
 import { useToast } from "@/hooks/use-toast";
 import { useCredentials } from "@/hooks/use-credentials";
+import { isMobileDevice } from "@/lib/utils/web-trader-utils";
 
 interface UserContextType {
   user: UserSettings | null;
@@ -25,6 +26,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const { toast } = useToast();
   const { hasCredentials, clearCredentials, getCredentials, storeCredentials } = useCredentials();
 
@@ -103,7 +105,64 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       }
 
       // Redirect to Web Trader with token
-      window.open(`https://webtrader.salesvault.dev/trading-view?ctx=${token}`, '_blank');
+      const webTraderUrl = `https://webtrader.salesvault.dev/trading-view?ctx=${token}`;
+      
+      // Try multiple methods to open Web Trader directly
+      let success = false;
+      
+      // Method 1: Try window.open with _blank
+      try {
+        const newWindow = window.open(webTraderUrl, '_blank');
+        if (newWindow && !newWindow.closed) {
+          success = true;
+        }
+      } catch (error) {
+        console.warn('window.open failed:', error);
+      }
+      
+      // Method 2: Try location.href (works better on mobile)
+      if (!success) {
+        try {
+          window.location.href = webTraderUrl;
+          success = true;
+        } catch (error) {
+          console.warn('location.href failed:', error);
+        }
+      }
+      
+      // Method 3: Try location.assign as fallback
+      if (!success) {
+        try {
+          window.location.assign(webTraderUrl);
+          success = true;
+        } catch (error) {
+          console.warn('location.assign failed:', error);
+        }
+      }
+      
+      // Method 4: Try location.replace as last resort
+      if (!success) {
+        try {
+          window.location.replace(webTraderUrl);
+          success = true;
+        } catch (error) {
+          console.warn('location.replace failed:', error);
+        }
+      }
+      
+      if (success) {
+        toast({
+          title: "Success",
+          description: "Web Trader opened successfully",
+        });
+      } else {
+        // If all methods failed, show error message
+        toast({
+          title: "Error",
+          description: "Failed to open Web Trader. Please try again.",
+          variant: "destructive",
+        });
+      }
     } catch (err) {
       console.error(err);
       toast({
@@ -129,7 +188,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
+    <UserContext.Provider value={contextValue}>
+      {children}
+    </UserContext.Provider>
   );
 }
 

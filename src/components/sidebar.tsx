@@ -48,11 +48,13 @@ const navigation = [
 export function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [isWebTraderLoading, setIsWebTraderLoading] = useState(false);
   const { user, openWebTrader } = useUser();
   const { toast } = useToast();
 
   const handleWebTraderClick = async () => {
     setIsOpen(false);
+    setIsWebTraderLoading(true);
     try {
       await openWebTrader();
     } catch (error) {
@@ -61,6 +63,8 @@ export function Sidebar({ className }: SidebarProps) {
         description: "Failed to open Web Trader. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsWebTraderLoading(false);
     }
   };
 
@@ -104,10 +108,20 @@ export function Sidebar({ className }: SidebarProps) {
       <div className="px-2 py-2">
         <button
           onClick={handleWebTraderClick}
-          className="flex items-center cursor-pointer w-full rounded-md px-3 py-3 text-sm font-medium transition-colors bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg hover:from-blue-600 hover:to-purple-700"
+          disabled={isWebTraderLoading}
+          className="flex items-center cursor-pointer w-full rounded-md px-3 py-3 text-sm font-medium transition-colors bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg hover:from-blue-600 hover:to-purple-700 disabled:from-gray-500 disabled:to-gray-600 disabled:cursor-not-allowed"
         >
-          <Monitor className="mr-3 h-4 w-4 text-white" />
-          Web Trader
+          {isWebTraderLoading ? (
+            <>
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-3" />
+              Opening...
+            </>
+          ) : (
+            <>
+              <Monitor className="mr-3 h-4 w-4 text-white" />
+              Web Trader
+            </>
+          )}
         </button>
       </div>
       
