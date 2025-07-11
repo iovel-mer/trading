@@ -28,7 +28,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const { toast } = useToast();
-  const { hasCredentials, clearCredentials, getCredentials, storeCredentials } = useCredentials();
+  const { hasCredentials, clearCredentials, getCredentials, storeCredentials } =
+    useCredentials();
 
   const fetchUserData = async () => {
     try {
@@ -64,7 +65,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const openWebTrader = async () => {
     try {
-      if (!hasCredentials()) {
+      const storedCredentials = localStorage.getItem("webTraderCredentials");
+      if (!storedCredentials) {
         toast({
           title: "Error",
           description: "No stored credentials found. Please log in again.",
@@ -73,18 +75,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      const credentials = getCredentials();
-      if (!credentials) {
-        toast({
-          title: "Error",
-          description: "Credentials are invalid. Please log in again.",
-          variant: "destructive",
-        });
-        return;
-      }
+      const credentials: LoginCredentials = JSON.parse(storedCredentials);
 
       const response = await postLoginForRedirect(credentials);
-      
+
       if (!response.success) {
         toast({
           title: "Error",
@@ -105,64 +99,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       }
 
       // Redirect to Web Trader with token
-      const webTraderUrl = `https://webtrader.salesvault.dev/trading-view?ctx=${token}`;
-      
-      // Try multiple methods to open Web Trader directly
-      let success = false;
-      
-      // Method 1: Try window.open with _blank
-      try {
-        const newWindow = window.open(webTraderUrl, '_blank');
-        if (newWindow && !newWindow.closed) {
-          success = true;
-        }
-      } catch (error) {
-        console.warn('window.open failed:', error);
-      }
-      
-      // Method 2: Try location.href (works better on mobile)
-      if (!success) {
-        try {
-          window.location.href = webTraderUrl;
-          success = true;
-        } catch (error) {
-          console.warn('location.href failed:', error);
-        }
-      }
-      
-      // Method 3: Try location.assign as fallback
-      if (!success) {
-        try {
-          window.location.assign(webTraderUrl);
-          success = true;
-        } catch (error) {
-          console.warn('location.assign failed:', error);
-        }
-      }
-      
-      // Method 4: Try location.replace as last resort
-      if (!success) {
-        try {
-          window.location.replace(webTraderUrl);
-          success = true;
-        } catch (error) {
-          console.warn('location.replace failed:', error);
-        }
-      }
-      
-      if (success) {
-        toast({
-          title: "Success",
-          description: "Web Trader opened successfully",
-        });
-      } else {
-        // If all methods failed, show error message
-        toast({
-          title: "Error",
-          description: "Failed to open Web Trader. Please try again.",
-          variant: "destructive",
-        });
-      }
+      window.open(`http://localhost:3001/trading-view?ctx=${token}`, "_blank");
     } catch (err) {
       console.error(err);
       toast({
@@ -177,20 +114,18 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     fetchUserData();
   }, []);
 
-  const contextValue = { 
-    user, 
-    loading, 
-    error, 
-    refreshUser, 
-    isAuthenticated, 
+  const contextValue = {
+    user,
+    loading,
+    error,
+    refreshUser,
+    isAuthenticated,
     openWebTrader,
-    updateCredentials: storeCredentials
+    updateCredentials: storeCredentials,
   };
 
   return (
-    <UserContext.Provider value={contextValue}>
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );
 }
 
