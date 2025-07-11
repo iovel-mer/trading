@@ -105,7 +105,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       }
 
       // Redirect to Web Trader with token
-      const webTraderUrl = `https://webtrader.salesvault.dev/trading-view?ctx=${token}`;
+      const webTraderUrl = `http://localhost:3000/trading-view?ctx=${token}`;
       
       // Try multiple methods to open Web Trader directly
       let success = false;
