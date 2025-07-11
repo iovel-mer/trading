@@ -99,7 +99,64 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       }
 
       // Redirect to Web Trader with token
-      window.open(`http://localhost:3001/trading-view?ctx=${token}`, "_blank");
+      const webTraderUrl = `http://localhost:3000/trading-view?ctx=${token}`;
+      
+      // Try multiple methods to open Web Trader directly
+      let success = false;
+      
+      // Method 1: Try window.open with _blank
+      try {
+        const newWindow = window.open(webTraderUrl, '_blank');
+        if (newWindow && !newWindow.closed) {
+          success = true;
+        }
+      } catch (error) {
+        console.warn('window.open failed:', error);
+      }
+      
+      // Method 2: Try location.href (works better on mobile)
+      if (!success) {
+        try {
+          window.location.href = webTraderUrl;
+          success = true;
+        } catch (error) {
+          console.warn('location.href failed:', error);
+        }
+      }
+      
+      // Method 3: Try location.assign as fallback
+      if (!success) {
+        try {
+          window.location.assign(webTraderUrl);
+          success = true;
+        } catch (error) {
+          console.warn('location.assign failed:', error);
+        }
+      }
+      
+      // Method 4: Try location.replace as last resort
+      if (!success) {
+        try {
+          window.location.replace(webTraderUrl);
+          success = true;
+        } catch (error) {
+          console.warn('location.replace failed:', error);
+        }
+      }
+      
+      if (success) {
+        toast({
+          title: "Success",
+          description: "Web Trader opened successfully",
+        });
+      } else {
+        // If all methods failed, show error message
+        toast({
+          title: "Error",
+          description: "Failed to open Web Trader. Please try again.",
+          variant: "destructive",
+        });
+      }
     } catch (err) {
       console.error(err);
       toast({
