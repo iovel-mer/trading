@@ -235,7 +235,10 @@ export default function FinancePage() {
               <CardTitle className="text-sm font-medium">
                 Cash Balance
               </CardTitle>
-              <CreditCard className="h-4 w-4 text-muted-foreground" />
+              <CreditCard
+                className="h-4 w-4 text-muted-foreground"
+                color="gold"
+              />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -251,7 +254,10 @@ export default function FinancePage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Investments</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <TrendingUp
+                className="h-4 w-4 text-muted-foreground"
+                color="#0078ff"
+              />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">

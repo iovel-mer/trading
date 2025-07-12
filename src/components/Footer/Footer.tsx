@@ -2,15 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  LineChart,
-  X,
-  Twitter,
-  MessageCircle,
-  Send,
-  Github,
-} from "lucide-react";
+import { X, Twitter, MessageCircle, Send, Github } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const modalContent = {
   terms: {
@@ -78,146 +72,18 @@ const modalContent = {
       <p class="text-sm text-gray-400 mt-6">Last updated: January 2024</p>
     `,
   },
-  // Product modals
-  "Spot Trading": {
-    title: "Spot Trading",
-    content: `
-      <h3 class="text-xl font-semibold mb-4 text-white">Spot Trading</h3>
-      <p class="mb-4">Trade cryptocurrencies at current market prices with instant settlement. Buy and sell digital assets directly without leverage.</p>
-      <h3 class="text-xl font-semibold mb-4 text-white">Features</h3>
-      <ul class="mb-4 list-disc list-inside space-y-2">
-        <li>Real-time market prices</li>
-        <li>Instant trade execution</li>
-        <li>Low trading fees</li>
-        <li>Wide range of trading pairs</li>
-        <li>Advanced order types</li>
-      </ul>
-      <p class="text-sm text-gray-400 mt-6">Available 24/7</p>
-    `,
-  },
-  "Futures Trading": {
-    title: "Futures Trading",
-    content: `
-      <h3 class="text-xl font-semibold mb-4 text-white">Futures Trading</h3>
-      <p class="mb-4">Trade cryptocurrency futures with leverage up to 125x. Speculate on price movements with advanced trading tools.</p>
-      <h3 class="text-xl font-semibold mb-4 text-white">Features</h3>
-      <ul class="mb-4 list-disc list-inside space-y-2">
-        <li>Up to 125x leverage</li>
-        <li>Perpetual contracts</li>
-        <li>Risk management tools</li>
-        <li>Real-time P&L tracking</li>
-        <li>Advanced charting</li>
-      </ul>
-      <p class="text-sm text-gray-400 mt-6">High risk - High reward</p>
-    `,
-  },
-  "Options": {
-    title: "Options Trading",
-    content: `
-      <h3 class="text-xl font-semibold mb-4 text-white">Options Trading</h3>
-      <p class="mb-4">Trade cryptocurrency options with flexible strategies. Hedge your positions or speculate on volatility.</p>
-      <h3 class="text-xl font-semibold mb-4 text-white">Features</h3>
-      <ul class="mb-4 list-disc list-inside space-y-2">
-        <li>Call and Put options</li>
-        <li>Multiple expiration dates</li>
-        <li>Advanced strategies</li>
-        <li>Risk management</li>
-        <li>Professional tools</li>
-      </ul>
-      <p class="text-sm text-gray-400 mt-6">For experienced traders</p>
-    `,
-  },
-  "Staking": {
-    title: "Staking",
-    content: `
-      <h3 class="text-xl font-semibold mb-4 text-white">Staking</h3>
-      <p class="mb-4">Earn passive income by staking your cryptocurrencies. Support blockchain networks while earning rewards.</p>
-      <h3 class="text-xl font-semibold mb-4 text-white">Features</h3>
-      <ul class="mb-4 list-disc list-inside space-y-2">
-        <li>Competitive APY rates</li>
-        <li>Flexible staking periods</li>
-        <li>Auto-compound rewards</li>
-        <li>Multiple supported coins</li>
-        <li>Easy withdrawal</li>
-      </ul>
-      <p class="text-sm text-gray-400 mt-6">Earn while you hold</p>
-    `,
-  },
-  // Company modals
-  "About Us": {
-    title: "About Us",
-    content: `
-      <h3 class="text-xl font-semibold mb-4 text-white">About SalesVault</h3>
-      <p class="mb-4">SalesVault is a leading cryptocurrency trading platform founded in 2020. We provide secure, reliable, and innovative trading solutions for users worldwide.</p>
-      <h3 class="text-xl font-semibold mb-4 text-white">Our Mission</h3>
-      <p class="mb-4">To democratize access to cryptocurrency trading by providing a user-friendly platform with advanced tools and exceptional security.</p>
-      <h3 class="text-xl font-semibold mb-4 text-white">Key Facts</h3>
-      <ul class="mb-4 list-disc list-inside space-y-2">
-        <li>Founded in 2020</li>
-        <li>Millions of users worldwide</li>
-        <li>24/7 customer support</li>
-        <li>Regulated and compliant</li>
-        <li>Advanced security measures</li>
-      </ul>
-      <p class="text-sm text-gray-400 mt-6">Trusted by millions</p>
-    `,
-  },
-  "Security": {
-    title: "Security",
-    content: `
-      <h3 class="text-xl font-semibold mb-4 text-white">Security Measures</h3>
-      <p class="mb-4">Your security is our top priority. We implement industry-leading security measures to protect your assets and personal information.</p>
-      <h3 class="text-xl font-semibold mb-4 text-white">Security Features</h3>
-      <ul class="mb-4 list-disc list-inside space-y-2">
-        <li>Cold storage for 95% of assets</li>
-        <li>Multi-signature technology</li>
-        <li>Two-factor authentication (2FA)</li>
-        <li>Advanced encryption</li>
-        <li>Regular security audits</li>
-        <li>Insurance coverage</li>
-      </ul>
-      <h3 class="text-xl font-semibold mb-4 text-white">Best Practices</h3>
-      <p class="mb-4">Enable 2FA, use strong passwords, and never share your credentials. We recommend using hardware wallets for large holdings.</p>
-      <p class="text-sm text-gray-400 mt-6">Your assets are safe with us</p>
-    `,
-  },
-  // Support modals
-  "Help Center": {
-    title: "Help Center",
-    content: `
-      <h3 class="text-xl font-semibold mb-4 text-white">Help Center</h3>
-      <p class="mb-4">Find answers to common questions and learn how to use our platform effectively. Our comprehensive help center is available 24/7.</p>
-      <h3 class="text-xl font-semibold mb-4 text-white">Available Resources</h3>
-      <ul class="mb-4 list-disc list-inside space-y-2">
-        <li>Getting started guides</li>
-        <li>Trading tutorials</li>
-        <li>Security best practices</li>
-        <li>FAQ section</li>
-        <li>Video tutorials</li>
-        <li>Community forum</li>
-      </ul>
-      <h3 class="text-xl font-semibold mb-4 text-white">Contact Options</h3>
-      <p class="mb-4">Can't find what you're looking for? Contact our support team via live chat, email, or ticket system.</p>
-      <p class="text-sm text-gray-400 mt-6">We're here to help 24/7</p>
-    `,
-  },
-  "Contact Us": {
-    title: "Contact Us",
-    content: `
-      <h3 class="text-xl font-semibold mb-4 text-white">Contact Us</h3>
-      <p class="mb-4">Get in touch with our support team. We're here to help with any questions or issues you may have.</p>
-      <h3 class="text-xl font-semibold mb-4 text-white">Contact Methods</h3>
-      <ul class="mb-4 list-disc list-inside space-y-2">
-        <li><strong>Live Chat:</strong> Available 24/7 on our platform</li>
-        <li><strong>Email:</strong> support@salesvault.com</li>
-        <li><strong>Support Tickets:</strong> Submit through your account</li>
-        <li><strong>Response Time:</strong> Within 2 hours</li>
-      </ul>
-      <h3 class="text-xl font-semibold mb-4 text-white">Business Inquiries</h3>
-      <p class="mb-4">For business partnerships, media inquiries, or other business-related questions, please email: business@salesvault.com</p>
-      <p class="text-sm text-gray-400 mt-6">We respond within 2 hours</p>
-    `,
-  },
+};
+
+// Route mapping for navigation links
+const routeMapping = {
+  "Spot Trading": "/products/spot-trading",
+  "Futures Trading": "/products/futures-trading",
+  Options: "/products/options",
+  Staking: "/products/staking",
+  "About Us": "/company/about-us",
+  Security: "/company/security",
+  "Help Center": "/support/help-center",
+  "Contact Us": "/support/contact-us",
 };
 
 export default function Footer() {
@@ -258,30 +124,9 @@ export default function Footer() {
                 The most trusted cryptocurrency trading platform with advanced
                 tools and security.
               </p>
-              {/* <div className="flex space-x-4">
-                {Object.entries(socialIcons).map(([social, Icon]) => (
-                  <motion.a
-                    key={social}
-                    href="#"
-                    whileHover={{ scale: 1.1 }}
-                    className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
-                  >
-                    <Icon className="w-5 h-5" />
-                  </motion.a>
-                ))}
-              </div> */}
             </div>
 
             {[
-              {
-                title: "Products",
-                links: [
-                  "Spot Trading",
-                  "Futures Trading",
-                  "Options",
-                  "Staking",
-                ],
-              },
               {
                 title: "Company",
                 links: ["About Us", "Security"],
@@ -296,13 +141,12 @@ export default function Footer() {
                 <ul className="space-y-2">
                   {section.links.map((link) => (
                     <li key={link}>
-                      <button
-                        type="button"
-                        onClick={() => handleOpenModal(link)}
-                        className="text-gray-400 hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-0 text-left"
+                      <Link
+                        href={routeMapping[link as keyof typeof routeMapping]}
+                        className="text-gray-400 hover:text-white transition-colors cursor-pointer"
                       >
                         {link}
-                      </button>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -313,7 +157,7 @@ export default function Footer() {
           <div className="pt-8 border-t border-gray-800">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <p className="text-gray-400 text-sm">
-                © 2024 SalesVault. All rights reserved.
+                © {new Date().getFullYear()} SalesVault. All rights reserved.
               </p>
               <div className="flex space-x-6 text-sm">
                 <button
@@ -355,7 +199,7 @@ export default function Footer() {
         </div>
       </footer>
 
-      {/* Modal Portal */}
+      {/* Modal Portal - Only for Terms, Privacy, and Cookies */}
       <AnimatePresence>
         {activeModal && (
           <motion.div

@@ -117,7 +117,6 @@ export default function ProfilePage() {
                 </div>
               </div>
               <div className="flex justify-end space-x-2">
-                <Button variant="outline">Cancel</Button>
                 <Button>Save Changes</Button>
               </div>
             </CardContent>
