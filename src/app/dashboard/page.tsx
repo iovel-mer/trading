@@ -34,7 +34,6 @@ interface DashboardData {
   tradingAccounts: TradingAccountDto[];
 }
 
-// Helper function to format currency amount
 const formatCurrencyAmount = (amount: number, currency: string): string => {
   if (currency === "USD" || currency === "USDT" || currency === "USDC") {
     return amount.toLocaleString("en-US", {
@@ -43,7 +42,6 @@ const formatCurrencyAmount = (amount: number, currency: string): string => {
     });
   }
 
-  // For crypto currencies, show more decimal places for small amounts
   const decimals = amount < 1 ? 6 : amount < 100 ? 4 : 2;
   return amount.toLocaleString("en-US", {
     minimumFractionDigits: decimals,
@@ -51,7 +49,6 @@ const formatCurrencyAmount = (amount: number, currency: string): string => {
   });
 };
 
-// Helper function to get wallet icon based on currency
 const getWalletIcon = (currency: string) => {
   const iconMap: Record<string, string> = {
     BTC: "₿",
@@ -73,7 +70,6 @@ const getWalletIcon = (currency: string) => {
   return iconMap[currency] || "◊";
 };
 
-// Helper function to get currency-specific background colors
 const getCurrencyColors = (currency: string) => {
   const colorMap: Record<
     string,
@@ -181,7 +177,6 @@ const getCurrencyColors = (currency: string) => {
   );
 };
 
-// Helper function to get primary currency (highest USD equivalent with balance)
 const getPrimaryCurrency = (
   currencyBreakdown: CurrencyBreakdown[]
 ): CurrencyBreakdown | null => {
@@ -197,18 +192,15 @@ const getPrimaryCurrency = (
     );
   }
 
-  // Return currency with highest USD equivalent
   return currenciesWithBalance.reduce((prev, current) => {
     return current.usdEquivalent > prev.usdEquivalent ? current : prev;
   });
 };
 
-// Helper function to sort currencies (with balance first, then by USD value)
 const sortCurrencies = (
   currencies: CurrencyBreakdown[]
 ): CurrencyBreakdown[] => {
   return currencies.sort((a, b) => {
-    // First priority: currencies with balance > 0
     const aHasBalance = a.totalBalance > 0 ? 1 : 0;
     const bHasBalance = b.totalBalance > 0 ? 1 : 0;
 
@@ -216,7 +208,6 @@ const sortCurrencies = (
       return bHasBalance - aHasBalance;
     }
 
-    // Second priority: USD equivalent value
     return b.usdEquivalent - a.usdEquivalent;
   });
 };
@@ -241,7 +232,6 @@ export default function DashboardPage() {
     setError("");
 
     try {
-      // Fetch wallet summary and trading accounts in parallel
       const [walletSummaryResponse, accountsResponse] = await Promise.all([
         getWalletSummary(),
         getTradingAccounts(),
@@ -259,8 +249,6 @@ export default function DashboardPage() {
       const accounts = accountsResponse.success
         ? accountsResponse.data || []
         : [];
-
-      // Tickets are now included in wallet summary as ticketBreakdown
 
       setDashboardData({
         walletSummary: walletSummary ?? null,
@@ -281,7 +269,6 @@ export default function DashboardPage() {
     }
   }, [userLoading]);
 
-  // Handle auth confirmation callback
   const handleAuthConfirmed = async () => {
     await refreshUser();
     await fetchDashboardData();
@@ -327,17 +314,14 @@ export default function DashboardPage() {
     ? getPrimaryCurrency(walletSummary.currencyBreakdown)
     : null;
 
-  // Filter active tickets from wallet summary
   const tickets = walletSummary?.ticketBreakdown || [];
   const activeTickets = tickets.filter(
     (ticket) => ticket.ticketStatus === 0 || ticket.ticketStatus === 1 // Pending or Processing
   );
-  console.log(dashboardData);
   return (
     <DashboardLayout>
       <AuthConfirmer onAuthConfirmed={handleAuthConfirmed} />
       <div className="space-y-6">
-        {/* Welcome Section */}
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
             Welcome back, {user ? `${user.firstName} ${user.lastName}` : "User"}
@@ -348,7 +332,6 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        {/* Stats Cards */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -415,7 +398,10 @@ export default function DashboardPage() {
               <CardTitle className="text-sm font-medium">
                 Total USD Value
               </CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
+              <DollarSign
+                className="h-4 w-4 text-muted-foreground"
+                color="green"
+              />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -440,7 +426,10 @@ export default function DashboardPage() {
               <CardTitle className="text-sm font-medium">
                 Active Tickets
               </CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <TrendingUp
+                className="h-4 w-4 text-muted-foreground"
+                color="#0078ff"
+              />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -457,7 +446,10 @@ export default function DashboardPage() {
               <CardTitle className="text-sm font-medium">
                 Trading Activity
               </CardTitle>
-              <Activity className="h-4 w-4 text-muted-foreground" />
+              <Activity
+                className="h-4 w-4 text-muted-foreground"
+                color="yellow"
+              />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -514,7 +506,10 @@ export default function DashboardPage() {
               <CardTitle className="text-sm font-medium">
                 Locked Balance
               </CardTitle>
-              <PiggyBank className="h-4 w-4 text-muted-foreground" />
+              <PiggyBank
+                className="h-4 w-4 text-muted-foreground"
+                color="gold"
+              />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">

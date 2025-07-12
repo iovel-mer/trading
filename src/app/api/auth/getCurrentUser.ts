@@ -67,12 +67,7 @@ export const getCurrentUser = async () => {
           maxAge: 60 * 60 * 24 * 7, // 7 days
           path: "/",
         });
-      } catch (updateError) {
-        console.log(
-          "⚠️ [getCurrentUser] Failed to update session:",
-          updateError
-        );
-      }
+      } catch (updateError) {}
 
       return {
         success: true,

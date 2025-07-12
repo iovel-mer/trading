@@ -74,7 +74,6 @@ export default function TradingPage() {
   const [ticketType, setTicketType] = useState<TicketType>(0); // TicketType.Deposit
   const [creatingTicket, setCreatingTicket] = useState(false);
 
-  // Pagination state
   const [pagination, setPagination] = useState<PaginationState>({
     currentPage: 1,
     pageSize: 10,
@@ -82,23 +81,18 @@ export default function TradingPage() {
     totalPages: 0,
   });
 
-  console.log(selectedAccount, "SelectedAccount");
-
   const { toast } = useToast();
 
-  // Load trading accounts on component mount
   useEffect(() => {
     loadTradingAccounts();
   }, []);
 
-  // Load wallets when account changes
   useEffect(() => {
     if (selectedAccount) {
       loadWallets(selectedAccount);
     }
   }, [selectedAccount]);
 
-  // Load tickets when tab changes to history or pagination changes
   useEffect(() => {
     if (activeTab === "history" && selectedAccount) {
       loadTickets(pagination.currentPage, pagination.pageSize);
@@ -147,15 +141,13 @@ export default function TradingPage() {
     setTicketsLoading(true);
     const response = await getTickets({
       tradingAccountId: selectedAccount,
-      pageIndex: page - 1, // API expects 0-based index
+      pageIndex: page - 1,
       pageSize: pageSize,
     });
 
     if (response.success && response.data) {
       setTickets(response.data);
 
-      // Note: Since your API doesn't return total count, we'll estimate it
-      // You might want to modify your API to return total count for proper pagination
       const estimatedTotal =
         response.data.length === pageSize
           ? page * pageSize + 1
@@ -204,9 +196,8 @@ export default function TradingPage() {
         description: `Ticket created successfully with ID: ${response.data}`,
       });
       setTicketAmount("");
-      // Reload tickets if we're on the history tab
       if (activeTab === "history") {
-        loadTickets(1, pagination.pageSize); // Reset to first page
+        loadTickets(1, pagination.pageSize);
       }
     } else {
       toast({
@@ -231,7 +222,7 @@ export default function TradingPage() {
     setPagination((prev) => ({
       ...prev,
       pageSize,
-      currentPage: 1, // Reset to first page when changing page size
+      currentPage: 1,
     }));
   };
 
@@ -311,7 +302,6 @@ export default function TradingPage() {
   return (
     <DashboardLayout>
       <div className="space-y-6">
-        {/* Header */}
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Trading</h1>
           <p className="text-muted-foreground">
@@ -320,7 +310,6 @@ export default function TradingPage() {
           </p>
         </div>
 
-        {/* Tabs */}
         <Tabs
           value={activeTab}
           onValueChange={setActiveTab}
@@ -341,7 +330,6 @@ export default function TradingPage() {
             </TabsTrigger>
           </TabsList>
 
-          {/* Trading Accounts Tab */}
           <TabsContent value="accounts" className="space-y-6">
             <Card>
               <CardHeader>
@@ -415,7 +403,6 @@ export default function TradingPage() {
             </Card>
           </TabsContent>
 
-          {/* Create Ticket Tab */}
           <TabsContent value="create" className="space-y-6">
             <Card>
               <CardHeader>
@@ -531,7 +518,6 @@ export default function TradingPage() {
             </Card>
           </TabsContent>
 
-          {/* Ticket History Tab */}
           <TabsContent value="history" className="space-y-6">
             <Card>
               <CardHeader>
@@ -575,7 +561,6 @@ export default function TradingPage() {
                     )}
                   </div>
 
-                  {/* Tickets List */}
                   {tickets.length === 0 ? (
                     <div className="text-center py-8">
                       <History className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
@@ -615,7 +600,6 @@ export default function TradingPage() {
                     </div>
                   )}
 
-                  {/* Pagination Controls */}
                   {tickets.length > 0 && (
                     <div className="flex items-center justify-between pt-4">
                       <div className="text-sm text-muted-foreground">
