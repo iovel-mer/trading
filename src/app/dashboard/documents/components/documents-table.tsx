@@ -28,7 +28,13 @@ export function DocumentsTable({ refreshTrigger }: DocumentsTableProps) {
     const result = await getDocumentsAction();
 
     if (result.success && result.data) {
-      setDocuments(result.data as any);
+      const sortedDocuments = (result.data as any).sort((a: any, b: any) => {
+        return (
+          new Date(b.creationTime).getTime() -
+          new Date(a.creationTime).getTime()
+        );
+      });
+      setDocuments(sortedDocuments);
     }
 
     setIsLoading(false);
