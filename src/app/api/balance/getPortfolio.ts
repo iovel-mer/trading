@@ -17,6 +17,5 @@ export const getPortfolio = async (tradingAccountId: string) => {
     }
   );
 
-  console.log(response, "  - - - - - - - - - - - -");
   return response;
 };

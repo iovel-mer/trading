@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
+type Candle = {
+  id: number;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+};
+
 const SimpleCandlestickAnimation = () => {
-  const [candleData, setCandleData] = useState([]);
+  const [candleData, setCandleData] = useState<Candle[]>([]);
 
   // Initialize and continuously add candlesticks
   useEffect(() => {
@@ -36,7 +44,7 @@ const SimpleCandlestickAnimation = () => {
 
     // Add new candles continuously
     const interval = setInterval(() => {
-      setCandleData((prev) => {
+      setCandleData((prev: any) => {
         const lastCandle = prev[prev.length - 1];
         const volatility = 0.015;
         const change = (Math.random() - 0.5) * volatility;
