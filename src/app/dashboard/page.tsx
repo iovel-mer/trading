@@ -415,7 +415,10 @@ export default function DashboardPage() {
               <CardTitle className="text-sm font-medium">
                 Total USD Value
               </CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
+              <DollarSign
+                className="h-4 w-4 text-muted-foreground"
+                color="green"
+              />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -440,7 +443,10 @@ export default function DashboardPage() {
               <CardTitle className="text-sm font-medium">
                 Active Tickets
               </CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <TrendingUp
+                className="h-4 w-4 text-muted-foreground"
+                color="#0078ff"
+              />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -457,7 +463,10 @@ export default function DashboardPage() {
               <CardTitle className="text-sm font-medium">
                 Trading Activity
               </CardTitle>
-              <Activity className="h-4 w-4 text-muted-foreground" />
+              <Activity
+                className="h-4 w-4 text-muted-foreground"
+                color="yellow"
+              />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -514,7 +523,10 @@ export default function DashboardPage() {
               <CardTitle className="text-sm font-medium">
                 Locked Balance
               </CardTitle>
-              <PiggyBank className="h-4 w-4 text-muted-foreground" />
+              <PiggyBank
+                className="h-4 w-4 text-muted-foreground"
+                color="gold"
+              />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
