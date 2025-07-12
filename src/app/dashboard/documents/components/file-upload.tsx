@@ -21,12 +21,14 @@ export function FileUpload({ onUploadSuccess }: FileUploadProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadMessage, setUploadMessage] = useState<string>("");
+  const [uploadSuccess, setUploadSuccess] = useState<boolean | null>(null);
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedFile(file);
       setUploadMessage("");
+      setUploadSuccess(null);
     }
   };
 
@@ -36,6 +38,7 @@ export function FileUpload({ onUploadSuccess }: FileUploadProps) {
     if (file) {
       setSelectedFile(file);
       setUploadMessage("");
+      setUploadSuccess(null);
     }
   };
 
@@ -48,6 +51,7 @@ export function FileUpload({ onUploadSuccess }: FileUploadProps) {
 
     setIsUploading(true);
     setUploadMessage("");
+    setUploadSuccess(null);
 
     const formData = new FormData();
     formData.append("file", selectedFile);
@@ -56,6 +60,7 @@ export function FileUpload({ onUploadSuccess }: FileUploadProps) {
 
     if (result.success) {
       setUploadMessage("File uploaded successfully!");
+      setUploadSuccess(true);
       setSelectedFile(null);
       onUploadSuccess();
       const fileInput = document.getElementById(
@@ -64,6 +69,7 @@ export function FileUpload({ onUploadSuccess }: FileUploadProps) {
       if (fileInput) fileInput.value = "";
     } else {
       setUploadMessage(result.error || "Upload failed");
+      setUploadSuccess(false);
     }
 
     setIsUploading(false);
@@ -72,6 +78,7 @@ export function FileUpload({ onUploadSuccess }: FileUploadProps) {
   const removeFile = () => {
     setSelectedFile(null);
     setUploadMessage("");
+    setUploadSuccess(null);
     const fileInput = document.getElementById("file-input") as HTMLInputElement;
     if (fileInput) fileInput.value = "";
   };
@@ -145,7 +152,15 @@ export function FileUpload({ onUploadSuccess }: FileUploadProps) {
         )}
 
         {uploadMessage && (
-          <div className="text-sm p-3 rounded-lg border bg-muted">
+          <div
+            className={`text-sm p-3 rounded-lg border ${
+              uploadSuccess === true
+                ? "bg-green-50 text-green-800 border-green-200"
+                : uploadSuccess === false
+                ? "bg-red-50 text-red-800 border-red-200"
+                : "bg-muted"
+            }`}
+          >
             {uploadMessage}
           </div>
         )}
