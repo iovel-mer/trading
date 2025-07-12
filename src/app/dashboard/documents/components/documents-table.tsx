@@ -26,7 +26,6 @@ export function DocumentsTable({ refreshTrigger }: DocumentsTableProps) {
     setError("");
 
     const result = await getDocumentsAction();
-    console.log(result);
 
     if (result.success && result.data) {
       setDocuments(result.data as any);
@@ -42,8 +41,6 @@ export function DocumentsTable({ refreshTrigger }: DocumentsTableProps) {
   const getFileIcon = (contentType: string) => {
     return <FileText className="h-5 w-5 text-muted-foreground" />;
   };
-
-  console.log(documents);
 
   if (isLoading) {
     return (

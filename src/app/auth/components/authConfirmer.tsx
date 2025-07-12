@@ -48,10 +48,6 @@ export function AuthConfirmer({ onAuthConfirmed }: AuthConfirmerProps) {
           window.location.reload();
         }, 1000);
       } else {
-        console.log(
-          "❌ [AuthConfirmer] Auth confirmation failed:",
-          result.message
-        );
         setStatus("error");
 
         setTimeout(() => {

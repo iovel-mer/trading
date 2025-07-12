@@ -5,8 +5,6 @@ import { createSession } from "@/app/api/utils/session";
 import type { LoginResponse } from "@/app/api/types/auth";
 
 export const confirmAuth = async (authKey: string) => {
-  console.log("🔑 [confirmAuth] Confirming auth with key:", authKey);
-
   if (!authKey) {
     return {
       success: false,
@@ -29,21 +27,11 @@ export const confirmAuth = async (authKey: string) => {
     }
   );
 
-  console.log("🔑 [confirmAuth] API response:", {
-    success: response.success,
-    statusCode: response.statusCode,
-    hasData: !!response.data,
-    error: response.errors,
-  });
-
   if (
     response.success &&
     response.data?.accessToken &&
     response.data?.refreshToken
   ) {
-    console.log("✅ [confirmAuth] Auth confirmed, creating session...");
-
-    // Create session with the new tokens
     await createSession(response.data.accessToken, response.data.refreshToken);
 
     return {
