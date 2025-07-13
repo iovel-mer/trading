@@ -42,7 +42,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setError(response.message as any);
         setIsAuthenticated(false);
         setUser(null);
-        clearCredentials(); // Clear credentials if user data fetch fails
+        clearCredentials();
         return;
       }
 
@@ -53,7 +53,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       setError("Failed to fetch user data");
       setIsAuthenticated(false);
       setUser(null);
-      clearCredentials(); // Clear credentials if user data fetch fails
+      clearCredentials();
     } finally {
       setLoading(false);
     }
