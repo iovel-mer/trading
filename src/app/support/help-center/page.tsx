@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Help Center - Get Support When You Need It",
@@ -158,17 +159,19 @@ export default function HelpCenterPage() {
         </div>
 
         <div className="bg-muted p-6 rounded-lg">
-          <h3 className="text-lg font-semibold mb-2">
+          <h3 className="text-lg font-semibold mb-2 text-gray-300">
             Can't Find What You're Looking For?
           </h3>
-          <p className="text-muted-foreground mb-4">
+          <p className="text-muted-foreground mb-4 text-shadow-black">
             Our support team is here to help with any questions not covered in
             our FAQ. We pride ourselves on quick response times and
             knowledgeable assistance.
           </p>
-          <button className="bg-primary text-primary-foreground px-4 py-2 rounded hover:bg-primary/90">
-            Contact Support
-          </button>
+          <Link href={"/support/contact-us"}>
+            <button className="bg-primary text-primary-foreground px-4 py-2 rounded hover:bg-primary/90">
+              Contact Support
+            </button>
+          </Link>
         </div>
       </div>
     </div>

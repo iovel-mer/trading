@@ -145,8 +145,10 @@ export default function ContactUsPage() {
         </div>
 
         <div className="bg-blue-50 border border-blue-200 p-6 rounded-lg">
-          <h3 className="text-lg font-semibold mb-2">Response Times</h3>
-          <div className="grid md:grid-cols-2 gap-4 text-sm">
+          <h3 className="text-lg font-semibold mb-2 text-black">
+            Response Times
+          </h3>
+          <div className="grid md:grid-cols-2 gap-4 text-sm text-black">
             <div>
               <p>
                 <strong>Live Chat:</strong> Immediate response during business

@@ -3,12 +3,13 @@
 import type React from "react";
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft } from "lucide-react";
 import type { LoginCredentials } from "@/app/api/types/auth";
 import { postLogin } from "@/app/api/auth/postLogin";
 import { useCredentials } from "@/hooks/use-credentials";
 
 export default function LoginPage() {
+  //TODO Should be changed!!
   const { storeCredentials } = useCredentials();
   const [formData, setFormData] = useState({
     emailOrUsername: "",
@@ -161,15 +162,6 @@ export default function LoginPage() {
                   Remember me
                 </label>
               </div>
-
-              {/* <button
-                type="button"
-                onClick={() => setShowTwoFactor(!showTwoFactor)}
-                disabled={isLoading}
-                className="text-sm text-blue-400 hover:text-blue-300 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors"
-              >
-                {showTwoFactor ? "Hide" : "Need"} 2FA?
-              </button> */}
             </div>
 
             <button
@@ -207,7 +199,7 @@ export default function LoginPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black to-black" />
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
-        
+
         <div className="relative h-full flex items-center justify-center p-12">
           <div className="max-w-md">
             <h2 className="text-3xl font-bold text-white mb-6">
@@ -239,7 +231,7 @@ export default function LoginPage() {
                 <p>24/7 customer support and educational resources</p>
               </div>
             </div>
-            
+
             <div className="mt-10 pt-10 border-t border-gray-700">
               <div className="flex items-center justify-between text-sm">
                 <div>

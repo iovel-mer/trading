@@ -160,39 +160,24 @@ export default function Footer() {
                 © {new Date().getFullYear()} SalesVault. All rights reserved.
               </p>
               <div className="flex space-x-6 text-sm">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleOpenModal("terms");
-                  }}
-                  className="text-gray-400 hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-1 underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
+                <Link
+                  href="/legal/terms-of-service"
+                  className="text-gray-400 hover:text-white transition-colors cursor-pointer underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
                 >
                   Terms of Service
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleOpenModal("privacy");
-                  }}
-                  className="text-gray-400 hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-1 underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
+                </Link>
+                <Link
+                  href="/legal/privacy-policy"
+                  className="text-gray-400 hover:text-white transition-colors cursor-pointer underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
                 >
                   Privacy Policy
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleOpenModal("cookies");
-                  }}
-                  className="text-gray-400 hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-1 underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
+                </Link>
+                <Link
+                  href="/legal/cookie-policy"
+                  className="text-gray-400 hover:text-white transition-colors cursor-pointer underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
                 >
                   Cookie Policy
-                </button>
+                </Link>
               </div>
             </div>
           </div>

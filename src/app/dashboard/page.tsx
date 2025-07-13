@@ -367,7 +367,7 @@ export default function DashboardPage() {
                     <span className="text-lg text-muted-foreground">BTC</span>
                   </>
                 ) : (
-                  "No Balance"
+                  0
                 )}
               </div>
               <div className="space-y-1">
