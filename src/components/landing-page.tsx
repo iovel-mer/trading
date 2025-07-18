@@ -10,36 +10,19 @@ import {
   Shield,
   Zap,
   Globe,
-  Users,
-  TrendingUp,
   Lock,
   Smartphone,
-  Clock,
-  DollarSign,
   ChevronDown,
   Menu,
   X,
-  Star,
   Check,
   Bitcoin,
-  Banknote,
-  Wallet,
-  LineChart,
   Bot,
   Coins,
   Key,
 } from 'lucide-react';
 import Footer from '../components/Footer/Footer';
-import {
-  getTradingPairs,
-  getTicker,
-  getAllTickers,
-  get24hrTickerStats,
-  getPrice,
-  getOrderBook,
-  getRecentTrades,
-  getExchangeInfo,
-} from '@/app/api/binance/getBinance';
+import { getTradingPairs, getTicker } from '@/app/api/binance/getBinance';
 import type {
   TradingPair as BinanceTradingPair,
   Ticker as BinanceTicker,
@@ -48,12 +31,12 @@ import ModernTradingAnimation from './Animation/Animation';
 import UltraModernTradingInterface from './Animation/Animation';
 import RealisticTradingPlatform from './Animation/Animation';
 import { MainHeader } from './main-header';
+import BTCTradingChart from './LandingChart/LandingChart';
 
 const LandingPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);
-  const [activeModal, setActiveModal] = useState<string | null>(null);
 
   type MarketData = {
     symbol: string;

@@ -49,11 +49,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-black/90 backdrop-blur-xl border-b border-gray-800'
-          : ''
-      } ${className}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black/90 backdrop-blur-xl border-b border-gray-800  ${className}`}
     >
       <div className='container mx-auto px-6 py-4'>
         <div className='flex items-center justify-between'>
