@@ -1,0 +1,29 @@
+{
+  "lsp": {
+    "typescript-language-server": {
+      "initialization_options": {
+        "preferences": {
+          "includeCompletionsForModuleExports": true,
+          "includeCompletionsWithSnippetText": true,
+          "includeCompletionsForImportStatements": true,
+          "importModuleSpecifier": "shortest",
+          "includePackageJsonAutoImports": "auto"
+        }
+      }
+    }
+  },
+  "languages": {
+    "TypeScript": {
+      "language_servers": ["typescript-language-server"],
+      "formatter": "prettier"
+    },
+    "JavaScript": {
+      "language_servers": ["typescript-language-server"],
+      "formatter": "prettier"
+    },
+    "TSX": {
+      "language_servers": ["typescript-language-server"],
+      "formatter": "prettier"
+    }
+  }
+}

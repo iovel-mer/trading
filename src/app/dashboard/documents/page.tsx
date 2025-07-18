@@ -10,7 +10,7 @@ import { FileUpload } from "./components/file-upload";
 const DocumentsPage = () => {
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [activeTab, setActiveTab] = useState("upload");
-
+  const [t, setT] = useState();
   const handleUploadSuccess = () => {
     // Trigger a refresh of the documents table
     setRefreshTrigger((prev) => prev + 1);
