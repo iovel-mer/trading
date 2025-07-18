@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import BTCTradingChart from '../LandingChart/LandingChart';
+import BTCTradingChart, {
+  CustomTradingChart,
+} from '../LandingChart/LandingChart';
 
 type Candle = {
   id: number;
@@ -72,7 +74,7 @@ const SimpleCandlestickAnimation = () => {
 
   return (
     <div className='w-full h-[600px] bg-gray-900 flex items-center justify-center'>
-      <BTCTradingChart />
+      <CustomTradingChart symbol='BTC/USDT' />
     </div>
   );
 };
