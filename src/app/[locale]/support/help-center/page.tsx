@@ -1,120 +1,111 @@
+'use client';
+
 import { MainHeader } from '@/components/main-header';
 import { ArrowLeft } from 'lucide-react';
-import type { Metadata } from 'next';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Help Center - Get Support When You Need It',
-  description:
-    'Find answers to common questions and get help with your trading account.',
-};
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function HelpCenterPage() {
+  const locale = useLocale();
+  const tLegal = useTranslations('legal');
+  const tHelp = useTranslations('support.helpCenter');
+
   return (
     <div className='container mx-auto px-4 py-12 max-w-4xl'>
       <MainHeader />
       <div className='space-y-8 pt-30'>
         <div className='mb-8'>
           <Link
-            href='/'
+            href={`/${locale}`}
             className='inline-flex items-center text-gray-400 hover:text-white transition-colors mb-6'
           >
             <ArrowLeft className='w-4 h-4 mr-2' />
-            Back to Home
+            {tLegal('backToHome')}
           </Link>
           <h1 className='text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'>
-            Terms of Service
+            {tHelp('title')}
           </h1>
         </div>
 
         <div className='text-center space-y-4'>
-          <h1 className='text-4xl font-bold tracking-tight'>Help Center</h1>
+          <h1 className='text-4xl font-bold tracking-tight'>
+            {tHelp('title')}
+          </h1>
           <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-            Find quick answers to common questions or get personalized support
-            from our team.
+            {tHelp('subtitle')}
           </p>
         </div>
 
         <div className='grid md:grid-cols-3 gap-6'>
           <div className='p-6 border rounded-lg text-center'>
-            <h3 className='font-semibold mb-2'>Live Chat</h3>
+            <h3 className='font-semibold mb-2'>{tHelp('liveChat.title')}</h3>
             <p className='text-sm text-muted-foreground mb-4'>
-              Get instant help from our support team
-            </p>
-            <p className='text-xs text-muted-foreground'>Available 24/7</p>
-          </div>
-          <div className='p-6 border rounded-lg text-center'>
-            <h3 className='font-semibold mb-2'>Email Support</h3>
-            <p className='text-sm text-muted-foreground mb-4'>
-              Detailed responses within 2 hours
+              {tHelp('liveChat.description')}
             </p>
             <p className='text-xs text-muted-foreground'>
-              support@platform.com
+              {tHelp('liveChat.availability')}
             </p>
           </div>
           <div className='p-6 border rounded-lg text-center'>
-            <h3 className='font-semibold mb-2'>Phone Support</h3>
+            <h3 className='font-semibold mb-2'>
+              {tHelp('emailSupport.title')}
+            </h3>
             <p className='text-sm text-muted-foreground mb-4'>
-              Speak directly with our experts
+              {tHelp('emailSupport.description')}
             </p>
-            <p className='text-xs text-muted-foreground'>+1 (555) 123-4567</p>
+            <p className='text-xs text-muted-foreground'>
+              {tHelp('emailSupport.email')}
+            </p>
+          </div>
+          <div className='p-6 border rounded-lg text-center'>
+            <h3 className='font-semibold mb-2'>
+              {tHelp('phoneSupport.title')}
+            </h3>
+            <p className='text-sm text-muted-foreground mb-4'>
+              {tHelp('phoneSupport.description')}
+            </p>
+            <p className='text-xs text-muted-foreground'>
+              {tHelp('phoneSupport.phone')}
+            </p>
           </div>
         </div>
 
         <div className='space-y-6'>
-          <h2 className='text-2xl font-semibold'>Frequently Asked Questions</h2>
+          <h2 className='text-2xl font-semibold'>{tHelp('faq.title')}</h2>
           <div className='space-y-4'>
             <details className='p-4 border rounded-lg'>
               <summary className='font-medium cursor-pointer'>
-                How do I fund my account?
+                {tHelp('faq.fundAccount.question')}
               </summary>
               <div className='mt-3 text-sm text-muted-foreground'>
-                <p>
-                  You can fund your account through bank transfer, credit card,
-                  or cryptocurrency deposit. Bank transfers typically take 1-2
-                  business days, while crypto deposits are usually instant after
-                  network confirmation.
-                </p>
+                <p>{tHelp('faq.fundAccount.answer')}</p>
               </div>
             </details>
 
             <details className='p-4 border rounded-lg'>
               <summary className='font-medium cursor-pointer'>
-                What are your trading fees?
+                {tHelp('faq.tradingFees.question')}
               </summary>
               <div className='mt-3 text-sm text-muted-foreground'>
-                <p>
-                  Our fee structure is transparent and competitive. Spot trading
-                  fees start at 0.1% for makers and 0.15% for takers. Futures
-                  trading fees are as low as 0.02% for makers. Volume discounts
-                  are available for high-frequency traders.
-                </p>
+                <p>{tHelp('faq.tradingFees.answer')}</p>
               </div>
             </details>
 
             <details className='p-4 border rounded-lg'>
               <summary className='font-medium cursor-pointer'>
-                How long do withdrawals take?
+                {tHelp('faq.withdrawals.question')}
               </summary>
               <div className='mt-3 text-sm text-muted-foreground'>
-                <p>
-                  Cryptocurrency withdrawals are processed within 30 minutes
-                  during business hours. Bank withdrawals typically take 1-3
-                  business days depending on your bank and location.
-                </p>
+                <p>{tHelp('faq.withdrawals.answer')}</p>
               </div>
             </details>
 
             <details className='p-4 border rounded-lg'>
               <summary className='font-medium cursor-pointer'>
-                Is my account insured?
+                {tHelp('faq.insurance.question')}
               </summary>
               <div className='mt-3 text-sm text-muted-foreground'>
-                <p>
-                  Yes, we maintain comprehensive insurance coverage for digital
-                  assets and operational risks. Additionally, fiat deposits are
-                  protected by FDIC insurance up to $250,000 per account.
-                </p>
+                <p>{tHelp('faq.insurance.answer')}</p>
               </div>
             </details>
           </div>
@@ -122,52 +113,55 @@ export default function HelpCenterPage() {
 
         <div className='grid md:grid-cols-2 gap-8'>
           <div className='space-y-4'>
-            <h3 className='text-xl font-semibold'>Getting Started</h3>
+            <h3 className='text-xl font-semibold'>
+              {tHelp('gettingStarted.title')}
+            </h3>
             <ul className='space-y-2 text-sm'>
               <li>
                 <a href='#' className='text-primary hover:underline'>
-                  Account Verification Guide
+                  {tHelp('gettingStarted.verification')}
                 </a>
               </li>
               <li>
                 <a href='#' className='text-primary hover:underline'>
-                  How to Make Your First Trade
+                  {tHelp('gettingStarted.firstTrade')}
                 </a>
               </li>
               <li>
                 <a href='#' className='text-primary hover:underline'>
-                  Understanding Order Types
+                  {tHelp('gettingStarted.orderTypes')}
                 </a>
               </li>
               <li>
                 <a href='#' className='text-primary hover:underline'>
-                  Platform Tutorial Videos
+                  {tHelp('gettingStarted.tutorials')}
                 </a>
               </li>
             </ul>
           </div>
-
           <div className='space-y-4'>
-            <h3 className='text-xl font-semibold'>Advanced Topics</h3>
+            <h3 className='text-xl font-semibold'>
+              {tHelp('advancedTopics.title')}
+            </h3>
             <ul className='space-y-2 text-sm'>
               <li>
                 <a href='#' className='text-primary hover:underline'>
-                  Margin Trading Explained
+                  {tHelp('advancedTopics.marginTrading')}
                 </a>
               </li>
               <li>
                 <a href='#' className='text-primary hover:underline'>
-                  Options Strategies Guide
+                  {tHelp('advancedTopics.optionsStrategies')}
                 </a>
               </li>
               <li>
                 <a href='#' className='text-primary hover:underline'>
-                  API Documentation
+                  {tHelp('advancedTopics.apiDocs')}
                 </a>
               </li>
               <li>
                 <a href='#' className='text-primary hover:underline'>
-                  Tax Reporting Tools
+                  {tHelp('advancedTopics.taxReporting')}
                 </a>
               </li>
             </ul>
@@ -176,16 +170,14 @@ export default function HelpCenterPage() {
 
         <div className='bg-muted p-6 rounded-lg'>
           <h3 className='text-lg font-semibold mb-2 text-gray-300'>
-            Can't Find What You're Looking For?
+            {tHelp('cantFind.title')}
           </h3>
           <p className='text-muted-foreground mb-4 text-shadow-black'>
-            Our support team is here to help with any questions not covered in
-            our FAQ. We pride ourselves on quick response times and
-            knowledgeable assistance.
+            {tHelp('cantFind.description')}
           </p>
-          <Link href={'/support/contact-us'}>
+          <Link href={`/${locale}/support/contact-us`}>
             <button className='bg-primary text-primary-foreground px-4 py-2 rounded hover:bg-primary/90'>
-              Contact Support
+              {tHelp('cantFind.contactButton')}
             </button>
           </Link>
         </div>

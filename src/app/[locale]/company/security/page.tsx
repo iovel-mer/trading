@@ -1,87 +1,101 @@
+'use client';
+
 import { MainHeader } from '@/components/main-header';
 import { ArrowLeft } from 'lucide-react';
-import type { Metadata } from 'next';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Security - Your Assets Are Protected',
-  description:
-    'Learn about our comprehensive security measures and regulatory compliance standards.',
-};
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function SecurityPage() {
+  const locale = useLocale();
+  const tLegal = useTranslations('legal');
+  const tSecurity = useTranslations('support.security');
+
   return (
     <div className='container mx-auto px-4 py-12 max-w-4xl'>
       <MainHeader />
       <div className='space-y-8 pt-30'>
         <div className='mb-8'>
           <Link
-            href='/'
+            href={`/${locale}`}
             className='inline-flex items-center text-gray-400 hover:text-white transition-colors mb-6'
           >
             <ArrowLeft className='w-4 h-4 mr-2' />
-            Back to Home
+            {tLegal('backToHome')}
           </Link>
           <h1 className='text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'>
-            Terms of Service
+            {tSecurity('title')}
           </h1>
         </div>
 
         <div className='text-center space-y-4'>
-          <h1 className='text-4xl font-bold tracking-tight'>Security First</h1>
+          <h1 className='text-4xl font-bold tracking-tight'>
+            {tSecurity('title')}
+          </h1>
           <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-            Your assets and data are protected by institutional-grade security
-            measures and regulatory oversight.
+            {tSecurity('subtitle')}
           </p>
         </div>
 
         <div className='grid md:grid-cols-2 gap-8'>
           <div className='space-y-6'>
-            <h2 className='text-2xl font-semibold'>Asset Protection</h2>
+            <h2 className='text-2xl font-semibold'>
+              {tSecurity('assetProtection.title')}
+            </h2>
             <div className='space-y-4'>
               <div className='p-4 border rounded-lg'>
-                <h3 className='font-medium mb-2'>Cold Storage</h3>
+                <h3 className='font-medium mb-2'>
+                  {tSecurity('assetProtection.coldStorage.title')}
+                </h3>
                 <p className='text-sm text-muted-foreground'>
-                  95% of digital assets stored offline in military-grade secure
-                  facilities
+                  {tSecurity('assetProtection.coldStorage.description')}
                 </p>
               </div>
               <div className='p-4 border rounded-lg'>
-                <h3 className='font-medium mb-2'>Insurance Coverage</h3>
+                <h3 className='font-medium mb-2'>
+                  {tSecurity('assetProtection.insurance.title')}
+                </h3>
                 <p className='text-sm text-muted-foreground'>
-                  $100M insurance policy covering digital assets and operational
-                  risks
+                  {tSecurity('assetProtection.insurance.description')}
                 </p>
               </div>
               <div className='p-4 border rounded-lg'>
-                <h3 className='font-medium mb-2'>Segregated Accounts</h3>
+                <h3 className='font-medium mb-2'>
+                  {tSecurity('assetProtection.segregatedAccounts.title')}
+                </h3>
                 <p className='text-sm text-muted-foreground'>
-                  Client funds held separately from company assets in regulated
-                  banks
+                  {tSecurity('assetProtection.segregatedAccounts.description')}
                 </p>
               </div>
             </div>
           </div>
 
           <div className='space-y-6'>
-            <h2 className='text-2xl font-semibold'>Technical Security</h2>
+            <h2 className='text-2xl font-semibold'>
+              {tSecurity('technicalSecurity.title')}
+            </h2>
             <div className='space-y-4'>
               <div className='p-4 border rounded-lg'>
-                <h3 className='font-medium mb-2'>Multi-Signature Wallets</h3>
+                <h3 className='font-medium mb-2'>
+                  {tSecurity('technicalSecurity.multiSig.title')}
+                </h3>
                 <p className='text-sm text-muted-foreground'>
-                  Multiple keys required for all cryptocurrency transactions
+                  {tSecurity('technicalSecurity.multiSig.description')}
                 </p>
               </div>
               <div className='p-4 border rounded-lg'>
-                <h3 className='font-medium mb-2'>End-to-End Encryption</h3>
+                <h3 className='font-medium mb-2'>
+                  {tSecurity('technicalSecurity.encryption.title')}
+                </h3>
                 <p className='text-sm text-muted-foreground'>
-                  All data encrypted in transit and at rest using AES-256
+                  {tSecurity('technicalSecurity.encryption.description')}
                 </p>
               </div>
               <div className='p-4 border rounded-lg'>
-                <h3 className='font-medium mb-2'>24/7 Monitoring</h3>
+                <h3 className='font-medium mb-2'>
+                  {tSecurity('technicalSecurity.monitoring.title')}
+                </h3>
                 <p className='text-sm text-muted-foreground'>
-                  Real-time threat detection and incident response team
+                  {tSecurity('technicalSecurity.monitoring.description')}
                 </p>
               </div>
             </div>
@@ -89,24 +103,26 @@ export default function SecurityPage() {
         </div>
 
         <div className='space-y-6'>
-          <h2 className='text-2xl font-semibold'>Regulatory Compliance</h2>
+          <h2 className='text-2xl font-semibold'>
+            {tSecurity('compliance.title')}
+          </h2>
           <div className='grid md:grid-cols-3 gap-4'>
             <div className='text-center p-4 border rounded-lg'>
-              <h3 className='font-semibold'>FCA Regulated</h3>
+              <h3 className='font-semibold'>{tSecurity('compliance.fca')}</h3>
               <p className='text-xs text-muted-foreground'>
-                UK Financial Conduct Authority
+                {tSecurity('compliance.fcaDesc')}
               </p>
             </div>
             <div className='text-center p-4 border rounded-lg'>
-              <h3 className='font-semibold'>CFTC Registered</h3>
+              <h3 className='font-semibold'>{tSecurity('compliance.cftc')}</h3>
               <p className='text-xs text-muted-foreground'>
-                US Commodity Futures Trading Commission
+                {tSecurity('compliance.cftcDesc')}
               </p>
             </div>
             <div className='text-center p-4 border rounded-lg'>
-              <h3 className='font-semibold'>MAS Licensed</h3>
+              <h3 className='font-semibold'>{tSecurity('compliance.mas')}</h3>
               <p className='text-xs text-muted-foreground'>
-                Monetary Authority of Singapore
+                {tSecurity('compliance.masDesc')}
               </p>
             </div>
           </div>
@@ -114,25 +130,23 @@ export default function SecurityPage() {
 
         <div className='bg-blue-50 border border-blue-200 p-6 rounded-lg'>
           <h3 className='text-lg font-semibold mb-3 text-black'>
-            Account Security Tips
+            {tSecurity('securityTips.title')}
           </h3>
           <ul className='space-y-2 text-sm text-blue-800'>
-            <li>• Enable two-factor authentication on your account</li>
-            <li>• Use a unique, strong password with a password manager</li>
-            <li>• Never share your login credentials with anyone</li>
-            <li>• Regularly review your account activity and statements</li>
-            <li>
-              • Contact support immediately if you notice suspicious activity
-            </li>
+            <li>• {tSecurity('securityTips.tip1')}</li>
+            <li>• {tSecurity('securityTips.tip2')}</li>
+            <li>• {tSecurity('securityTips.tip3')}</li>
+            <li>• {tSecurity('securityTips.tip4')}</li>
+            <li>• {tSecurity('securityTips.tip5')}</li>
           </ul>
         </div>
 
         <div className='text-center'>
-          <h3 className='text-lg font-semibold mb-2'>Security Audits</h3>
+          <h3 className='text-lg font-semibold mb-2'>
+            {tSecurity('audits.title')}
+          </h3>
           <p className='text-muted-foreground'>
-            Our systems undergo quarterly security audits by leading
-            cybersecurity firms including Deloitte and PwC. All audit reports
-            are available upon request.
+            {tSecurity('audits.description')}
           </p>
         </div>
       </div>

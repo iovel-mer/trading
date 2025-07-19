@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronLeft, Search, ChevronDown } from 'lucide-react';
-import { postRegistration } from '../api/auth/postRegistration';
+import { postRegistration } from '../../api/auth/postRegistration';
 import { getCountries } from '@/app/api/countries/getCountries';
 import { getLanguages } from '@/app/api/languages/getLanguages';
 import type { Country } from '@/app/api/types/countries';
@@ -34,64 +34,46 @@ export default function RegisterPage() {
   const [languages, setLanguages] = useState<Language[]>([]);
   const [userCountryCode, setUserCountryCode] = useState<string | null>(null);
 
-  // Search states
   const [countrySearch, setCountrySearch] = useState('');
   const [languageSearch, setLanguageSearch] = useState('');
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
 
-  // Function to detect user's country
   const detectUserCountry = async () => {
     try {
-      // Method 1: Try using a geolocation IP service
       const response = await fetch('https://ipapi.co/json/');
       if (response.ok) {
         const data = await response.json();
         if (data.country_code) {
-          console.log('Detected country from IP:', data.country_code);
           setUserCountryCode(data.country_code.toUpperCase());
           return data.country_code.toUpperCase();
         }
       }
-    } catch (error) {
-      console.log('IP geolocation failed, trying alternative...');
-    }
+    } catch (error) {}
 
     try {
-      // Method 2: Alternative service
       const response = await fetch('https://api.country.is/');
       if (response.ok) {
         const data = await response.json();
         if (data.country) {
-          console.log(
-            'Detected country from alternative service:',
-            data.country
-          );
           setUserCountryCode(data.country.toUpperCase());
           return data.country.toUpperCase();
         }
       }
-    } catch (error) {
-      console.log('Alternative geolocation failed');
-    }
+    } catch (error) {}
 
     try {
-      // Method 3: Use browser's timezone as fallback
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       const countryFromTimezone = getCountryFromTimezone(timezone);
       if (countryFromTimezone) {
-        console.log('Detected country from timezone:', countryFromTimezone);
         setUserCountryCode(countryFromTimezone);
         return countryFromTimezone;
       }
-    } catch (error) {
-      console.log('Timezone detection failed');
-    }
+    } catch (error) {}
 
     return null;
   };
 
-  // Helper function to map timezone to country (basic mapping)
   const getCountryFromTimezone = (timezone: string): string | null => {
     const timezoneToCountry: { [key: string]: string } = {
       'America/New_York': 'US',
@@ -156,7 +138,6 @@ export default function RegisterPage() {
     return timezoneToCountry[timezone] || null;
   };
 
-  // Sort countries to put user's country first
   const getSortedCountries = () => {
     if (!userCountryCode || countries.length === 0) {
       return countries;
@@ -176,7 +157,6 @@ export default function RegisterPage() {
     return countries;
   };
 
-  // Set the source to the current domain URL and fetch countries/languages
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setFormData(prev => ({
@@ -185,7 +165,6 @@ export default function RegisterPage() {
       }));
     }
 
-    // Fetch countries and languages
     const fetchData = async () => {
       try {
         const [countriesResponse, languagesData] = await Promise.all([
@@ -196,10 +175,8 @@ export default function RegisterPage() {
         if (countriesResponse.success && countriesResponse.data) {
           setCountries(countriesResponse.data);
 
-          // Detect user's country after countries are loaded
           const detectedCountry = await detectUserCountry();
 
-          // Auto-select user's country if detected
           if (detectedCountry) {
             const foundCountry = countriesResponse.data.find(
               country => country.code === detectedCountry
@@ -248,7 +225,6 @@ export default function RegisterPage() {
     setIsLoading(false);
   };
 
-  // Filter countries and languages based on search
   const filteredCountries = getSortedCountries().filter(
     country =>
       country.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
@@ -261,27 +237,23 @@ export default function RegisterPage() {
       language.code.toLowerCase().includes(languageSearch.toLowerCase())
   );
 
-  // Handle country selection
   const handleCountrySelect = (countryCode: string) => {
     setFormData(prev => ({ ...prev, country: countryCode }));
     setCountrySearch('');
     setShowCountryDropdown(false);
   };
 
-  // Handle language selection
   const handleLanguageSelect = (languageCode: string) => {
     setFormData(prev => ({ ...prev, language: languageCode }));
     setLanguageSearch('');
     setShowLanguageDropdown(false);
   };
 
-  // Get selected country and language names for display
   const selectedCountry = countries.find(c => c.code === formData.country);
   const selectedLanguage = languages.find(l => l.code === formData.language);
 
   return (
     <div className='min-h-screen flex bg-[#1b1f7b]'>
-      {/* Left side - Auth Form */}
       <div className='flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 xl:px-12'>
         <div className='mx-auto w-full max-w-sm'>
           <Link
@@ -456,7 +428,9 @@ export default function RegisterPage() {
                     )}
                   </span>
                   <ChevronDown
-                    className={`h-4 w-4 text-gray-400 transition-transform ${showCountryDropdown ? 'rotate-180' : ''}`}
+                    className={`h-4 w-4 text-gray-400 transition-transform ${
+                      showCountryDropdown ? 'rotate-180' : ''
+                    }`}
                   />
                 </div>
                 {showCountryDropdown && (
@@ -526,7 +500,9 @@ export default function RegisterPage() {
                       : 'Select your language'}
                   </span>
                   <ChevronDown
-                    className={`h-4 w-4 text-gray-400 transition-transform ${showLanguageDropdown ? 'rotate-180' : ''}`}
+                    className={`h-4 w-4 text-gray-400 transition-transform ${
+                      showLanguageDropdown ? 'rotate-180' : ''
+                    }`}
                   />
                 </div>
                 {showLanguageDropdown && (
@@ -615,7 +591,6 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      {/* Right side - Background */}
       <div className='hidden lg:block relative flex-1'>
         <div className='absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20' />
         <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black to-black' />

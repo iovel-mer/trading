@@ -1,15 +1,16 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { postRefreshToken } from "@/app/api/auth/postRefreshToken";
-import { COOKIE_CONFIG } from "./app/api/const/session";
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { postRefreshToken } from '@/app/api/auth/postRefreshToken';
+import { COOKIE_CONFIG } from './app/api/const/session';
+import createIntlMiddleware from 'next-intl/middleware';
 
 const parseJwtSync = (token: string) => {
   try {
-    const base64Url = token.split(".")[1];
-    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     return JSON.parse(atob(base64));
   } catch (error) {
-    console.error("Failed to decode JWT:", error);
+    console.error('Failed to decode JWT:', error);
     return null;
   }
 };
@@ -20,31 +21,60 @@ const isJWTExpiredSync = (token: string): boolean => {
   return Date.now() >= payload.exp * 1000;
 };
 
+const intlMiddleware = createIntlMiddleware({
+  locales: ['en', 'es', 'de'],
+  defaultLocale: 'en',
+  localePrefix: 'always',
+});
+
 export async function middleware(request: NextRequest) {
+  console.log('Middleware called for:', request.nextUrl.pathname);
+
   const url = new URL(request.url);
-  const origin = url.origin;
   const pathname = url.pathname;
+
+  const intlResponse = intlMiddleware(request);
+
+  if (intlResponse && intlResponse.status >= 300 && intlResponse.status < 400) {
+    console.log('Middleware - Intl redirect:', intlResponse.status);
+    return intlResponse;
+  }
+
+  const segments = pathname.split('/');
+  const locales = ['en', 'es', 'de'];
+  const locale = locales.includes(segments[1]) ? segments[1] : 'en';
+  const pathnameWithoutLocale = locales.includes(segments[1])
+    ? '/' + segments.slice(2).join('/')
+    : pathname;
+
+  console.log(
+    'Middleware - Detected locale:',
+    locale,
+    'Path without locale:',
+    pathnameWithoutLocale
+  );
+
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-url", request.url);
-  requestHeaders.set("x-origin", origin);
-  requestHeaders.set("x-pathname", pathname);
+  requestHeaders.set('x-url', request.url);
+  requestHeaders.set('x-origin', url.origin);
+  requestHeaders.set('x-pathname', pathname);
+  requestHeaders.set('x-locale', locale);
 
-  const publicPaths = ["/login", "/register", "/"];
-  const protectedPaths = ["/dashboard", "/trading", "/finance"];
-  const authPaths = ["/login", "/register"];
+  const publicPaths = ['/login', '/register', '/'];
+  const protectedPaths = ['/dashboard', '/trading', '/finance'];
+  const authPaths = ['/login', '/register'];
 
-  const isProtectedPath = protectedPaths.some((path) =>
-    request.nextUrl.pathname.startsWith(path)
+  const isProtectedPath = protectedPaths.some(path =>
+    pathnameWithoutLocale.startsWith(path)
   );
-  const isAuthPath = authPaths.some((path) =>
-    request.nextUrl.pathname.startsWith(path)
+  const isAuthPath = authPaths.some(path =>
+    pathnameWithoutLocale.startsWith(path)
   );
 
-  // Check if there's an authkey in the URL - if so, allow access to dashboard
-  const authkey = url.searchParams.get("authkey");
-  if (authkey && pathname === "/dashboard") {
+  const authkey = url.searchParams.get('authkey');
+  if (authkey && pathnameWithoutLocale === '/dashboard') {
     console.log(
-      "\x1b[43m\x1b[30m[AUTHKEY DETECTED]\x1b[0m Allowing dashboard access for auth confirmation"
+      '\x1b[43m\x1b[30m[AUTHKEY DETECTED]\x1b[0m Allowing dashboard access for auth confirmation'
     );
     return NextResponse.next({
       request: {
@@ -53,7 +83,6 @@ export async function middleware(request: NextRequest) {
     });
   }
 
-  // If accessing auth pages with valid session, redirect to dashboard
   if (isAuthPath) {
     const sessionCookie = request.cookies.get(COOKIE_CONFIG.SESSION.name);
     if (sessionCookie) {
@@ -61,23 +90,33 @@ export async function middleware(request: NextRequest) {
         const sessionData = JSON.parse(sessionCookie.value);
         const { token } = sessionData;
         if (token && !isJWTExpiredSync(token)) {
-          return NextResponse.redirect(new URL("/dashboard", request.url));
+          const dashboardUrl = `/${locale}/dashboard`;
+          return NextResponse.redirect(new URL(dashboardUrl, request.url));
         }
-      } catch {
-        // Invalid session, continue to auth page
-      }
+      } catch {}
     }
-    return NextResponse.next();
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
   }
 
-  if (!isProtectedPath) return NextResponse.next();
+  if (!isProtectedPath) {
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
 
   const cookie = request.cookies.get(COOKIE_CONFIG.SESSION.name);
   if (!cookie) {
     console.log(
-      "\x1b[41m\x1b[97m[NO SESSION COOKIE]\x1b[0m Redirecting to /login"
+      '\x1b[41m\x1b[97m[NO SESSION COOKIE]\x1b[0m Redirecting to /login'
     );
-    return NextResponse.redirect(new URL("/", request.url));
+    const loginUrl = `/${locale}/login`;
+    return NextResponse.redirect(new URL(loginUrl, request.url));
   }
 
   let sessionData;
@@ -85,30 +124,30 @@ export async function middleware(request: NextRequest) {
     sessionData = JSON.parse(cookie.value);
   } catch {
     console.log(
-      "\x1b[41m\x1b[97m[INVALID SESSION DATA]\x1b[0m Redirecting to /login"
+      '\x1b[41m\x1b[97m[INVALID SESSION DATA]\x1b[0m Redirecting to /login'
     );
-    const response = NextResponse.redirect(new URL("/login", request.url));
-    // Clear the invalid session cookie
+    const loginUrl = `/${locale}/login`;
+    const response = NextResponse.redirect(new URL(loginUrl, request.url));
     response.cookies.delete(COOKIE_CONFIG.SESSION.name);
-    response.cookies.delete("accessToken");
-    response.cookies.delete("refreshToken");
+    response.cookies.delete('accessToken');
+    response.cookies.delete('refreshToken');
     return response;
   }
 
   const { token, refreshToken } = sessionData;
 
-  // Token expired → try to refresh
   const needsRefresh = isJWTExpiredSync(token);
   if (needsRefresh) {
-    console.log("\x1b[44m\x1b[97m[TOKEN EXPIRED]\x1b[0m Trying refresh...");
+    console.log('\x1b[44m\x1b[97m[TOKEN EXPIRED]\x1b[0m Trying refresh...');
     if (!refreshToken) {
       console.log(
-        "\x1b[41m\x1b[97m[NO REFRESH TOKEN]\x1b[0m Redirecting to /login"
+        '\x1b[41m\x1b[97m[NO REFRESH TOKEN]\x1b[0m Redirecting to /login'
       );
-      const response = NextResponse.redirect(new URL("/login", request.url));
+      const loginUrl = `/${locale}/login`;
+      const response = NextResponse.redirect(new URL(loginUrl, request.url));
       response.cookies.delete(COOKIE_CONFIG.SESSION.name);
-      response.cookies.delete("accessToken");
-      response.cookies.delete("refreshToken");
+      response.cookies.delete('accessToken');
+      response.cookies.delete('refreshToken');
       return response;
     }
 
@@ -119,17 +158,18 @@ export async function middleware(request: NextRequest) {
       !refreshed.data?.refreshToken
     ) {
       console.log(
-        "\x1b[41m\x1b[97m[REFRESH FAILED]\x1b[0m Invalid refresh token"
+        '\x1b[41m\x1b[97m[REFRESH FAILED]\x1b[0m Invalid refresh token'
       );
-      const response = NextResponse.redirect(new URL("/login", request.url));
+      const loginUrl = `/${locale}/login`;
+      const response = NextResponse.redirect(new URL(loginUrl, request.url));
       response.cookies.delete(COOKIE_CONFIG.SESSION.name);
-      response.cookies.delete("accessToken");
-      response.cookies.delete("refreshToken");
+      response.cookies.delete('accessToken');
+      response.cookies.delete('refreshToken');
       return response;
     }
 
-    console.log("\x1b[42m\x1b[30m[REFRESH SUCCESSFUL]\x1b[0m Token updated!");
-    // Set updated session with new tokens
+    console.log('\x1b[42m\x1b[30m[REFRESH SUCCESSFUL]\x1b[0m Token updated!');
+
     const updatedSession = {
       ...sessionData,
       token: refreshed.data.accessToken,
@@ -137,46 +177,44 @@ export async function middleware(request: NextRequest) {
       updatedAt: new Date().toISOString(),
     };
 
-    const response = NextResponse.next({
+    const nextResponse = NextResponse.next({
       request: {
         headers: requestHeaders,
       },
     });
 
-    // Update session cookie
-    response.cookies.set(
+    nextResponse.cookies.set(
       COOKIE_CONFIG.SESSION.name,
       JSON.stringify(updatedSession),
       {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
         maxAge: 60 * 60 * 24 * 7, // 7 days
-        path: "/",
+        path: '/',
       }
     );
 
-    // Update individual token cookies for backward compatibility
-    response.cookies.set("accessToken", refreshed.data.accessToken, {
+    nextResponse.cookies.set('accessToken', refreshed.data.accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
       maxAge: 60 * 15, // 15 minutes
-      path: "/",
+      path: '/',
     });
 
-    response.cookies.set("refreshToken", refreshed.data.refreshToken, {
+    nextResponse.cookies.set('refreshToken', refreshed.data.refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
       maxAge: 60 * 60 * 24 * 7, // 7 days
-      path: "/",
+      path: '/',
     });
 
-    return response;
+    return nextResponse;
   }
 
-  console.log("\x1b[32m[TOKEN VALID]\x1b[0m Continuing request");
+  console.log('\x1b[32m[TOKEN VALID]\x1b[0m Continuing request');
   return NextResponse.next({
     request: {
       headers: requestHeaders,
@@ -186,13 +224,9 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+    // Match all pathnames except for
+    // - … if they start with `/api`, `/_next` or `/_vercel`
+    // - … the ones containing a dot (e.g. `favicon.ico`)
+    '/((?!api|_next|_vercel|.*\\..*).*)',
   ],
 };

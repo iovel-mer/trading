@@ -1,0 +1,406 @@
+{
+  "header": {
+    "dashboard": "Dashboard",
+    "error": "Fehler",
+    "loading": "Lädt...",
+    "user": "Benutzer",
+    "noEmail": "Keine E-Mail",
+    "profile": "Profil",
+    "logOut": "Abmelden",
+    "loggingOut": "Abmeldung läuft..."
+  },
+  "navbar": {
+    "login": "Anmelden",
+    "getStarted": "Loslegen",
+    "markets": "Märkte",
+    "trade": "Handeln",
+    "futures": "Futures",
+    "security": "Sicherheit"
+  },
+  "hero": {
+    "title": "Handel mit Krypto",
+    "subtitle": "Wie ein Profi",
+    "description": "Erleben Sie die Zukunft des Kryptowährungshandels mit fortschrittlichen Tools, blitzschneller Ausführung und institutioneller Sicherheit.",
+    "loading": "Marktdaten werden geladen...",
+    "startTrading": "Jetzt mit dem Handel beginnen",
+    "loadingError": "Fehler beim Laden der Marktdaten"
+  },
+  "stats": {
+    "dailyVolume": "Tägliches Handelsvolumen",
+    "activeTraders": "Aktive Händler",
+    "countriesSupported": "Unterstützte Länder",
+    "lowestFees": "Niedrigste Gebühren"
+  },
+  "features": {
+    "title": "Alles was Sie brauchen um",
+    "subtitle": "Erfolgreich zu Handeln",
+    "description": "Professionelle Handelstools, Echtzeitdaten und erweiterte Funktionen für Anfänger und Experten",
+    "advancedTools": "Erweiterte Trading-Tools",
+    "advancedToolsDesc": "Professionelle Charts, technische Indikatoren und Echtzeit-Marktdaten",
+    "bankSecurity": "Banken-Sicherheit",
+    "bankSecurityDesc": "Multi-Signatur-Wallets, 2FA und Cold Storage für maximalen Schutz",
+    "fastExecution": "Blitzschnelle Ausführung",
+    "fastExecutionDesc": "Ultra-niedrige Latenz Matching-Engine verarbeitet Millionen von Aufträgen pro Sekunde",
+    "globalAccess": "Globaler Marktzugang",
+    "globalAccessDesc": "Handeln Sie 500+ Kryptowährungen auf Spot- und Futures-Märkten"
+  },
+  "markets": {
+    "title": "Handeln Sie Top-Kryptowährungen",
+    "description": "Zugang zu den liquidesten Märkten mit engen Spreads",
+    "tradeNow": "Jetzt Handeln",
+    "volume24h": "24h Volumen"
+  },
+  "security": {
+    "title": "Ihre Sicherheit ist unsere",
+    "subtitle": "Oberste Priorität",
+    "description": "Wir setzen branchenführende Sicherheitsmaßnahmen ein, um sicherzustellen, dass Ihre Gelder und Daten jederzeit sicher bleiben.",
+    "coldStorage": "Cold Storage",
+    "coldStorageDesc": "95% der Gelder offline gespeichert",
+    "multiSig": "Multi-Sig Wallets",
+    "multiSigDesc": "Mehrere Signaturen erforderlich",
+    "2fa": "2FA-Schutz",
+    "2faDesc": "Zwei-Faktor-Authentifizierung",
+    "aiMonitoring": "KI-Überwachung",
+    "aiMonitoringDesc": "24/7 Bedrohungserkennung"
+  },
+  "cta": {
+    "title": "Bereit mit dem Handel zu beginnen?",
+    "description": "Schließen Sie sich über 500.000 Händlern an, die unserer Plattform für ihre Kryptowährungshandel vertrauen",
+    "createAccount": "Kostenloses Konto erstellen",
+    "noCreditCard": "Keine Kreditkarte erforderlich",
+    "quickStart": "In Minuten mit dem Handel beginnen"
+  },
+  "footer": {
+    "description": "Die vertrauenswürdigste Krypto-Handelsplattform mit fortschrittlichen Tools und Sicherheit.",
+    "company": "Unternehmen",
+    "support": "Support",
+    "aboutUs": "Über Uns",
+    "security": "Sicherheit",
+    "helpCenter": "Hilfezentrum",
+    "contactUs": "Kontaktieren Sie uns",
+    "terms": {
+      "title": "Nutzungsbedingungen",
+      "content": "<h3 class=\"text-xl font-semibold mb-4 text-white\">1. Annahme der Bedingungen</h3><p class=\"mb-4\">Durch den Zugriff auf und die Nutzung von SalesVault akzeptieren Sie...</p>..."
+    },
+    "privacy": {
+      "title": "Datenschutzrichtlinie",
+      "content": "<h3 class=\"text-xl font-semibold mb-4 text-white\">1. Welche Informationen wir sammeln</h3><p class=\"mb-4\">Wir sammeln Informationen, die Sie uns direkt zur Verfügung stellen...</p>..."
+    },
+    "cookies": {
+      "title": "Cookie-Richtlinie",
+      "content": "<h3 class=\"text-xl font-semibold mb-4 text-white\">1. Was sind Cookies</h3><p class=\"mb-4\">Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden...</p>..."
+    },
+    "legal": {
+      "terms": "Nutzungsbedingungen",
+      "privacy": "Datenschutz",
+      "cookies": "Cookie-Richtlinie"
+    },
+    "rights": "Alle Rechte vorbehalten.",
+    "close": "Schließen"
+  },
+  "legal": {
+    "backToHome": "Zurück zur Startseite",
+    "lastUpdated": "Zuletzt aktualisiert: Januar 2024"
+  },
+  "cookiePolicy": {
+    "title": "Cookie-Richtlinie",
+    "whatAreCookies": {
+      "title": "1. Was sind Cookies",
+      "content": "Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, wenn Sie unsere Website besuchen. Sie helfen uns, Ihnen eine bessere Erfahrung zu bieten."
+    },
+    "typesOfCookies": {
+      "title": "2. Arten von Cookies, die wir verwenden",
+      "essential": "Wesentliche Cookies: Erforderlich für das ordnungsgemäße Funktionieren der Website, einschließlich Authentifizierungs- und Sicherheitsfunktionen.",
+      "analytics": "Analyse-Cookies: Helfen uns zu verstehen, wie Besucher mit unserer Website interagieren, indem sie anonyme Informationen sammeln.",
+      "functional": "Funktionale Cookies: Ermöglichen erweiterte Funktionalität und Personalisierung, wie das Merken Ihrer Präferenzen.",
+      "marketing": "Marketing-Cookies: Werden verwendet, um Besucher über Websites hinweg zu verfolgen, um relevante Werbung anzuzeigen."
+    },
+    "thirdPartyCookies": {
+      "title": "3. Drittanbieter-Cookies",
+      "content": "Wir können Drittanbieterdienste verwenden, die Cookies auf Ihrem Gerät setzen, einschließlich Google Analytics und Werbepartner."
+    },
+    "managingCookies": {
+      "title": "4. Cookie-Verwaltung",
+      "content": "Sie können Cookies über Ihre Browser-Einstellungen kontrollieren. Das Deaktivieren bestimmter Cookies kann jedoch die Website-Funktionalität beeinträchtigen."
+    },
+    "cookieConsent": {
+      "title": "5. Cookie-Einverständnis",
+      "content": "Durch die weitere Nutzung unserer Website stimmen Sie unserer Verwendung von Cookies zu, wie in dieser Richtlinie beschrieben."
+    },
+    "updates": {
+      "title": "6. Aktualisierungen dieser Richtlinie",
+      "content": "Wir können diese Cookie-Richtlinie von Zeit zu Zeit aktualisieren. Änderungen werden auf dieser Seite mit einem aktualisierten Überarbeitungsdatum veröffentlicht."
+    }
+  },
+  "termsOfService": {
+    "title": "Nutzungsbedingungen",
+    "acceptance": {
+      "title": "1. Annahme der Bedingungen",
+      "content": "Durch den Zugriff auf und die Nutzung von SalesVault akzeptieren Sie die Bedingungen und Bestimmungen dieser Vereinbarung und stimmen zu, daran gebunden zu sein."
+    },
+    "tradingServices": {
+      "title": "2. Trading-Dienstleistungen",
+      "content": "SalesVault bietet Kryptowährungs-Trading-Dienstleistungen an. Alle Trades werden auf Ihr eigenes Risiko ausgeführt."
+    },
+    "accountSecurity": {
+      "title": "3. Kontosicherheit",
+      "content": "Sie sind verantwortlich für die Wahrung der Vertraulichkeit Ihrer Kontodaten und für alle Aktivitäten, die unter Ihrem Konto auftreten."
+    },
+    "riskDisclosure": {
+      "title": "4. Risikoaufklärung",
+      "content": "Der Handel mit Kryptowährungen birgt ein erhebliches Verlustrisiko und ist nicht für alle Anleger geeignet. Die vergangene Performance ist kein Indikator für zukünftige Ergebnisse."
+    },
+    "feesAndCharges": {
+      "title": "5. Gebühren und Kosten",
+      "content": "Trading-Gebühren gelten für alle Transaktionen. Gebührenpläne sind auf unserer Website verfügbar und können von Zeit zu Zeit aktualisiert werden."
+    },
+    "prohibitedActivities": {
+      "title": "6. Verbotene Aktivitäten",
+      "content": "Benutzer dürfen sich nicht an Marktmanipulation, Geldwäsche oder anderen illegalen Aktivitäten auf unserer Plattform beteiligen."
+    },
+    "limitationOfLiability": {
+      "title": "7. Haftungsbeschränkung",
+      "content": "SalesVault haftet nicht für indirekte, zufällige, besondere, Folge- oder Strafschäden."
+    },
+    "termination": {
+      "title": "8. Kündigung",
+      "content": "Wir behalten uns das Recht vor, Ihr Konto jederzeit bei Verletzung dieser Bedingungen zu kündigen oder zu sperren."
+    }
+  },
+  "privacyPolicy": {
+    "title": "Datenschutzrichtlinie",
+    "informationWeCollect": {
+      "title": "1. Informationen, die wir sammeln",
+      "content": "Wir sammeln Informationen, die Sie uns direkt zur Verfügung stellen, z.B. wenn Sie ein Konto erstellen, Trades durchführen oder uns für Support kontaktieren."
+    },
+    "howWeUseInfo": {
+      "title": "2. Wie wir Ihre Informationen verwenden",
+      "content": "Wir verwenden Ihre Informationen, um unsere Dienste bereitzustellen, zu warten und zu verbessern, Transaktionen zu verarbeiten und mit Ihnen zu kommunizieren."
+    },
+    "informationSharing": {
+      "title": "3. Informationsaustausch",
+      "content": "Wir verkaufen, handeln oder übertragen Ihre persönlichen Informationen nicht an Dritte ohne Ihre Zustimmung, außer wie in dieser Richtlinie beschrieben."
+    },
+    "dataSecurity": {
+      "title": "4. Datensicherheit",
+      "content": "Wir implementieren angemessene Sicherheitsmaßnahmen zum Schutz Ihrer persönlichen Informationen vor unbefugtem Zugriff, Änderung, Offenlegung oder Zerstörung."
+    },
+    "cookiesAndTracking": {
+      "title": "5. Cookies und Tracking",
+      "content": "Wir verwenden Cookies und ähnliche Technologien, um Ihre Erfahrung zu verbessern, Nutzungsmuster zu analysieren und Inhalte zu personalisieren."
+    },
+    "dataRetention": {
+      "title": "6. Datenaufbewahrung",
+      "content": "Wir bewahren Ihre Informationen so lange auf, wie es notwendig ist, um Dienste bereitzustellen und rechtliche Verpflichtungen zu erfüllen."
+    },
+    "yourRights": {
+      "title": "7. Ihre Rechte",
+      "content": "Sie haben das Recht, auf Ihre persönlichen Informationen zuzugreifen, sie zu aktualisieren oder zu löschen. Kontaktieren Sie uns, um diese Rechte auszuüben."
+    },
+    "internationalTransfers": {
+      "title": "8. Internationale Übertragungen",
+      "content": "Ihre Informationen können in andere Länder als Ihrem eigenen übertragen und verarbeitet werden, vorbehaltlich angemessener Schutzmaßnahmen."
+    }
+  },
+  "support": {
+    "contactUs": {
+      "title": "Kontaktieren Sie uns",
+      "subtitle": "Wir sind hier, um zu helfen. Kontaktieren Sie uns über einen dieser Kanäle und wir melden uns schnell zurück.",
+      "getInTouch": "Kontakt aufnehmen",
+      "customerSupport": {
+        "title": "Kundensupport",
+        "description": "Für Kontoprobleme, Trading-Fragen und technischen Support",
+        "email": "Email: support@platform.com",
+        "phone": "Telefon: +1 (555) 123-4567",
+        "availability": "Verfügbar 24/7"
+      },
+      "businessInquiries": {
+        "title": "Geschäftsanfragen",
+        "description": "Partnerschaften, institutionelle Dienstleistungen und Medienanfragen",
+        "email": "Email: business@platform.com",
+        "phone": "Telefon: +1 (555) 123-4568",
+        "availability": "Montag-Freitag, 9-18 Uhr EST"
+      },
+      "complianceLegal": {
+        "title": "Compliance & Recht",
+        "description": "Regulatorische Angelegenheiten und rechtliche Anfragen",
+        "email": "Email: legal@platform.com",
+        "availability": "Antwort innerhalb von 48 Stunden"
+      },
+      "sendMessage": "Senden Sie uns eine Nachricht",
+      "form": {
+        "name": "Name",
+        "namePlaceholder": "Ihr vollständiger Name",
+        "email": "Email",
+        "emailPlaceholder": "ihre@email.com",
+        "subject": "Betreff",
+        "message": "Nachricht",
+        "messagePlaceholder": "Wie können wir Ihnen helfen?",
+        "sendButton": "Nachricht senden",
+        "subjects": {
+          "general": "Allgemeine Anfrage",
+          "support": "Konto-Support",
+          "technical": "Technisches Problem",
+          "partnership": "Partnerschaft",
+          "media": "Medienanfrage"
+        }
+      },
+      "offices": {
+        "title": "Unsere Büros",
+        "newYork": "New York (Hauptsitz)",
+        "london": "London",
+        "singapore": "Singapur"
+      },
+      "responseTimes": {
+        "title": "Antwortzeiten",
+        "liveChat": "Live-Chat: Sofortige Antwort während der Geschäftszeiten",
+        "emailSupport": "Email-Support: Innerhalb von 2 Stunden für dringende Angelegenheiten",
+        "phoneSupport": "Telefon-Support: Keine Wartezeit, 24/7 Verfügbarkeit",
+        "businessInquiries": "Geschäftsanfragen: Innerhalb von 1 Werktag"
+      }
+    },
+    "helpCenter": {
+      "title": "Hilfezentrum",
+      "subtitle": "Finden Sie schnelle Antworten auf häufige Fragen oder erhalten Sie personalisierten Support von unserem Team.",
+      "liveChat": {
+        "title": "Live-Chat",
+        "description": "Erhalten Sie sofortige Hilfe von unserem Support-Team",
+        "availability": "Verfügbar 24/7"
+      },
+      "emailSupport": {
+        "title": "Email-Support",
+        "description": "Detaillierte Antworten innerhalb von 2 Stunden",
+        "email": "support@platform.com"
+      },
+      "phoneSupport": {
+        "title": "Telefon-Support",
+        "description": "Sprechen Sie direkt mit unseren Experten",
+        "phone": "+1 (555) 123-4567"
+      },
+      "faq": {
+        "title": "Häufig gestellte Fragen",
+        "fundAccount": {
+          "question": "Wie finanziere ich mein Konto?",
+          "answer": "Sie können Ihr Konto über Banküberweisung, Kreditkarte oder Kryptowährungs-Einzahlung finanzieren. Banküberweisungen dauern normalerweise 1-2 Werktage, während Krypto-Einzahlungen nach Netzwerkbestätigung meist sofort verfügbar sind."
+        },
+        "tradingFees": {
+          "question": "Wie hoch sind Ihre Trading-Gebühren?",
+          "answer": "Unsere Gebührenstruktur ist transparent und wettbewerbsfähig. Spot-Trading-Gebühren beginnen bei 0,1% für Maker und 0,15% für Taker. Futures-Trading-Gebühren sind so niedrig wie 0,02% für Maker. Volumenrabatte sind für Hochfrequenz-Trader verfügbar."
+        },
+        "withdrawals": {
+          "question": "Wie lange dauern Abhebungen?",
+          "answer": "Kryptowährungs-Abhebungen werden innerhalb von 30 Minuten während der Geschäftszeiten bearbeitet. Bank-Abhebungen dauern normalerweise 1-3 Werktage, abhängig von Ihrer Bank und Ihrem Standort."
+        },
+        "insurance": {
+          "question": "Ist mein Konto versichert?",
+          "answer": "Ja, wir unterhalten umfassende Versicherungsdeckung für digitale Vermögenswerte und operative Risiken. Zusätzlich sind Fiat-Einlagen durch FDIC-Versicherung bis zu $250.000 pro Konto geschützt."
+        }
+      },
+      "gettingStarted": {
+        "title": "Erste Schritte",
+        "verification": "Konto-Verifizierungsleitfaden",
+        "firstTrade": "Wie Sie Ihren ersten Trade machen",
+        "orderTypes": "Ordertypen verstehen",
+        "tutorials": "Plattform-Tutorial-Videos"
+      },
+      "advancedTopics": {
+        "title": "Erweiterte Themen",
+        "marginTrading": "Margin-Trading erklärt",
+        "optionsStrategies": "Optionsstrategien-Leitfaden",
+        "apiDocs": "API-Dokumentation",
+        "taxReporting": "Steuerberichterstattungs-Tools"
+      },
+      "cantFind": {
+        "title": "Können Sie nicht finden, wonach Sie suchen?",
+        "description": "Unser Support-Team ist hier, um bei allen Fragen zu helfen, die nicht in unserem FAQ behandelt werden. Wir sind stolz auf schnelle Antwortzeiten und kompetente Unterstützung.",
+        "contactButton": "Support kontaktieren"
+      }
+    },
+    "aboutUs": {
+      "title": "Über uns",
+      "subtitle": "Wir bauen die Zukunft der Finanzmärkte und machen ausgeklügelte Trading-Tools für jeden zugänglich.",
+      "mission": {
+        "title": "Unsere Mission",
+        "content": "Finanzmärkte waren traditionell die Domäne großer Institutionen und wohlhabender Einzelpersonen. Wir glauben, dass jeder Zugang zu denselben mächtigen Trading-Tools und Möglichkeiten verdient. Unsere Plattform kombiniert institutionelle Technologie mit einer intuitiven Benutzeroberfläche und bringt professionelle Trading-Fähigkeiten zu Privatanlegern weltweit."
+      },
+      "founded": {
+        "title": "Gegründet 2019",
+        "content": "Gestartet von einem Team ehemaliger Wall Street-Trader und Silicon Valley-Ingenieure, die den Bedarf für bessere Retail-Trading-Infrastruktur sahen. Wir sind von einem kleinen Startup zu einem Unternehmen gewachsen, das über 2 Millionen Trader weltweit bedient."
+      },
+      "globalReach": {
+        "title": "Globale Reichweite",
+        "content": "Mit Büros in New York, London und Singapur bieten wir 24/7-Support und halten regulatorische Compliance in mehreren Jurisdiktionen aufrecht. Unser vielfältiges Team spricht über 20 Sprachen."
+      },
+      "values": {
+        "title": "Unsere Werte",
+        "transparency": {
+          "title": "Transparenz",
+          "description": "Klare Preise, keine versteckten Gebühren, offene Kommunikation"
+        },
+        "innovation": {
+          "title": "Innovation",
+          "description": "Spitzentechnologie, kontinuierliche Verbesserung"
+        },
+        "security": {
+          "title": "Sicherheit",
+          "description": "Banken-Sicherheit, regulatorische Compliance"
+        }
+      }
+    },
+    "security": {
+      "title": "Sicherheit zuerst",
+      "subtitle": "Ihre Vermögenswerte und Daten sind durch institutionelle Sicherheitsmaßnahmen und regulatorische Aufsicht geschützt.",
+      "assetProtection": {
+        "title": "Vermögensschutz",
+        "coldStorage": {
+          "title": "Cold Storage",
+          "description": "95% der digitalen Vermögenswerte offline in militärisch sicheren Einrichtungen gespeichert"
+        },
+        "insurance": {
+          "title": "Versicherungsschutz",
+          "description": "$100M Versicherungspolice für digitale Vermögenswerte und operative Risiken"
+        },
+        "segregatedAccounts": {
+          "title": "Getrennte Konten",
+          "description": "Kundengelder getrennt von Unternehmensvermögen in regulierten Banken gehalten"
+        }
+      },
+      "technicalSecurity": {
+        "title": "Technische Sicherheit",
+        "multiSig": {
+          "title": "Multi-Signatur-Wallets",
+          "description": "Mehrere Schlüssel erforderlich für alle Kryptowährungs-Transaktionen"
+        },
+        "encryption": {
+          "title": "Ende-zu-Ende-Verschlüsselung",
+          "description": "Alle Daten verschlüsselt in Transit und Ruhe mit AES-256"
+        },
+        "monitoring": {
+          "title": "24/7-Überwachung",
+          "description": "Echtzeit-Bedrohungserkennung und Incident-Response-Team"
+        }
+      },
+      "compliance": {
+        "title": "Regulatorische Compliance",
+        "fca": "FCA-reguliert",
+        "fcaDesc": "UK Financial Conduct Authority",
+        "cftc": "CFTC-registriert",
+        "cftcDesc": "US Commodity Futures Trading Commission",
+        "mas": "MAS-lizenziert",
+        "masDesc": "Monetary Authority of Singapore"
+      },
+      "securityTips": {
+        "title": "Konto-Sicherheitstipps",
+        "tip1": "Aktivieren Sie Zwei-Faktor-Authentifizierung für Ihr Konto",
+        "tip2": "Verwenden Sie ein einzigartiges, starkes Passwort mit einem Passwort-Manager",
+        "tip3": "Teilen Sie niemals Ihre Anmeldedaten mit anderen",
+        "tip4": "Überprüfen Sie regelmäßig Ihre Kontoaktivität und Auszüge",
+        "tip5": "Kontaktieren Sie sofort den Support, wenn Sie verdächtige Aktivitäten bemerken"
+      },
+      "audits": {
+        "title": "Sicherheitsaudits",
+        "description": "Unsere Systeme durchlaufen vierteljährliche Sicherheitsaudits durch führende Cybersicherheitsfirmen einschließlich Deloitte und PwC. Alle Auditberichte sind auf Anfrage verfügbar."
+      }
+    }
+  }
+}

@@ -1,8 +1,15 @@
+'use client';
+
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { MainHeader } from '@/components/main-header';
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function TermsOfServicePage() {
+  const locale = useLocale();
+  const tLegal = useTranslations('legal');
+  const tTerms = useTranslations('termsOfService');
+
   return (
     <div className='min-h-screen bg-black text-white'>
       <MainHeader />
@@ -10,14 +17,14 @@ export default function TermsOfServicePage() {
         <div className='max-w-4xl mx-auto'>
           <div className='mb-8'>
             <Link
-              href='/'
+              href={`/${locale}`}
               className='inline-flex items-center text-gray-400 hover:text-white transition-colors mb-6'
             >
               <ArrowLeft className='w-4 h-4 mr-2' />
-              Back to Home
+              {tLegal('backToHome')}
             </Link>
             <h1 className='text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'>
-              Terms of Service
+              {tTerms('title')}
             </h1>
           </div>
 
@@ -26,88 +33,64 @@ export default function TermsOfServicePage() {
             <div className='text-gray-300 leading-relaxed space-y-6'>
               <div>
                 <h3 className='text-xl font-semibold mb-4 text-white'>
-                  1. Acceptance of Terms
+                  {tTerms('acceptance.title')}
+                </h3>
+                <p className='mb-4'>{tTerms('acceptance.content')}</p>
+              </div>
+
+              <div>
+                <h3 className='text-xl font-semibold mb-4 text-white'>
+                  {tTerms('tradingServices.title')}
+                </h3>
+                <p className='mb-4'>{tTerms('tradingServices.content')}</p>
+              </div>
+
+              <div>
+                <h3 className='text-xl font-semibold mb-4 text-white'>
+                  {tTerms('accountSecurity.title')}
+                </h3>
+                <p className='mb-4'>{tTerms('accountSecurity.content')}</p>
+              </div>
+
+              <div>
+                <h3 className='text-xl font-semibold mb-4 text-white'>
+                  {tTerms('riskDisclosure.title')}
+                </h3>
+                <p className='mb-4'>{tTerms('riskDisclosure.content')}</p>
+              </div>
+
+              <div>
+                <h3 className='text-xl font-semibold mb-4 text-white'>
+                  {tTerms('feesAndCharges.title')}
+                </h3>
+                <p className='mb-4'>{tTerms('feesAndCharges.content')}</p>
+              </div>
+
+              <div>
+                <h3 className='text-xl font-semibold mb-4 text-white'>
+                  {tTerms('prohibitedActivities.title')}
+                </h3>
+                <p className='mb-4'>{tTerms('prohibitedActivities.content')}</p>
+              </div>
+
+              <div>
+                <h3 className='text-xl font-semibold mb-4 text-white'>
+                  {tTerms('limitationOfLiability.title')}
                 </h3>
                 <p className='mb-4'>
-                  By accessing and using SalesVault, you accept and agree to be
-                  bound by the terms and provision of this agreement.
+                  {tTerms('limitationOfLiability.content')}
                 </p>
               </div>
 
               <div>
                 <h3 className='text-xl font-semibold mb-4 text-white'>
-                  2. Trading Services
+                  {tTerms('termination.title')}
                 </h3>
-                <p className='mb-4'>
-                  SalesVault provides cryptocurrency trading services. All
-                  trades are executed at your own risk.
-                </p>
-              </div>
-
-              <div>
-                <h3 className='text-xl font-semibold mb-4 text-white'>
-                  3. Account Security
-                </h3>
-                <p className='mb-4'>
-                  You are responsible for maintaining the confidentiality of
-                  your account credentials and for all activities that occur
-                  under your account.
-                </p>
-              </div>
-
-              <div>
-                <h3 className='text-xl font-semibold mb-4 text-white'>
-                  4. Risk Disclosure
-                </h3>
-                <p className='mb-4'>
-                  Cryptocurrency trading involves substantial risk of loss and
-                  is not suitable for all investors. Past performance is not
-                  indicative of future results.
-                </p>
-              </div>
-
-              <div>
-                <h3 className='text-xl font-semibold mb-4 text-white'>
-                  5. Fees and Charges
-                </h3>
-                <p className='mb-4'>
-                  Trading fees apply to all transactions. Fee schedules are
-                  available on our website and may be updated from time to time.
-                </p>
-              </div>
-
-              <div>
-                <h3 className='text-xl font-semibold mb-4 text-white'>
-                  6. Prohibited Activities
-                </h3>
-                <p className='mb-4'>
-                  Users may not engage in market manipulation, money laundering,
-                  or any other illegal activities on our platform.
-                </p>
-              </div>
-
-              <div>
-                <h3 className='text-xl font-semibold mb-4 text-white'>
-                  7. Limitation of Liability
-                </h3>
-                <p className='mb-4'>
-                  SalesVault shall not be liable for any indirect, incidental,
-                  special, consequential, or punitive damages.
-                </p>
-              </div>
-
-              <div>
-                <h3 className='text-xl font-semibold mb-4 text-white'>
-                  8. Termination
-                </h3>
-                <p className='mb-4'>
-                  We reserve the right to terminate or suspend your account at
-                  any time for violation of these terms.
-                </p>
+                <p className='mb-4'>{tTerms('termination.content')}</p>
               </div>
 
               <p className='text-sm text-gray-400 mt-8'>
-                Last updated: January 2024
+                {tLegal('lastUpdated')}
               </p>
             </div>
           </div>
