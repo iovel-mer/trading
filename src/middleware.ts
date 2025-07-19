@@ -47,13 +47,6 @@ export async function middleware(request: NextRequest) {
     ? '/' + segments.slice(2).join('/')
     : pathname;
 
-  console.log(
-    'Middleware - Detected locale:',
-    locale,
-    'Path without locale:',
-    pathnameWithoutLocale
-  );
-
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-url', request.url);
   requestHeaders.set('x-origin', url.origin);

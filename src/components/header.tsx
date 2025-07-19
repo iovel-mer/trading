@@ -18,6 +18,7 @@ import { useState } from 'react';
 import { postLogout } from '@/app/api/auth/postLogout';
 import { useCredentials } from '@/hooks/use-credentials';
 import { useTranslations } from 'next-intl';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface HeaderProps {
   className?: string;
@@ -29,7 +30,7 @@ export function Header({ className }: HeaderProps) {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { clearCredentials } = useCredentials();
 
-  const tLogin = useTranslations('navbar');
+  const tLogin = useTranslations('');
 
   const handleLogout = async () => {
     try {
@@ -118,6 +119,7 @@ export function Header({ className }: HeaderProps) {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          <LanguageSwitcher />
         </div>
       </div>
     </header>
