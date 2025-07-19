@@ -1,7 +1,6 @@
 'use client';
 
 import type React from 'react';
-
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -11,9 +10,12 @@ import { getCountries } from '@/app/api/countries/getCountries';
 import { getLanguages } from '@/app/api/languages/getLanguages';
 import type { Country } from '@/app/api/types/countries';
 import type { Language } from '@/app/api/types/languages';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function RegisterPage() {
+  const t = useTranslations();
   const router = useRouter();
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -33,12 +35,11 @@ export default function RegisterPage() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [languages, setLanguages] = useState<Language[]>([]);
   const [userCountryCode, setUserCountryCode] = useState<string | null>(null);
-
   const [countrySearch, setCountrySearch] = useState('');
   const [languageSearch, setLanguageSearch] = useState('');
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
-
+  const locale = useLocale();
   const detectUserCountry = async () => {
     try {
       const response = await fetch('https://ipapi.co/json/');
@@ -174,9 +175,7 @@ export default function RegisterPage() {
 
         if (countriesResponse.success && countriesResponse.data) {
           setCountries(countriesResponse.data);
-
           const detectedCountry = await detectUserCountry();
-
           if (detectedCountry) {
             const foundCountry = countriesResponse.data.find(
               country => country.code === detectedCountry
@@ -257,18 +256,18 @@ export default function RegisterPage() {
       <div className='flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 xl:px-12'>
         <div className='mx-auto w-full max-w-sm'>
           <Link
-            href='/'
+            href={`/${locale}/`}
             className='inline-flex items-center text-sm text-gray-400 hover:text-white mb-8 transition-colors'
           >
             <ChevronLeft className='h-4 w-4 mr-1' />
-            Back to home
+            {t('register.backToHome')}
           </Link>
 
           <div className='text-center mb-8'>
             <h1 className='text-3xl font-bold text-white mb-2'>
-              Create Account
+              {t('register.title')}
             </h1>
-            <p className='text-gray-400'>Join our trading platform today</p>
+            <p className='text-gray-400'>{t('register.subtitle')}</p>
           </div>
 
           {error && (
@@ -284,7 +283,7 @@ export default function RegisterPage() {
                   htmlFor='firstName'
                   className='block text-sm font-medium text-gray-300 mb-1'
                 >
-                  First Name
+                  {t('register.firstName')}
                 </label>
                 <input
                   type='text'
@@ -295,7 +294,7 @@ export default function RegisterPage() {
                   required
                   disabled={isLoading}
                   className='w-full px-3 py-2 border border-gray-400 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500'
-                  placeholder='First name'
+                  placeholder={t('register.firstNamePlaceholder')}
                 />
               </div>
               <div>
@@ -303,7 +302,7 @@ export default function RegisterPage() {
                   htmlFor='lastName'
                   className='block text-sm font-medium text-gray-300 mb-1'
                 >
-                  Last Name
+                  {t('register.lastName')}
                 </label>
                 <input
                   type='text'
@@ -314,7 +313,7 @@ export default function RegisterPage() {
                   required
                   disabled={isLoading}
                   className='w-full px-3 py-2 border border-gray-400 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500'
-                  placeholder='Last name'
+                  placeholder={t('register.lastNamePlaceholder')}
                 />
               </div>
             </div>
@@ -324,7 +323,7 @@ export default function RegisterPage() {
                 htmlFor='email'
                 className='block text-sm font-medium text-gray-300 mb-1'
               >
-                Email
+                {t('register.email')}
               </label>
               <input
                 type='email'
@@ -335,7 +334,7 @@ export default function RegisterPage() {
                 required
                 disabled={isLoading}
                 className='w-full px-3 py-2 border border-gray-400 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500'
-                placeholder='Enter your email'
+                placeholder={t('register.emailPlaceholder')}
               />
             </div>
 
@@ -344,7 +343,7 @@ export default function RegisterPage() {
                 htmlFor='username'
                 className='block text-sm font-medium text-gray-300 mb-1'
               >
-                Username
+                {t('register.username')}
               </label>
               <input
                 type='text'
@@ -355,7 +354,7 @@ export default function RegisterPage() {
                 required
                 disabled={isLoading}
                 className='w-full px-3 py-2 border border-gray-400 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500'
-                placeholder='Choose a username'
+                placeholder={t('register.usernamePlaceholder')}
               />
             </div>
 
@@ -364,7 +363,7 @@ export default function RegisterPage() {
                 htmlFor='password'
                 className='block text-sm font-medium text-gray-300 mb-1'
               >
-                Password
+                {t('register.password')}
               </label>
               <input
                 type='password'
@@ -375,7 +374,7 @@ export default function RegisterPage() {
                 required
                 disabled={isLoading}
                 className='w-full px-3 py-2 border border-gray-400 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500'
-                placeholder='Create a password'
+                placeholder={t('register.passwordPlaceholder')}
               />
             </div>
 
@@ -384,7 +383,7 @@ export default function RegisterPage() {
                 htmlFor='phoneNumber'
                 className='block text-sm font-medium text-gray-300 mb-1'
               >
-                Phone Number
+                {t('register.phoneNumber')}
               </label>
               <input
                 type='tel'
@@ -395,7 +394,7 @@ export default function RegisterPage() {
                 required
                 disabled={isLoading}
                 className='w-full px-3 py-2 border border-gray-400 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500'
-                placeholder='Enter your phone number'
+                placeholder={t('register.phoneNumberPlaceholder')}
               />
             </div>
 
@@ -404,7 +403,7 @@ export default function RegisterPage() {
                 htmlFor='country'
                 className='block text-sm font-medium text-gray-300 mb-1'
               >
-                Country{' '}
+                {t('register.country')}
               </label>
               <div className='relative'>
                 <div
@@ -419,12 +418,12 @@ export default function RegisterPage() {
                         {selectedCountry.name}
                         {selectedCountry.code === userCountryCode && (
                           <span className='ml-2 text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded'>
-                            Your Location
+                            {t('register.yourLocation')}
                           </span>
                         )}
                       </span>
                     ) : (
-                      'Select your country'
+                      t('register.selectCountry')
                     )}
                   </span>
                   <ChevronDown
@@ -433,6 +432,7 @@ export default function RegisterPage() {
                     }`}
                   />
                 </div>
+
                 {showCountryDropdown && (
                   <div className='absolute z-10 w-full mt-1 bg-[#1b1f7b] border border-gray-400 rounded-lg shadow-lg max-h-60 overflow-hidden'>
                     <div className='p-2 border-b border-gray-400'>
@@ -440,7 +440,7 @@ export default function RegisterPage() {
                         <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400' />
                         <input
                           type='text'
-                          placeholder='Search countries...'
+                          placeholder={t('register.searchCountries')}
                           value={countrySearch}
                           onChange={e => setCountrySearch(e.target.value)}
                           className='w-full pl-10 pr-3 py-2 bg-[#1b1f7b] border border-gray-600 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500'
@@ -462,14 +462,14 @@ export default function RegisterPage() {
                             <span>{country.name}</span>
                             {country.code === userCountryCode && (
                               <span className='text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded'>
-                                Your Location
+                                {t('register.yourLocation')}
                               </span>
                             )}
                           </div>
                         ))
                       ) : (
                         <div className='px-3 py-2 text-gray-400'>
-                          No countries found
+                          {t('register.noCountriesFound')}
                         </div>
                       )}
                     </div>
@@ -483,7 +483,7 @@ export default function RegisterPage() {
                 htmlFor='language'
                 className='block text-sm font-medium text-gray-300 mb-1'
               >
-                Language
+                {t('register.language')}
               </label>
               <div className='relative'>
                 <div
@@ -497,7 +497,7 @@ export default function RegisterPage() {
                   >
                     {selectedLanguage
                       ? selectedLanguage.name
-                      : 'Select your language'}
+                      : t('register.selectLanguage')}
                   </span>
                   <ChevronDown
                     className={`h-4 w-4 text-gray-400 transition-transform ${
@@ -505,6 +505,7 @@ export default function RegisterPage() {
                     }`}
                   />
                 </div>
+
                 {showLanguageDropdown && (
                   <div className='absolute z-10 w-full mt-1 bg-[#1b1f7b] border border-gray-400 rounded-lg shadow-lg max-h-60 overflow-hidden'>
                     <div className='p-2 border-b border-gray-400'>
@@ -512,7 +513,7 @@ export default function RegisterPage() {
                         <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400' />
                         <input
                           type='text'
-                          placeholder='Search languages...'
+                          placeholder={t('register.searchLanguages')}
                           value={languageSearch}
                           onChange={e => setLanguageSearch(e.target.value)}
                           className='w-full pl-10 pr-3 py-2 bg-[#1b1f7b] border border-gray-600 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500'
@@ -532,7 +533,7 @@ export default function RegisterPage() {
                         ))
                       ) : (
                         <div className='px-3 py-2 text-gray-400'>
-                          No languages found
+                          {t('register.noLanguagesFound')}
                         </div>
                       )}
                     </div>
@@ -546,7 +547,7 @@ export default function RegisterPage() {
                 htmlFor='dateOfBirth'
                 className='block text-sm font-medium text-gray-300 mb-1'
               >
-                Date of Birth
+                {t('register.dateOfBirth')}
               </label>
               <input
                 type='date'
@@ -569,76 +570,95 @@ export default function RegisterPage() {
               {isLoading ? (
                 <div className='flex items-center justify-center'>
                   <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2'></div>
-                  Creating account...
+                  {t('register.creatingAccount')}
                 </div>
               ) : (
-                'Create Account'
+                t('register.createAccount')
               )}
             </button>
           </form>
 
           <div className='mt-6 text-center'>
             <p className='text-sm text-gray-400'>
-              Already have an account?{' '}
+              {t('register.alreadyHaveAccount')}{' '}
               <Link
                 href='/login'
                 className='text-blue-400 hover:text-blue-300 font-medium transition-colors'
               >
-                Sign in
+                {t('register.signIn')}
               </Link>
             </p>
           </div>
         </div>
       </div>
 
+      {/* Right side - Background */}
       <div className='hidden lg:block relative flex-1'>
         <div className='absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20' />
         <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black to-black' />
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+
         <div className='relative h-full flex items-center justify-center p-12'>
           <div className='max-w-md'>
             <h2 className='text-3xl font-bold text-white mb-6'>
-              Start Trading Today
+              {t('register.rightSide.title')}
             </h2>
+
             <div className='space-y-4 text-gray-400'>
               <div className='flex items-start space-x-3'>
                 <div className='flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5'>
                   <div className='w-2 h-2 rounded-full bg-blue-500' />
                 </div>
-                <p>Access to 100+ cryptocurrency trading pairs</p>
+                <p>{t('register.rightSide.feature1')}</p>
               </div>
+
               <div className='flex items-start space-x-3'>
                 <div className='flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5'>
                   <div className='w-2 h-2 rounded-full bg-blue-500' />
                 </div>
-                <p>Advanced trading tools and real-time market data</p>
+                <p>{t('register.rightSide.feature2')}</p>
               </div>
+
               <div className='flex items-start space-x-3'>
                 <div className='flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5'>
                   <div className='w-2 h-2 rounded-full bg-blue-500' />
                 </div>
-                <p>Secure wallet with industry-leading protection</p>
+                <p>{t('register.rightSide.feature3')}</p>
               </div>
+
               <div className='flex items-start space-x-3'>
                 <div className='flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5'>
                   <div className='w-2 h-2 rounded-full bg-blue-500' />
                 </div>
-                <p>24/7 customer support and educational resources</p>
+                <p>{t('register.rightSide.feature4')}</p>
               </div>
             </div>
+
             <div className='mt-10 pt-10 border-t border-gray-400'>
               <div className='flex items-center justify-between text-sm'>
                 <div>
-                  <p className='text-gray-400'>Total Trading Volume</p>
-                  <p className='text-2xl font-bold text-white'>$2.8B+</p>
+                  <p className='text-gray-400'>
+                    {t('register.rightSide.totalVolume')}
+                  </p>
+                  <p className='text-2xl font-bold text-white'>
+                    {t('register.rightSide.totalVolumeValue')}
+                  </p>
                 </div>
                 <div>
-                  <p className='text-gray-400'>Active Traders</p>
-                  <p className='text-2xl font-bold text-white'>500K+</p>
+                  <p className='text-gray-400'>
+                    {t('register.rightSide.activeTraders')}
+                  </p>
+                  <p className='text-2xl font-bold text-white'>
+                    {t('register.rightSide.activeTradersValue')}
+                  </p>
                 </div>
                 <div>
-                  <p className='text-gray-400'>Countries</p>
-                  <p className='text-2xl font-bold text-white'>180+</p>
+                  <p className='text-gray-400'>
+                    {t('register.rightSide.countries')}
+                  </p>
+                  <p className='text-2xl font-bold text-white'>
+                    {t('register.rightSide.countriesValue')}
+                  </p>
                 </div>
               </div>
             </div>
