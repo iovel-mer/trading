@@ -17,7 +17,7 @@ import { useUser } from '@/app/[locale]/dashboard/context/user-context';
 import { useState } from 'react';
 import { postLogout } from '@/app/api/auth/postLogout';
 import { useCredentials } from '@/hooks/use-credentials';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface HeaderProps {
@@ -29,7 +29,7 @@ export function Header({ className }: HeaderProps) {
   const { user, loading, error } = useUser();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { clearCredentials } = useCredentials();
-
+  const locale = useLocale();
   const tLogin = useTranslations('');
 
   const handleLogout = async () => {
@@ -37,11 +37,11 @@ export function Header({ className }: HeaderProps) {
       setIsLoggingOut(true);
       await postLogout();
       clearCredentials();
-      router.push('/login');
+      router.push(`/${locale}/login`);
     } catch (error) {
       console.error('Logout error:', error);
       clearCredentials();
-      router.push('/login');
+      router.push(`/${locale}/login`);
     } finally {
       setIsLoggingOut(false);
     }
@@ -107,7 +107,7 @@ export function Header({ className }: HeaderProps) {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                onClick={() => router.push('/dashboard/profile')}
+                onClick={() => router.push(`/${locale}/dashboard/profile`)}
               >
                 <User className='mr-2 h-4 w-4' />
                 <span>{tLogin('header.profile')}</span>
