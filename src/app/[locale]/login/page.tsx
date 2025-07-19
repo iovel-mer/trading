@@ -7,10 +7,13 @@ import { ChevronLeft } from 'lucide-react';
 import type { LoginCredentials } from '@/app/api/types/auth';
 import { postLogin } from '@/app/api/auth/postLogin';
 import { useCredentials } from '@/hooks/use-credentials';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function LoginPage() {
-  //TODO Should be changed!!
+  const t = useTranslations('login');
+  const locale = useLocale();
   const { storeCredentials } = useCredentials();
+
   const [formData, setFormData] = useState({
     emailOrUsername: '',
     password: '',
@@ -50,30 +53,25 @@ export default function LoginPage() {
       return;
     }
 
-    // Store credentials for Web Trader access
     storeCredentials(credentials);
-
     window.location.href = '/dashboard';
   };
 
   return (
     <div className='min-h-screen flex bg-[#1b1f7b]'>
-      {/* Left side - Auth Form */}
       <div className='flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 xl:px-12'>
         <div className='mx-auto w-full max-w-sm'>
           <Link
-            href='/'
+            href={`/${locale}/`}
             className='inline-flex items-center text-sm text-gray-400 hover:text-white mb-8 transition-colors'
           >
             <ChevronLeft className='h-4 w-4 mr-1' />
-            Back to home
+            {t('backToHome')}
           </Link>
 
           <div className='text-center mb-8'>
-            <h1 className='text-3xl font-bold text-white mb-2'>Sign In</h1>
-            <p className='text-gray-400'>
-              Welcome back to your trading platform
-            </p>
+            <h1 className='text-3xl font-bold text-white mb-2'>{t('title')}</h1>
+            <p className='text-gray-400'>{t('subtitle')}</p>
           </div>
 
           {error && (
@@ -88,7 +86,7 @@ export default function LoginPage() {
                 htmlFor='emailOrUsername'
                 className='block text-sm font-medium text-gray-300 mb-1'
               >
-                Email or Username
+                {t('emailOrUsername')}
               </label>
               <input
                 type='text'
@@ -99,7 +97,7 @@ export default function LoginPage() {
                 required
                 disabled={isLoading}
                 className='w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500'
-                placeholder='Enter your email or username'
+                placeholder={t('emailOrUsernamePlaceholder')}
               />
             </div>
 
@@ -108,7 +106,7 @@ export default function LoginPage() {
                 htmlFor='password'
                 className='block text-sm font-medium text-gray-300 mb-1'
               >
-                Password
+                {t('password')}
               </label>
               <input
                 type='password'
@@ -119,7 +117,7 @@ export default function LoginPage() {
                 required
                 disabled={isLoading}
                 className='w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500'
-                placeholder='Enter your password'
+                placeholder={t('passwordPlaceholder')}
               />
             </div>
 
@@ -129,7 +127,7 @@ export default function LoginPage() {
                   htmlFor='twoFactorCode'
                   className='block text-sm font-medium text-gray-300 mb-1'
                 >
-                  Two-Factor Code
+                  {t('twoFactorCode')}
                 </label>
                 <input
                   type='text'
@@ -139,7 +137,7 @@ export default function LoginPage() {
                   onChange={handleInputChange}
                   disabled={isLoading}
                   className='w-full px-3 py-2 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500'
-                  placeholder='Enter 2FA code'
+                  placeholder={t('twoFactorCodePlaceholder')}
                 />
               </div>
             )}
@@ -159,7 +157,7 @@ export default function LoginPage() {
                   htmlFor='rememberMe'
                   className='ml-2 block text-sm text-gray-300'
                 >
-                  Remember me
+                  {t('rememberMe')}
                 </label>
               </div>
             </div>
@@ -172,22 +170,22 @@ export default function LoginPage() {
               {isLoading ? (
                 <div className='flex items-center justify-center'>
                   <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2'></div>
-                  Signing in...
+                  {t('signingIn')}
                 </div>
               ) : (
-                'Sign In'
+                t('signIn')
               )}
             </button>
           </form>
 
           <div className='mt-6 text-center'>
             <p className='text-sm text-gray-400'>
-              Don&apos;t have an account?{' '}
+              {t('dontHaveAccount')}{' '}
               <Link
                 href='/register'
                 className='text-blue-400 hover:text-blue-300 font-medium transition-colors'
               >
-                Sign up
+                {t('signUp')}
               </Link>
             </p>
           </div>
@@ -203,48 +201,60 @@ export default function LoginPage() {
         <div className='relative h-full flex items-center justify-center p-12'>
           <div className='max-w-md'>
             <h2 className='text-3xl font-bold text-white mb-6'>
-              Start Trading Today
+              {t('rightSide.title')}
             </h2>
+
             <div className='space-y-4 text-gray-400'>
               <div className='flex items-start space-x-3'>
                 <div className='flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5'>
                   <div className='w-2 h-2 rounded-full bg-blue-500' />
                 </div>
-                <p>Access to 100+ cryptocurrency trading pairs</p>
+                <p>{t('rightSide.feature1')}</p>
               </div>
+
               <div className='flex items-start space-x-3'>
                 <div className='flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5'>
                   <div className='w-2 h-2 rounded-full bg-blue-500' />
                 </div>
-                <p>Advanced trading tools and real-time market data</p>
+                <p>{t('rightSide.feature2')}</p>
               </div>
+
               <div className='flex items-start space-x-3'>
                 <div className='flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5'>
                   <div className='w-2 h-2 rounded-full bg-blue-500' />
                 </div>
-                <p>Secure wallet with industry-leading protection</p>
+                <p>{t('rightSide.feature3')}</p>
               </div>
+
               <div className='flex items-start space-x-3'>
                 <div className='flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5'>
                   <div className='w-2 h-2 rounded-full bg-blue-500' />
                 </div>
-                <p>24/7 customer support and educational resources</p>
+                <p>{t('rightSide.feature4')}</p>
               </div>
             </div>
 
             <div className='mt-10 pt-10 border-t border-gray-700'>
               <div className='flex items-center justify-between text-sm'>
                 <div>
-                  <p className='text-gray-400'>Total Trading Volume</p>
-                  <p className='text-2xl font-bold text-white'>$2.8B+</p>
+                  <p className='text-gray-400'>{t('rightSide.totalVolume')}</p>
+                  <p className='text-2xl font-bold text-white'>
+                    {t('rightSide.totalVolumeValue')}
+                  </p>
                 </div>
                 <div>
-                  <p className='text-gray-400'>Active Traders</p>
-                  <p className='text-2xl font-bold text-white'>500K+</p>
+                  <p className='text-gray-400'>
+                    {t('rightSide.activeTraders')}
+                  </p>
+                  <p className='text-2xl font-bold text-white'>
+                    {t('rightSide.activeTradersValue')}
+                  </p>
                 </div>
                 <div>
-                  <p className='text-gray-400'>Countries</p>
-                  <p className='text-2xl font-bold text-white'>180+</p>
+                  <p className='text-gray-400'>{t('rightSide.countries')}</p>
+                  <p className='text-2xl font-bold text-white'>
+                    {t('rightSide.countriesValue')}
+                  </p>
                 </div>
               </div>
             </div>

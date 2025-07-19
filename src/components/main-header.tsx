@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface MainHeaderProps {
   className?: string;
@@ -17,7 +17,7 @@ interface MainHeaderProps {
 export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const locale = useLocale();
   const pathname = usePathname();
   const isHomePage = pathname === '/';
   const tLogin = useTranslations('navbar');
@@ -64,7 +64,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
             >
               <Image
                 src='/Vector.png'
-                alt={process.env.NEXT_PUBLIC_BASE_NAME as any}
+                alt={process.env.NEXT_PUBLIC_BASE_NAME || 'Vector PNG'}
                 width={30}
                 height={30}
               />
@@ -90,7 +90,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
           )}
 
           <div className='hidden lg:flex items-center space-x-4'>
-            <Link href='/login'>
+            <Link href={`${locale}/login`}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -99,7 +99,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
                 {tLogin('login')}
               </motion.button>
             </Link>
-            <Link href='/register'>
+            <Link href={`${locale}/register`}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

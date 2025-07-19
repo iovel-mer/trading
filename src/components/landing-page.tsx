@@ -330,7 +330,7 @@ const LandingPage = () => {
             <MainHeader />
 
             <div className='hidden lg:flex items-center space-x-4'>
-              <Link href='/login'>
+              <Link href={`${locale}/login`}>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -339,7 +339,7 @@ const LandingPage = () => {
                   {tNavbar('login')}
                 </motion.button>
               </Link>
-              <Link href='/register'>
+              <Link href={`${locale}/register`}>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -383,7 +383,7 @@ const LandingPage = () => {
                       {tNavbar('login')}
                     </button>
                   </Link>
-                  <Link href='/register' className='block'>
+                  <Link href={`${locale}/register`} className='block'>
                     <button className='w-full px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg'>
                       {tNavbar('getStarted')}
                     </button>
@@ -463,7 +463,7 @@ const LandingPage = () => {
               </div>
 
               <div className='flex flex-col sm:flex-row gap-4'>
-                <Link href='/register'>
+                <Link href={`${locale}/register`}>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -643,7 +643,7 @@ const LandingPage = () => {
                     <div className='text-2xl font-bold'>${pair.volume}</div>
                   </div>
                 </div>
-                <Link href='/register'>
+                <Link href={`${locale}/register`}>
                   <button className='w-full py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors'>
                     {tMarkets('tradeNow')}
                   </button>
@@ -807,7 +807,7 @@ const LandingPage = () => {
                 transition={{ delay: 0.2 }}
                 className='flex flex-col sm:flex-row gap-4 justify-center'
               >
-                <Link href='/register'>
+                <Link href={`${locale}/register`}>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

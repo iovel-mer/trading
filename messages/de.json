@@ -187,7 +187,7 @@
     },
     "cookiesAndTracking": {
       "title": "5. Cookies und Tracking",
-      "content": "Wir verwenden Cookies und ähnliche Technologien, um Ihre Erfahrung zu verbessern, Nutzungsmuster zu analysieren und Inhalte zu personalisieren."
+      "content": "Wir verwenden Cookies und ähnliche Technologien, um Ihre Er fahrung zu verbessern, Nutzungsmuster zu analysieren und Inhalte zu personalisieren."
     },
     "dataRetention": {
       "title": "6. Datenaufbewahrung",
@@ -401,6 +401,79 @@
         "title": "Sicherheitsaudits",
         "description": "Unsere Systeme durchlaufen vierteljährliche Sicherheitsaudits durch führende Cybersicherheitsfirmen einschließlich Deloitte und PwC. Alle Auditberichte sind auf Anfrage verfügbar."
       }
+    }
+  },
+  "login": {
+    "backToHome": "Zurück zur Startseite",
+    "title": "Anmelden",
+    "subtitle": "Willkommen zurück zu Ihrer Trading-Plattform",
+    "emailOrUsername": "E-Mail oder Benutzername",
+    "emailOrUsernamePlaceholder": "Geben Sie Ihre E-Mail oder Ihren Benutzernamen ein",
+    "password": "Passwort",
+    "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+    "twoFactorCode": "Zwei-Faktor-Code",
+    "twoFactorCodePlaceholder": "2FA-Code eingeben",
+    "rememberMe": "Angemeldet bleiben",
+    "signingIn": "Anmeldung läuft...",
+    "signIn": "Anmelden",
+    "dontHaveAccount": "Haben Sie noch kein Konto?",
+    "signUp": "Registrieren",
+    "rightSide": {
+      "title": "Starten Sie heute mit dem Handel",
+      "feature1": "Zugang zu über 100 Kryptowährungs-Handelspaaren",
+      "feature2": "Erweiterte Trading-Tools und Echtzeit-Marktdaten",
+      "feature3": "Sichere Wallet mit branchenführendem Schutz",
+      "feature4": "24/7 Kundensupport und Bildungsressourcen",
+      "totalVolume": "Gesamtes Handelsvolumen",
+      "totalVolumeValue": "$2.8B+",
+      "activeTraders": "Aktive Trader",
+      "activeTradersValue": "500K+",
+      "countries": "Länder",
+      "countriesValue": "180+"
+    }
+  },
+  "register": {
+    "backToHome": "Zurück zur Startseite",
+    "title": "Konto Erstellen",
+    "subtitle": "Treten Sie heute unserer Trading-Plattform bei",
+    "firstName": "Vorname",
+    "firstNamePlaceholder": "Vorname",
+    "lastName": "Nachname",
+    "lastNamePlaceholder": "Nachname",
+    "email": "E-Mail",
+    "emailPlaceholder": "Geben Sie Ihre E-Mail ein",
+    "username": "Benutzername",
+    "usernamePlaceholder": "Wählen Sie einen Benutzernamen",
+    "password": "Passwort",
+    "passwordPlaceholder": "Erstellen Sie ein Passwort",
+    "phoneNumber": "Telefonnummer",
+    "phoneNumberPlaceholder": "Geben Sie Ihre Telefonnummer ein",
+    "country": "Land",
+    "selectCountry": "Wählen Sie Ihr Land",
+    "yourLocation": "Ihr Standort",
+    "searchCountries": "Länder suchen...",
+    "noCountriesFound": "Keine Länder gefunden",
+    "language": "Sprache",
+    "selectLanguage": "Wählen Sie Ihre Sprache",
+    "searchLanguages": "Sprachen suchen...",
+    "noLanguagesFound": "Keine Sprachen gefunden",
+    "dateOfBirth": "Geburtsdatum",
+    "creatingAccount": "Konto wird erstellt...",
+    "createAccount": "Konto Erstellen",
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "signIn": "Anmelden",
+    "rightSide": {
+      "title": "Starten Sie heute mit dem Handel",
+      "feature1": "Zugang zu über 100 Kryptowährungs-Handelspaaren",
+      "feature2": "Erweiterte Trading-Tools und Echtzeit-Marktdaten",
+      "feature3": "Sichere Wallet mit branchenführendem Schutz",
+      "feature4": "24/7 Kundensupport und Bildungsressourcen",
+      "totalVolume": "Gesamtes Handelsvolumen",
+      "totalVolumeValue": "$2.8B+",
+      "activeTraders": "Aktive Trader",
+      "activeTradersValue": "500K+",
+      "countries": "Länder",
+      "countriesValue": "180+"
     }
   }
 }
