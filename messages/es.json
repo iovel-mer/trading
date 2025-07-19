@@ -49,13 +49,7 @@
     "export": "Exportar",
     "import": "Importar"
   },
-  "dashboard": {
-    "title": "Panel de Control",
-    "overview": "Resumen",
-    "analytics": "Análisis",
-    "reports": "Informes",
-    "settings": "Configuración"
-  },
+
   "trading": {
     "title": "Plataforma de Trading",
     "portfolio": "Portafolio",
@@ -530,6 +524,90 @@
       "activeTradersValue": "500K+",
       "countries": "Países",
       "countriesValue": "180+"
+    }
+  },
+  "dashboard": {
+    "title": "Panel de Control",
+    "overview": "Resumen",
+    "analytics": "Análisis",
+    "reports": "Informes",
+    "settings": "Configuración",
+    "loading": "Cargando panel...",
+    "errorTitle": "Error al Cargar el Panel",
+    "retry": "Reintentar",
+    "welcomeBack": "¡Bienvenido de vuelta, ",
+    "welcomeBackDefault": "¡Bienvenido de vuelta, Usuario!",
+    "subtitle": "Esto es lo que está pasando con tu cuenta de trading hoy.",
+    "primaryBalance": "Balance Principal",
+    "totalUsdValue": "Valor Total en USD",
+    "activeTickets": "Tickets Activos",
+    "tradingActivity": "Actividad de Trading",
+    "totalDeposits": "Total de Depósitos",
+    "totalWithdrawals": "Total de Retiros",
+    "lockedBalance": "Balance Bloqueado",
+    "recentTickets": "Tickets Recientes",
+    "recentTicketsDescription": "Tus últimas solicitudes de depósito y retiro.",
+    "noRecentTickets": "No hay tickets recientes",
+    "depositRequest": "Solicitud de Depósito",
+    "withdrawalRequest": "Solicitud de Retiro",
+    "currencyBreakdown": "Desglose por Moneda",
+    "currencyBreakdownDescription": "Tus balances por moneda.",
+    "noCurrenciesFound": "No se encontraron monedas",
+    "available": "Disponible:",
+    "locked": "Bloqueado:",
+    "wallet": "cartera",
+    "wallets": "carteras",
+    "account": "cuenta",
+    "accounts": "cuentas",
+    "totalTickets": "tickets totales",
+    "currenciesAvailable": "monedas disponibles",
+    "active": "Activo",
+    "ticketStatus": {
+      "pending": "Pendiente",
+      "processing": "Procesando",
+      "completed": "Completado",
+      "cancelled": "Cancelado",
+      "failed": "Fallido",
+      "rejected": "Rechazado"
+    }
+  },
+  "finance": {
+    "title": "Finanzas",
+    "subtitle": "Gestiona tus cuentas financieras, transacciones e inversiones.",
+    "loading": "Cargando datos financieros...",
+    "errorTitle": "Error al Cargar Datos Financieros",
+    "retry": "Reintentar",
+    "cashBalance": "Balance en Efectivo",
+    "investments": "Inversiones",
+    "holdings": "tenencias",
+    "tradingAccounts": "Cuentas de Trading",
+    "tradingAccountsDescription": "Resumen de tus cuentas de trading y su estado.",
+    "noTradingAccountsFound": "No se encontraron cuentas de trading",
+    "account": "Cuenta:",
+    "wallet": "cartera",
+    "wallets": "carteras",
+    "recentTransactions": "Transacciones Recientes",
+    "recentTransactionsDescription": "Últimas actividades de depósito y retiro.",
+    "noRecentTransactions": "No hay transacciones recientes",
+    "deposit": "Depósito",
+    "withdrawal": "Retiro",
+    "walletBreakdown": "Desglose de Carteras",
+    "walletBreakdownDescription": "Vista detallada de todos tus balances de cartera por moneda y cuenta.",
+    "noWalletsFound": "No se encontraron carteras",
+    "available": "Disponible:",
+    "locked": "Bloqueado:",
+    "accountStatus": {
+      "active": "Activo",
+      "suspended": "Suspendido"
+    },
+    "transactionStatus": {
+      "pending": "Pendiente",
+      "processing": "Procesando",
+      "completed": "Completado",
+      "cancelled": "Cancelado",
+      "failed": "Fallido",
+      "rejected": "Rechazado",
+      "unknown": "Desconocido"
     }
   }
 }

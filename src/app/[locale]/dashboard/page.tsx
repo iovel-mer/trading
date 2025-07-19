@@ -28,6 +28,7 @@ import type {
 import type { TradingAccountDto } from '@/app/api/types/trading';
 import { useUser } from './context/user-context';
 import { AuthConfirmer } from '../components/authConfirmer';
+import { useTranslations } from 'next-intl';
 
 interface DashboardData {
   walletSummary: WalletSummaryResponse | null;
@@ -166,7 +167,6 @@ const getCurrencyColors = (currency: string) => {
       darkText: 'dark:text-white',
     },
   };
-
   return (
     colorMap[currency] || {
       bg: 'bg-gray-500',
@@ -213,6 +213,7 @@ const sortCurrencies = (
 };
 
 export default function DashboardPage() {
+  const t = useTranslations();
   const {
     user,
     loading: userLoading,
@@ -279,7 +280,7 @@ export default function DashboardPage() {
       <div className='min-h-screen bg-background flex items-center justify-center'>
         <div className='text-center'>
           <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto'></div>
-          <p className='mt-4 text-muted-foreground'>Loading dashboard...</p>
+          <p className='mt-4 text-muted-foreground'>{t('dashboard.loading')}</p>
         </div>
       </div>
     );
@@ -293,14 +294,14 @@ export default function DashboardPage() {
           <div className='text-center'>
             <AlertCircle className='h-12 w-12 text-red-500 mx-auto mb-4' />
             <h2 className='text-xl font-semibold mb-2'>
-              Error Loading Dashboard
+              {t('dashboard.errorTitle')}
             </h2>
             <p className='text-muted-foreground mb-4'>{error || userError}</p>
             <button
               onClick={() => window.location.reload()}
               className='bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90'
             >
-              Retry
+              {t('dashboard.retry')}
             </button>
           </div>
         </div>
@@ -313,30 +314,48 @@ export default function DashboardPage() {
   const primaryCurrency = walletSummary
     ? getPrimaryCurrency(walletSummary.currencyBreakdown)
     : null;
-
   const tickets = walletSummary?.ticketBreakdown || [];
   const activeTickets = tickets.filter(
     ticket => ticket.ticketStatus === 0 || ticket.ticketStatus === 1 // Pending or Processing
   );
+
+  const getTicketStatusText = (status: number): string => {
+    const statusMap = [
+      t('dashboard.ticketStatus.pending'),
+      t('dashboard.ticketStatus.processing'),
+      t('dashboard.ticketStatus.completed'),
+      t('dashboard.ticketStatus.cancelled'),
+      t('dashboard.ticketStatus.failed'),
+      t('dashboard.ticketStatus.rejected'),
+    ];
+    return statusMap[status] || statusMap[0];
+  };
+
+  const getUserName = (): string => {
+    if (user) {
+      return `${user.firstName} ${user.lastName}`;
+    }
+    return '';
+  };
+
   return (
     <DashboardLayout>
       <AuthConfirmer onAuthConfirmed={handleAuthConfirmed} />
       <div className='space-y-6'>
         <div>
           <h1 className='text-3xl font-bold tracking-tight'>
-            Welcome back, {user ? `${user.firstName} ${user.lastName}` : 'User'}
-            !
+            {user
+              ? `${t('dashboard.welcomeBack')} ${getUserName()}!`
+              : t('dashboard.welcomeBackDefault')}
           </h1>
-          <p className='text-muted-foreground'>
-            Here&apos;s what&apos;s happening with your trading account today.
-          </p>
+          <p className='text-muted-foreground'>{t('dashboard.subtitle')}</p>
         </div>
 
         <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4'>
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Primary Balance
+                {t('dashboard.primaryBalance')}
               </CardTitle>
               <div
                 className={`h-6 w-6 rounded-full flex items-center justify-center text-xs font-bold ${
@@ -384,9 +403,9 @@ export default function DashboardPage() {
                       )}
                     </>
                   ) : (
-                    `${
-                      walletSummary?.currencyBreakdown.length || 0
-                    } currencies available`
+                    `${walletSummary?.currencyBreakdown.length || 0} ${t(
+                      'dashboard.currenciesAvailable'
+                    )}`
                   )}
                 </p>
               </div>
@@ -396,7 +415,7 @@ export default function DashboardPage() {
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Total USD Value
+                {t('dashboard.totalUsdValue')}
               </CardTitle>
               <DollarSign
                 className='h-4 w-4 text-muted-foreground'
@@ -412,7 +431,7 @@ export default function DashboardPage() {
                 }) || '0.00'}
               </div>
               <p className='text-xs text-muted-foreground'>
-                Available: $
+                {t('dashboard.available')} $
                 {walletSummary?.totalAvailableBalance.toLocaleString('en-US', {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
@@ -424,7 +443,7 @@ export default function DashboardPage() {
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Active Tickets
+                {t('dashboard.activeTickets')}
               </CardTitle>
               <TrendingUp
                 className='h-4 w-4 text-muted-foreground'
@@ -436,7 +455,7 @@ export default function DashboardPage() {
                 {walletSummary?.activeTickets || 0}
               </div>
               <p className='text-xs text-muted-foreground'>
-                {walletSummary?.totalTickets || 0} total tickets
+                {walletSummary?.totalTickets || 0} {t('dashboard.totalTickets')}
               </p>
             </CardContent>
           </Card>
@@ -444,7 +463,7 @@ export default function DashboardPage() {
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Trading Activity
+                {t('dashboard.tradingActivity')}
               </CardTitle>
               <Activity
                 className='h-4 w-4 text-muted-foreground'
@@ -456,8 +475,10 @@ export default function DashboardPage() {
                 {walletSummary?.totalTradingOrders || 0}
               </div>
               <p className='text-xs text-muted-foreground'>
-                {walletSummary?.totalAccounts || 0} account
-                {(walletSummary?.totalAccounts || 0) !== 1 ? 's' : ''}
+                {walletSummary?.totalAccounts || 0}{' '}
+                {(walletSummary?.totalAccounts || 0) !== 1
+                  ? t('dashboard.accounts')
+                  : t('dashboard.account')}
               </p>
             </CardContent>
           </Card>
@@ -468,7 +489,7 @@ export default function DashboardPage() {
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Total Deposits
+                {t('dashboard.totalDeposits')}
               </CardTitle>
               <ArrowUpDown className='h-4 w-4 text-green-500' />
             </CardHeader>
@@ -486,7 +507,7 @@ export default function DashboardPage() {
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Total Withdrawals
+                {t('dashboard.totalWithdrawals')}
               </CardTitle>
               <ArrowUpDown className='h-4 w-4 text-red-500' />
             </CardHeader>
@@ -504,7 +525,7 @@ export default function DashboardPage() {
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Locked Balance
+                {t('dashboard.lockedBalance')}
               </CardTitle>
               <PiggyBank
                 className='h-4 w-4 text-muted-foreground'
@@ -527,16 +548,16 @@ export default function DashboardPage() {
         <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-7'>
           <Card className='col-span-4'>
             <CardHeader>
-              <CardTitle>Recent Tickets</CardTitle>
+              <CardTitle>{t('dashboard.recentTickets')}</CardTitle>
               <CardDescription>
-                Your latest deposit and withdrawal requests.
+                {t('dashboard.recentTicketsDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className='space-y-4'>
                 {tickets.length === 0 ? (
                   <p className='text-sm text-muted-foreground'>
-                    No recent tickets
+                    {t('dashboard.noRecentTickets')}
                   </p>
                 ) : (
                   tickets.slice(0, 5).map(ticket => (
@@ -556,8 +577,9 @@ export default function DashboardPage() {
                       ></div>
                       <div className='flex-1 space-y-1'>
                         <p className='text-sm font-medium'>
-                          {ticket.ticketType === 0 ? 'Deposit' : 'Withdrawal'}{' '}
-                          Request
+                          {ticket.ticketType === 0
+                            ? t('dashboard.depositRequest')
+                            : t('dashboard.withdrawalRequest')}
                         </p>
                         <p className='text-xs text-muted-foreground'>
                           $
@@ -569,16 +591,7 @@ export default function DashboardPage() {
                       </div>
                       <div className='text-sm text-muted-foreground'>
                         <Badge variant='outline' className='text-xs'>
-                          {
-                            [
-                              'Pending',
-                              'Processing',
-                              'Completed',
-                              'Cancelled',
-                              'Failed',
-                              'Rejected',
-                            ][ticket.ticketStatus]
-                          }
+                          {getTicketStatusText(ticket.ticketStatus)}
                         </Badge>
                       </div>
                     </div>
@@ -590,13 +603,15 @@ export default function DashboardPage() {
 
           <Card className='col-span-3'>
             <CardHeader>
-              <CardTitle>Currency Breakdown</CardTitle>
-              <CardDescription>Your balances by currency.</CardDescription>
+              <CardTitle>{t('dashboard.currencyBreakdown')}</CardTitle>
+              <CardDescription>
+                {t('dashboard.currencyBreakdownDescription')}
+              </CardDescription>
             </CardHeader>
             <CardContent className='space-y-2'>
               {!walletSummary?.currencyBreakdown.length ? (
                 <p className='text-sm text-muted-foreground'>
-                  No currencies found
+                  {t('dashboard.noCurrenciesFound')}
                 </p>
               ) : (
                 sortCurrencies(walletSummary.currencyBreakdown).map(
@@ -624,12 +639,12 @@ export default function DashboardPage() {
                                   variant='outline'
                                   className='text-xs px-1 py-0'
                                 >
-                                  Active
+                                  {t('dashboard.active')}
                                 </Badge>
                               )}
                             </div>
                             <p className='text-sm text-muted-foreground'>
-                              Available:{' '}
+                              {t('dashboard.available')}{' '}
                               {formatCurrencyAmount(
                                 currency.availableBalance,
                                 currency.currency
@@ -656,7 +671,7 @@ export default function DashboardPage() {
                       </div>
                       {currency.lockedBalance > 0 && (
                         <div className='mt-2 text-xs text-muted-foreground'>
-                          Locked:{' '}
+                          {t('dashboard.locked')}{' '}
                           {formatCurrencyAmount(
                             currency.lockedBalance,
                             currency.currency
@@ -665,8 +680,10 @@ export default function DashboardPage() {
                         </div>
                       )}
                       <div className='mt-1 text-xs text-muted-foreground'>
-                        {currency.walletCount} wallet
-                        {currency.walletCount !== 1 ? 's' : ''}
+                        {currency.walletCount}{' '}
+                        {currency.walletCount !== 1
+                          ? t('dashboard.wallets')
+                          : t('dashboard.wallet')}
                       </div>
                     </div>
                   )

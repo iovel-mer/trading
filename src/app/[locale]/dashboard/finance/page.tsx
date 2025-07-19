@@ -28,6 +28,7 @@ import type {
   PortfolioDto,
   TicketDto,
 } from '@/app/api/types/trading';
+import { useTranslations } from 'next-intl';
 
 interface FinanceData {
   tradingAccounts: TradingAccountDto[];
@@ -38,7 +39,6 @@ interface FinanceData {
   totalCashBalance: number;
   totalInvestments: number;
   totalSavings: number;
-  // Fix: Add wallet mapping by account
   walletsByAccount: { [accountId: string]: WalletDto[] };
 }
 
@@ -56,6 +56,7 @@ export default function FinancePage() {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const t = useTranslations();
 
   useEffect(() => {
     fetchFinanceData();
@@ -79,7 +80,6 @@ export default function FinancePage() {
         return;
       }
 
-      // Fix: Properly fetch and map wallets by account
       const accountPromises = accounts.map(async account => {
         const [walletsResponse, portfolioResponse, ticketsResponse] =
           await Promise.all([
@@ -103,12 +103,9 @@ export default function FinancePage() {
       const recentTickets: TicketDto[] = [];
       const walletsByAccount: { [accountId: string]: WalletDto[] } = {};
 
-      // Fix: Properly organize data by account
       accountsData.forEach(({ account, wallets, portfolio, tickets }) => {
-        // Add wallets to the account-specific mapping
         walletsByAccount[account.id] = wallets;
 
-        // Add to global arrays
         allWallets.push(...wallets);
         if (portfolio) portfolios.push(portfolio);
         recentTickets.push(...tickets);
@@ -143,7 +140,7 @@ export default function FinancePage() {
         totalCashBalance,
         totalInvestments,
         totalSavings,
-        walletsByAccount, // Fix: Include the proper mapping
+        walletsByAccount,
       });
     } catch (err) {
       console.error('Finance data fetch error:', err);
@@ -205,7 +202,7 @@ export default function FinancePage() {
           <div className='text-center'>
             <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto'></div>
             <p className='mt-2 text-muted-foreground'>
-              Loading finance data...
+              {t('finance.loading')}{' '}
             </p>
           </div>
         </div>
@@ -235,10 +232,10 @@ export default function FinancePage() {
       <div className='space-y-6'>
         {/* Header */}
         <div>
-          <h1 className='text-3xl font-bold tracking-tight'>Finance</h1>
-          <p className='text-muted-foreground'>
-            Manage your financial accounts, transactions, and investments.
-          </p>
+          <h1 className='text-3xl font-bold tracking-tight'>
+            {t('finance.title')}
+          </h1>
+          <p className='text-muted-foreground'>{t('finance.subtitle')}</p>
         </div>
 
         {/* Financial Overview */}
@@ -246,7 +243,7 @@ export default function FinancePage() {
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Cash Balance
+                {t('finance.cashBalance')}
               </CardTitle>
               <CreditCard
                 className='h-4 w-4 text-muted-foreground'
@@ -258,8 +255,10 @@ export default function FinancePage() {
                 {formatCurrency(financeData.totalCashBalance)}
               </div>
               <p className='text-xs text-muted-foreground'>
-                {financeData.allWallets.length} wallet
-                {financeData.allWallets.length !== 1 ? 's' : ''}
+                {financeData.allWallets.length}
+                {financeData.allWallets.length !== 1
+                  ? t('finance.wallets')
+                  : t('finance.wallet')}
               </p>
             </CardContent>
           </Card>
@@ -280,7 +279,7 @@ export default function FinancePage() {
                   (sum, p) => sum + p.holdings.length,
                   0
                 )}{' '}
-                holdings
+                {t('finance.holdings')}
               </p>
             </CardContent>
           </Card>
@@ -290,20 +289,19 @@ export default function FinancePage() {
         <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-7'>
           <Card className='col-span-4'>
             <CardHeader>
-              <CardTitle>Trading Accounts</CardTitle>
+              <CardTitle>{t('finance.tradingAccounts')}</CardTitle>
               <CardDescription>
-                Overview of your trading accounts and their status.
+                {t('finance.tradingAccountsDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className='space-y-4'>
                 {financeData.tradingAccounts.length === 0 ? (
                   <p className='text-sm text-muted-foreground'>
-                    No trading accounts found
+                    {t('finance.noTradingAccountsFound')}{' '}
                   </p>
                 ) : (
                   financeData.tradingAccounts.map(account => {
-                    // Fix: Use the proper wallet mapping by account ID
                     const accountWallets =
                       financeData.walletsByAccount[account.id] || [];
                     const accountBalance = accountWallets.reduce(
@@ -323,12 +321,13 @@ export default function FinancePage() {
                           <div>
                             <p className='font-medium'>{account.displayName}</p>
                             <p className='text-sm text-muted-foreground'>
-                              Account: {account.accountNumber}
+                              {t('finance.account')}: {account.accountNumber}{' '}
                             </p>
-                            {/* Fix: Show wallet count for this specific account */}
                             <p className='text-xs text-muted-foreground'>
                               {accountWallets.length} wallet
-                              {accountWallets.length !== 1 ? 's' : ''}
+                              {accountWallets.length !== 1
+                                ? t('finance.wallets')
+                                : t('finance.wallet')}
                             </p>
                           </div>
                         </div>
@@ -348,15 +347,15 @@ export default function FinancePage() {
 
           <Card className='col-span-3'>
             <CardHeader>
-              <CardTitle>Recent Transactions</CardTitle>
+              <CardTitle>{t('finance.recentTransactions')}</CardTitle>
               <CardDescription>
-                Latest deposit and withdrawal activities.
+                {t('finance.recentTransactionsDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent className='space-y-2'>
               {financeData.recentTickets.length === 0 ? (
                 <p className='text-sm text-muted-foreground'>
-                  No recent transactions
+                  {t('finance.noRecentTransactions')}
                 </p>
               ) : (
                 financeData.recentTickets.slice(0, 5).map(ticket => (
@@ -364,7 +363,9 @@ export default function FinancePage() {
                     <div className='flex justify-between items-center'>
                       <div>
                         <p className='font-medium text-sm'>
-                          {ticket.ticketType === 0 ? 'Deposit' : 'Withdrawal'}
+                          {ticket.ticketType === 0
+                            ? t('finance.deposit')
+                            : t('finance.withdrawal')}
                         </p>
                         <p className='text-xs text-muted-foreground'>
                           {formatCurrency(ticket.amount)}
@@ -372,7 +373,9 @@ export default function FinancePage() {
                       </div>
                       <div className='text-right'>
                         <p
-                          className={`text-xs font-medium ${getTicketStatusColor(ticket.ticketStatus)}`}
+                          className={`text-xs font-medium ${getTicketStatusColor(
+                            ticket.ticketStatus
+                          )}`}
                         >
                           {getTicketStatusText(ticket.ticketStatus)}
                         </p>
@@ -388,19 +391,18 @@ export default function FinancePage() {
         {/* Wallet Breakdown */}
         <Card>
           <CardHeader>
-            <CardTitle>Wallet Breakdown</CardTitle>
+            <CardTitle>{t('finance.walletBreakdown')}</CardTitle>
             <CardDescription>
-              Detailed view of all your wallet balances by currency and account.
+              {t('finance.walletBreakdownDescription')}{' '}
             </CardDescription>
           </CardHeader>
           <CardContent>
             {financeData.allWallets.length === 0 ? (
               <div className='flex items-center justify-center h-32 text-muted-foreground'>
-                <p>No wallets found</p>
+                <p>{t('finance.noWalletsFound')}</p>
               </div>
             ) : (
               <div className='space-y-6'>
-                {/* Fix: Group wallets by account for better organization */}
                 {financeData.tradingAccounts.map(account => {
                   const accountWallets =
                     financeData.walletsByAccount[account.id] || [];
@@ -430,7 +432,7 @@ export default function FinancePage() {
                                     {wallet.currency}
                                   </p>
                                   <p className='text-xs text-muted-foreground'>
-                                    Available:{' '}
+                                    {t('finance.available')} :{' '}
                                     {wallet.availableBalance.toLocaleString()}
                                   </p>
                                 </div>

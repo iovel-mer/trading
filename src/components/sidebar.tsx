@@ -24,38 +24,11 @@ import {
 import { useUser } from '@/app/[locale]/dashboard/context/user-context';
 import { useToast } from '@/hooks/use-toast';
 import Image from 'next/image';
+import { useLocale } from 'next-intl';
 
 interface SidebarProps {
   className?: string;
 }
-
-const navigation = [
-  {
-    name: 'Dashboard',
-    href: '/dashboard',
-    icon: Home,
-  },
-  {
-    name: 'Finance',
-    href: '/dashboard/finance',
-    icon: DollarSign,
-  },
-  {
-    name: 'Trading',
-    href: '/dashboard/trading',
-    icon: TrendingUp,
-  },
-  {
-    name: 'My Profile',
-    href: '/dashboard/profile',
-    icon: User,
-  },
-  {
-    name: 'Documents',
-    href: '/dashboard/documents',
-    icon: User,
-  },
-];
 
 export function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
@@ -63,6 +36,7 @@ export function Sidebar({ className }: SidebarProps) {
   const [isWebTraderLoading, setIsWebTraderLoading] = useState(false);
   const { user, openWebTrader } = useUser();
   const { toast } = useToast();
+  const locale = useLocale();
 
   const handleWebTraderClick = async () => {
     setIsOpen(false);
@@ -79,6 +53,33 @@ export function Sidebar({ className }: SidebarProps) {
       setIsWebTraderLoading(false);
     }
   };
+  const navigation = [
+    {
+      name: 'Dashboard',
+      href: `/${locale}/dashboard`,
+      icon: Home,
+    },
+    {
+      name: 'Finance',
+      href: `/${locale}/dashboard/finance`,
+      icon: DollarSign,
+    },
+    {
+      name: 'Trading',
+      href: `/${locale}/dashboard/trading`,
+      icon: TrendingUp,
+    },
+    {
+      name: 'My Profile',
+      href: `/${locale}/dashboard/profile`,
+      icon: User,
+    },
+    {
+      name: 'Documents',
+      href: `/${locale}/dashboard/documents`,
+      icon: User,
+    },
+  ];
 
   const SidebarContent = () => (
     <div className='flex h-full flex-col'>
