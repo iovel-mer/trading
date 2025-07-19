@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import BTCTradingChart, {
-  CustomTradingChart,
-} from '../LandingChart/LandingChart';
+import { CustomTradingChart } from '../LandingChart/LandingChart';
 
 type Candle = {
   id: number;
@@ -15,9 +12,7 @@ type Candle = {
 const SimpleCandlestickAnimation = () => {
   const [candleData, setCandleData] = useState<Candle[]>([]);
 
-  // Initialize and continuously add candlesticks
   useEffect(() => {
-    // Generate initial candlestick data
     const generateCandleData = () => {
       const candles = [];
       let basePrice = 43200;
@@ -45,7 +40,6 @@ const SimpleCandlestickAnimation = () => {
 
     setCandleData(generateCandleData());
 
-    // Add new candles continuously
     const interval = setInterval(() => {
       setCandleData((prev: any) => {
         const lastCandle = prev[prev.length - 1];
@@ -64,7 +58,6 @@ const SimpleCandlestickAnimation = () => {
           close,
         };
 
-        // Keep only the last 25 candles and add new one
         return [...prev.slice(-24), newCandle];
       });
     }, 1500);
