@@ -15,11 +15,13 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { postUserProfile } from '@/app/api/user-settings/postUserProfile';
 import { getUser } from '@/app/api/user-settings/getUser';
+import { useTranslations } from 'next-intl';
 
 export default function ProfilePage() {
   const [isPending, startTransition] = useTransition();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
+  const t = useTranslations();
   const [message, setMessage] = useState<{
     type: 'success' | 'error';
     text: string;
@@ -100,10 +102,10 @@ export default function ProfilePage() {
     <DashboardLayout>
       <div className='space-y-6'>
         <div>
-          <h1 className='text-3xl font-bold tracking-tight'>My Profile</h1>
-          <p className='text-muted-foreground'>
-            Manage your account settings and personal information.
-          </p>
+          <h1 className='text-3xl font-bold tracking-tight'>
+            {t('profile.title')}
+          </h1>
+          <p className='text-muted-foreground'>{t('profile.subtitle')}</p>
         </div>
 
         {message && (
@@ -129,24 +131,30 @@ export default function ProfilePage() {
                 </Avatar>
               </div>
               <CardTitle>
-                {user ? `${user.firstName} ${user.lastName}` : 'Loading...'}
+                {user
+                  ? `${user.firstName} ${user.lastName}`
+                  : t('profile.loading')}
               </CardTitle>
-              <CardDescription>{user?.email || 'Loading...'}</CardDescription>
+              <CardDescription>
+                {user?.email || t('profile.loading')}
+              </CardDescription>
             </CardHeader>
           </Card>
 
           <Card className='md:col-span-2'>
             <CardHeader>
-              <CardTitle>Personal Information</CardTitle>
+              <CardTitle>{t('profile.personalInformation')}</CardTitle>
               <CardDescription>
-                Update your personal details and contact information.
+                {t('profile.personalInformationDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent className='space-y-6'>
               <form onSubmit={handleSubmit} className='space-y-6'>
                 <div className='grid gap-4 md:grid-cols-2'>
                   <div className='space-y-2'>
-                    <label className='text-sm font-medium'>First Name</label>
+                    <label className='text-sm font-medium'>
+                      {t('profile.firstName')}
+                    </label>
                     <input
                       type='text'
                       value={formData.firstName}
@@ -158,7 +166,9 @@ export default function ProfilePage() {
                     />
                   </div>
                   <div className='space-y-2'>
-                    <label className='text-sm font-medium'>Last Name</label>
+                    <label className='text-sm font-medium'>
+                      {t('profile.lastName')}
+                    </label>
                     <input
                       type='text'
                       value={formData.lastName}
@@ -170,7 +180,9 @@ export default function ProfilePage() {
                     />
                   </div>
                   <div className='space-y-2 flex flex-col'>
-                    <label className='text-sm font-medium'>Email</label>
+                    <label className='text-sm font-medium'>
+                      {t('profile.email')}
+                    </label>
                     <input
                       type='email'
                       value={formData.email}
@@ -180,7 +192,9 @@ export default function ProfilePage() {
                     />
                   </div>
                   <div className='space-y-2'>
-                    <label className='text-sm font-medium'>Phone Number</label>
+                    <label className='text-sm font-medium'>
+                      {t('profile.phoneNumber')}
+                    </label>
                     <input
                       type='tel'
                       value={formData.telephone}
@@ -192,7 +206,9 @@ export default function ProfilePage() {
                     />
                   </div>
                   <div className='space-y-2 md:col-span-2'>
-                    <label className='text-sm font-medium'>Username</label>
+                    <label className='text-sm font-medium'>
+                      {t('profile.username')}
+                    </label>
                     <input
                       type='text'
                       value={user?.username || ''}
@@ -206,10 +222,10 @@ export default function ProfilePage() {
                     {isPending ? (
                       <>
                         <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2'></div>
-                        Saving...
+                        {t('profile.saving')}
                       </>
                     ) : (
-                      'Save Changes'
+                      t('profile.saveChanges')
                     )}
                   </Button>
                 </div>

@@ -9,6 +9,13 @@
     "logOut": "Abmelden",
     "loggingOut": "Abmeldung läuft..."
   },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "finance": "Finanzen",
+    "trading": "Trading",
+    "profile": "Mein Profil",
+    "documents": "Dokumente"
+  },
   "navbar": {
     "login": "Anmelden",
     "getStarted": "Loslegen",
@@ -637,6 +644,52 @@
     "accountStatus": {
       "active": "Aktiv",
       "suspended": "Gesperrt"
+    }
+  },
+  "profile": {
+    "title": "Mein Profil",
+    "subtitle": "Verwalten Sie Ihre Kontoeinstellungen und persönlichen Informationen.",
+    "loading": "Lädt...",
+    "personalInformation": "Persönliche Informationen",
+    "personalInformationDescription": "Aktualisieren Sie Ihre persönlichen Daten und Kontaktinformationen.",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "phoneNumber": "Telefonnummer",
+    "username": "Benutzername",
+    "saving": "Speichert...",
+    "saveChanges": "Änderungen Speichern",
+    "successMessage": "Profil erfolgreich aktualisiert!",
+    "errorMessage": "Fehler beim Aktualisieren des Profils"
+  },
+  "documents": {
+    "title": "Dokumente",
+    "subtitle": "Laden Sie Ihre Dokumente sicher hoch und verwalten Sie sie.",
+    "tabs": {
+      "upload": "Dokumente Hochladen",
+      "manage": "Dokumente Verwalten"
+    },
+    "upload": {
+      "title": "Dokument Hochladen",
+      "description": "Wählen Sie eine Datei aus, um sie in Ihre Dokumentenbibliothek hochzuladen.",
+      "dragAndDrop": "Ziehen Sie Ihre Datei hierher oder klicken Sie zum Auswählen",
+      "selectFile": "Datei Auswählen",
+      "uploading": "Wird hochgeladen...",
+      "uploadDocument": "Dokument Hochladen",
+      "uploadSuccess": "Datei erfolgreich hochgeladen!",
+      "uploadFailed": "Upload fehlgeschlagen",
+      "removeFile": "Datei entfernen"
+    },
+    "table": {
+      "title": "Dokumente",
+      "description": "Ihre hochgeladenen Dokumente werden hier angezeigt.",
+      "detailedDescription": "Ihre hochgeladenen Dokumente und deren Details.",
+      "loadingDocuments": "Dokumente werden geladen...",
+      "noDocumentsYet": "Noch keine Dokumente hochgeladen",
+      "fileId": "Datei-ID:",
+      "refresh": "Aktualisieren",
+      "retry": "Wiederholen",
+      "unknown": "Unbekannt"
     }
   }
 }

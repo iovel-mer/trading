@@ -9,13 +9,13 @@
     "logOut": "Cerrar sesión",
     "loggingOut": "Cerrando sesión..."
   },
+
   "navigation": {
-    "dashboard": "Panel",
+    "dashboard": "Panel de Control",
+    "finance": "Finanzas",
     "trading": "Trading",
-    "products": "Productos",
-    "company": "Empresa",
-    "support": "Soporte",
-    "legal": "Legal"
+    "profile": "Mi Perfil",
+    "documents": "Documentos"
   },
   "auth": {
     "login": "Iniciar Sesión",
@@ -690,6 +690,52 @@
     "accountStatus": {
       "active": "Activo",
       "suspended": "Suspendido"
+    }
+  },
+  "profile": {
+    "title": "Mi Perfil",
+    "subtitle": "Gestiona la configuración de tu cuenta e información personal.",
+    "loading": "Cargando...",
+    "personalInformation": "Información Personal",
+    "personalInformationDescription": "Actualiza tus datos personales e información de contacto.",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Email",
+    "phoneNumber": "Número de Teléfono",
+    "username": "Nombre de Usuario",
+    "saving": "Guardando...",
+    "saveChanges": "Guardar Cambios",
+    "successMessage": "¡Perfil actualizado exitosamente!",
+    "errorMessage": "Error al actualizar el perfil"
+  },
+  "documents": {
+    "title": "Documentos",
+    "subtitle": "Sube y gestiona tus documentos de forma segura.",
+    "tabs": {
+      "upload": "Subir Documentos",
+      "manage": "Gestionar Documentos"
+    },
+    "upload": {
+      "title": "Subir Documento",
+      "description": "Selecciona un archivo para subir a tu biblioteca de documentos.",
+      "dragAndDrop": "Arrastra y suelta tu archivo aquí, o haz clic para seleccionar",
+      "selectFile": "Seleccionar Archivo",
+      "uploading": "Subiendo...",
+      "uploadDocument": "Subir Documento",
+      "uploadSuccess": "¡Archivo subido exitosamente!",
+      "uploadFailed": "Error al subir",
+      "removeFile": "Eliminar archivo"
+    },
+    "table": {
+      "title": "Documentos",
+      "description": "Tus documentos subidos aparecerán aquí.",
+      "detailedDescription": "Tus documentos subidos y sus detalles.",
+      "loadingDocuments": "Cargando documentos...",
+      "noDocumentsYet": "Aún no se han subido documentos",
+      "fileId": "ID del Archivo:",
+      "refresh": "Actualizar",
+      "retry": "Reintentar",
+      "unknown": "Desconocido"
     }
   }
 }
