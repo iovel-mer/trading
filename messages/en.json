@@ -17,6 +17,13 @@
     "futures": "Futures",
     "security": "Security"
   },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "finance": "Finance",
+    "trading": "Trading",
+    "profile": "My Profile",
+    "documents": "Documents"
+  },
   "hero": {
     "title": "Trade Crypto",
     "subtitle": "Like a Pro",
@@ -635,6 +642,52 @@
     "accountStatus": {
       "active": "Active",
       "suspended": "Suspended"
+    }
+  },
+  "profile": {
+    "title": "My Profile",
+    "subtitle": "Manage your account settings and personal information.",
+    "loading": "Loading...",
+    "personalInformation": "Personal Information",
+    "personalInformationDescription": "Update your personal details and contact information.",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "username": "Username",
+    "saving": "Saving...",
+    "saveChanges": "Save Changes",
+    "successMessage": "Profile updated successfully!",
+    "errorMessage": "Failed to update profile"
+  },
+  "documents": {
+    "title": "Documents",
+    "subtitle": "Upload and manage your documents securely.",
+    "tabs": {
+      "upload": "Upload Documents",
+      "manage": "Manage Documents"
+    },
+    "upload": {
+      "title": "Upload Document",
+      "description": "Select a file to upload to your document library.",
+      "dragAndDrop": "Drag and drop your file here, or click to select",
+      "selectFile": "Select File",
+      "uploading": "Uploading...",
+      "uploadDocument": "Upload Document",
+      "uploadSuccess": "File uploaded successfully!",
+      "uploadFailed": "Upload failed",
+      "removeFile": "Remove file"
+    },
+    "table": {
+      "title": "Documents",
+      "description": "Your uploaded documents will appear here.",
+      "detailedDescription": "Your uploaded documents and their details.",
+      "loadingDocuments": "Loading documents...",
+      "noDocumentsYet": "No documents uploaded yet",
+      "fileId": "File ID:",
+      "refresh": "Refresh",
+      "retry": "Retry",
+      "unknown": "Unknown"
     }
   }
 }

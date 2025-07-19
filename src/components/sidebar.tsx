@@ -12,6 +12,7 @@ import {
   Home,
   Menu,
   Monitor,
+  File,
 } from 'lucide-react';
 import { useState } from 'react';
 import {
@@ -24,7 +25,7 @@ import {
 import { useUser } from '@/app/[locale]/dashboard/context/user-context';
 import { useToast } from '@/hooks/use-toast';
 import Image from 'next/image';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface SidebarProps {
   className?: string;
@@ -37,6 +38,7 @@ export function Sidebar({ className }: SidebarProps) {
   const { user, openWebTrader } = useUser();
   const { toast } = useToast();
   const locale = useLocale();
+  const t = useTranslations();
 
   const handleWebTraderClick = async () => {
     setIsOpen(false);
@@ -55,32 +57,31 @@ export function Sidebar({ className }: SidebarProps) {
   };
   const navigation = [
     {
-      name: 'Dashboard',
+      name: t('navigation.dashboard'),
       href: `/${locale}/dashboard`,
       icon: Home,
     },
     {
-      name: 'Finance',
+      name: t('navigation.finance'),
       href: `/${locale}/dashboard/finance`,
       icon: DollarSign,
     },
     {
-      name: 'Trading',
+      name: t('navigation.trading'),
       href: `/${locale}/dashboard/trading`,
       icon: TrendingUp,
     },
     {
-      name: 'My Profile',
+      name: t('navigation.profile'),
       href: `/${locale}/dashboard/profile`,
       icon: User,
     },
     {
-      name: 'Documents',
+      name: t('navigation.documents'),
       href: `/${locale}/dashboard/documents`,
-      icon: User,
+      icon: File,
     },
   ];
-
   const SidebarContent = () => (
     <div className='flex h-full flex-col'>
       <div className='flex items-center px-2 border-b mb-3'>
