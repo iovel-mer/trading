@@ -54,6 +54,7 @@ import {
   Wallet,
   XCircle,
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type React from 'react';
 import { useEffect, useState } from 'react';
 
@@ -81,6 +82,7 @@ export default function TradingPage() {
 
   const [newAccountName, setNewAccountName] = useState('');
   const [creatingAccount, setCreatingAccount] = useState(false);
+  const t = useTranslations();
 
   const [pagination, setPagination] = useState<PaginationState>({
     currentPage: 1,
@@ -118,7 +120,7 @@ export default function TradingPage() {
     } else {
       toast({
         title: 'Error',
-        description: response.message || 'Failed to load trading accounts',
+        description: response.message || t('trading.errorTitle'),
         variant: 'destructive',
       });
     }
@@ -135,7 +137,7 @@ export default function TradingPage() {
     } else {
       toast({
         title: 'Error',
-        description: response.message || 'Failed to load wallets',
+        description: response.message || t('trading.errorTitle'),
         variant: 'destructive',
       });
     }
@@ -175,7 +177,7 @@ export default function TradingPage() {
     if (!newAccountName.trim()) {
       toast({
         title: 'Validation Error',
-        description: 'Please enter an account name',
+        description: t('trading.createAccount.validationError'),
         variant: 'destructive',
       });
       return;
@@ -192,7 +194,7 @@ export default function TradingPage() {
     if (result.success) {
       toast({
         title: 'Success',
-        description: 'Trading account created successfully!',
+        description: t('trading.createAccount.successMessage'),
       });
 
       setNewAccountName('');
@@ -203,7 +205,7 @@ export default function TradingPage() {
     } else {
       toast({
         title: 'Error',
-        description: 'Failed to create trading account',
+        description: t('trading.createAccount.errorMessage'),
         variant: 'destructive',
       });
     }
@@ -219,7 +221,7 @@ export default function TradingPage() {
     ) {
       toast({
         title: 'Validation Error',
-        description: 'Please select a wallet and enter a valid amount',
+        description: t('trading.createTicket.validationError'),
         variant: 'destructive',
       });
       return;
@@ -234,7 +236,9 @@ export default function TradingPage() {
     if (response.success && response.data) {
       toast({
         title: 'Success',
-        description: `Ticket created successfully with ID: ${response.data}`,
+        description: `${t('trading.createTicket.successMessage')} ${
+          response.data
+        }`,
       });
       setTicketAmount('');
       if (activeTab === 'history') {
@@ -243,9 +247,7 @@ export default function TradingPage() {
     } else {
       toast({
         title: 'Error',
-        description:
-          response.message ||
-          'Unable to create ticket due to insufficient funds. Please check your balance and try again.',
+        description: response.message || t('trading.createTicket.errorMessage'),
         variant: 'destructive',
       });
     }
@@ -286,12 +288,12 @@ export default function TradingPage() {
 
   const getStatusText = (status: TicketStatus) => {
     const statusMap = {
-      0: 'Pending',
-      1: 'Processing',
-      2: 'Completed',
-      3: 'Cancelled',
-      4: 'Failed',
-      5: 'Rejected',
+      0: t('trading.ticketStatus.pending'),
+      1: t('trading.ticketStatus.processing'),
+      2: t('trading.ticketStatus.completed'),
+      3: t('trading.ticketStatus.cancelled'),
+      4: t('trading.ticketStatus.failed'),
+      5: t('trading.ticketStatus.rejected'),
     };
     return statusMap[status] || 'Unknown';
   };
@@ -314,7 +316,9 @@ export default function TradingPage() {
   };
 
   const getTicketTypeText = (type: TicketType) => {
-    return type === 0 ? 'Deposit' : 'Withdraw';
+    return type === 0
+      ? t('trading.createTicket.deposit')
+      : t('trading.createTicket.withdrawal');
   };
 
   const getTicketTypeIcon = (type: TicketType) => {
@@ -332,7 +336,7 @@ export default function TradingPage() {
           <div className='text-center'>
             <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto'></div>
             <p className='mt-2 text-muted-foreground'>
-              Loading trading data...
+              {t('trading.loading')}{' '}
             </p>
           </div>
         </div>
@@ -344,11 +348,10 @@ export default function TradingPage() {
     <DashboardLayout>
       <div className='space-y-6'>
         <div>
-          <h1 className='text-3xl font-bold tracking-tight'>Trading</h1>
-          <p className='text-muted-foreground'>
-            Manage your trading accounts, create tickets, and view transaction
-            history.
-          </p>
+          <h1 className='text-3xl font-bold tracking-tight'>
+            {t('trading.title')}
+          </h1>
+          <p className='text-muted-foreground'>{t('trading.subtitle')}</p>
         </div>
 
         <Tabs
@@ -359,38 +362,38 @@ export default function TradingPage() {
           <TabsList className='grid w-full grid-cols-4'>
             <TabsTrigger value='accounts' className='flex items-center gap-2'>
               <Wallet className='h-4 w-4' />
-              Trading Accounts
+              {t('trading.tabs.accounts')}
             </TabsTrigger>
             <TabsTrigger
               value='create-account'
               className='flex items-center gap-2'
             >
               <UserPlus className='h-4 w-4' />
-              Create Account
+              {t('trading.tabs.createAccount')}
             </TabsTrigger>
             <TabsTrigger value='create' className='flex items-center gap-2'>
               <Plus className='h-4 w-4' />
-              Create Ticket
+              {t('trading.tabs.create')}
             </TabsTrigger>
             <TabsTrigger value='history' className='flex items-center gap-2'>
               <History className='h-4 w-4' />
-              Ticket History
+              {t('trading.tabs.history')}
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value='accounts' className='space-y-6'>
             <Card>
               <CardHeader>
-                <CardTitle>Select Trading Account</CardTitle>
+                <CardTitle>{t('trading.accounts.title')}</CardTitle>
                 <CardDescription>
-                  Choose an account to view its wallets and balances.
+                  {t('trading.accounts.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className='space-y-4'>
                   <div className='ms-auto mt-3'>
                     <Label htmlFor='account-select' className='justify-end'>
-                      Trading Account
+                      {t('trading.accounts.selectLabel')}
                     </Label>
                     <Select
                       value={selectedAccount}
@@ -421,7 +424,7 @@ export default function TradingPage() {
                                     {wallet.currency}
                                   </p>
                                   <p className='text-sm text-muted-foreground'>
-                                    Available:{' '}
+                                    {t('trading.accounts.available')}:{' '}
                                     {wallet.availableBalance.toFixed(2)}
                                   </p>
                                 </div>
@@ -431,13 +434,15 @@ export default function TradingPage() {
                                   ${wallet.usdEquivalent.toFixed(2)}
                                 </p>
                                 <p className='text-sm text-muted-foreground'>
-                                  Total: {wallet.totalBalance.toFixed(2)}
+                                  {t('trading.accounts.total')}{' '}
+                                  {wallet.totalBalance.toFixed(2)}
                                 </p>
                               </div>
                             </div>
                             {wallet.lockedBalance > 0 && (
                               <div className='mt-2 text-sm text-muted-foreground'>
-                                Locked: {wallet.lockedBalance.toFixed(2)}
+                                {t('trading.accounts.locked')}:{' '}
+                                {wallet.lockedBalance.toFixed(2)}
                               </div>
                             )}
                           </Card>
@@ -454,20 +459,20 @@ export default function TradingPage() {
           <TabsContent value='create-account' className='space-y-6'>
             <Card>
               <CardHeader>
-                <CardTitle>Create New Trading Account</CardTitle>
+                <CardTitle>{t('trading.createAccount.title')}</CardTitle>
                 <CardDescription>
-                  Create a new trading account to start trading.
+                  {t('trading.createAccount.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className='space-y-4'>
                   <div>
                     <Label htmlFor='account-name' className='mb-2'>
-                      Account Display Name
+                      {t('trading.createAccount.nameLabel')}
                     </Label>
                     <Input
                       id='account-name'
-                      placeholder='e.g., Main Trading Account'
+                      placeholder={t('trading.createAccount.namePlaceholder')}
                       value={newAccountName}
                       onChange={e => setNewAccountName(e.target.value)}
                       disabled={creatingAccount}
@@ -478,7 +483,7 @@ export default function TradingPage() {
                       }}
                     />
                     <p className='text-sm text-muted-foreground mt-1'>
-                      Choose a descriptive name for your trading account
+                      {t('trading.createAccount.nameHelp')}
                     </p>
                   </div>
 
@@ -491,14 +496,14 @@ export default function TradingPage() {
                       <Loader2 className='h-4 w-4 mr-2 animate-spin' />
                     )}
                     {creatingAccount
-                      ? 'Creating Account...'
-                      : 'Create Trading Account'}
+                      ? t('trading.createAccount.creating')
+                      : t('trading.createAccount.createButton')}
                   </Button>
 
                   {tradingAccounts.length > 0 && (
                     <div className='mt-6'>
                       <h4 className='text-sm font-medium mb-3'>
-                        Existing Accounts
+                        {t('trading.createAccount.existingAccounts')}
                       </h4>
                       <div className='space-y-2'>
                         {tradingAccounts.map(account => (
@@ -511,7 +516,8 @@ export default function TradingPage() {
                                 {account.displayName}
                               </p>
                               <p className='text-sm text-muted-foreground'>
-                                Account: {account.accountNumber}
+                                {t('trading.createAccount.account')}{' '}
+                                {account.accountNumber}
                               </p>
                             </div>
                             <Badge
@@ -521,7 +527,9 @@ export default function TradingPage() {
                                   : 'secondary'
                               }
                             >
-                              {account.status}
+                              {account.status === 'Active'
+                                ? t('trading.accountStatus.active')
+                                : t('trading.accountStatus.suspended')}
                             </Badge>
                           </div>
                         ))}
@@ -536,24 +544,27 @@ export default function TradingPage() {
           <TabsContent value='create' className='space-y-6'>
             <Card>
               <CardHeader>
-                <CardTitle>Create New Ticket</CardTitle>
+                <CardTitle>{t('trading.createTicket.title')}</CardTitle>
                 <CardDescription>
-                  Create a deposit or withdrawal ticket for your trading
-                  account.
+                  {t('trading.createTicket.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className='space-y-4'>
                   <div>
                     <Label htmlFor='account-select' className='mb-2'>
-                      Trading Account
+                      {t('trading.createTicket.accountLabel')}
                     </Label>
                     <Select
                       value={selectedAccount}
                       onValueChange={setSelectedAccount}
                     >
                       <SelectTrigger className='w-full'>
-                        <SelectValue placeholder='Select a trading account' />
+                        <SelectValue
+                          placeholder={t(
+                            'trading.createTicket.walletPlaceholder'
+                          )}
+                        />
                       </SelectTrigger>
                       <SelectContent className='w-full'>
                         {tradingAccounts.map(account => (
@@ -566,7 +577,7 @@ export default function TradingPage() {
                   </div>
                   <div>
                     <Label htmlFor='wallet-select' className='mb-2'>
-                      Wallet
+                      {t('trading.createTicket.walletLabel')}
                     </Label>
                     <Select
                       value={selectedWallet}
@@ -587,7 +598,7 @@ export default function TradingPage() {
                   </div>
                   <div>
                     <Label htmlFor='ticket-type' className='mb-2'>
-                      Ticket Type
+                      {t('trading.createTicket.typeLabel')}
                     </Label>
                     <Select
                       value={ticketType.toString()}
@@ -596,19 +607,23 @@ export default function TradingPage() {
                       }
                     >
                       <SelectTrigger className='w-full'>
-                        <SelectValue placeholder='Select ticket type' />
+                        <SelectValue
+                          placeholder={t(
+                            'trading.createTicket.typePlaceholder'
+                          )}
+                        />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value='0'>
                           <div className='flex items-center gap-2'>
                             <TrendingUp className='h-4 w-4 text-green-600' />
-                            Deposit
+                            {t('trading.createTicket.deposit')}
                           </div>
                         </SelectItem>
                         <SelectItem value='1'>
                           <div className='flex items-center gap-2'>
                             <TrendingDown className='h-4 w-4 text-red-600' />
-                            Withdraw
+                            {t('trading.createTicket.withdrawal')}
                           </div>
                         </SelectItem>
                       </SelectContent>
@@ -621,7 +636,7 @@ export default function TradingPage() {
                     <Input
                       id='amount'
                       type='number'
-                      placeholder='Enter amount'
+                      placeholder={t('trading.createTicket.amountPlaceholder')}
                       value={ticketAmount}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setTicketAmount(e.target.value)
@@ -637,7 +652,9 @@ export default function TradingPage() {
                     }
                     className='w-full'
                   >
-                    {creatingTicket ? 'Creating...' : 'Create Ticket'}
+                    {creatingTicket
+                      ? t('trading.createTicket.creating')
+                      : t('trading.createTicket.createButton')}
                   </Button>
                 </div>
               </CardContent>
@@ -647,9 +664,9 @@ export default function TradingPage() {
           <TabsContent value='history' className='space-y-6'>
             <Card>
               <CardHeader>
-                <CardTitle>Ticket History</CardTitle>
+                <CardTitle>{t('trading.history.title')}</CardTitle>
                 <CardDescription>
-                  View all your deposit and withdrawal tickets.
+                  {t('trading.history.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -657,7 +674,9 @@ export default function TradingPage() {
                   {/* Page Size Selector */}
                   <div className='flex items-center justify-between'>
                     <div className='flex items-center space-x-2'>
-                      <Label htmlFor='page-size'>Show:</Label>
+                      <Label htmlFor='page-size'>
+                        {t('trading.history.showLabel')}
+                      </Label>
                       <Select
                         value={pagination.pageSize.toString()}
                         onValueChange={handlePageSizeChange}
@@ -673,14 +692,14 @@ export default function TradingPage() {
                         </SelectContent>
                       </Select>
                       <span className='text-sm text-muted-foreground'>
-                        entries
+                        {t('trading.history.entries')}
                       </span>
                     </div>
                     {ticketsLoading && (
                       <div className='flex items-center space-x-2'>
                         <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-primary'></div>
                         <span className='text-sm text-muted-foreground'>
-                          Loading...
+                          {t('trading.history.loading')}
                         </span>
                       </div>
                     )}
@@ -688,7 +707,9 @@ export default function TradingPage() {
                   {tickets.length === 0 ? (
                     <div className='text-center py-8'>
                       <History className='h-12 w-12 text-muted-foreground mx-auto mb-4' />
-                      <p className='text-muted-foreground'>No tickets found</p>
+                      <p className='text-muted-foreground'>
+                        {t('trading.history.noTickets')}
+                      </p>
                     </div>
                   ) : (
                     <div className='space-y-2'>
@@ -705,7 +726,7 @@ export default function TradingPage() {
                                 {ticket.amount.toFixed(2)}
                               </p>
                               <p className='text-sm text-muted-foreground'>
-                                Ticket ID: {ticket.id}
+                                {t('trading.history.ticketId')} {ticket.id}
                               </p>
                             </div>
                           </div>
@@ -726,14 +747,15 @@ export default function TradingPage() {
                   {tickets.length > 0 && (
                     <div className='flex items-center justify-between pt-4'>
                       <div className='text-sm text-muted-foreground'>
-                        Showing{' '}
+                        {t('trading.history.showing')}{' '}
                         {(pagination.currentPage - 1) * pagination.pageSize + 1}{' '}
-                        to{' '}
+                        {t('trading.history.to')}{' '}
                         {Math.min(
                           pagination.currentPage * pagination.pageSize,
                           pagination.totalItems
                         )}{' '}
-                        of {pagination.totalItems} entries
+                        {t('trading.history.of')} {pagination.totalItems}{' '}
+                        {t('trading.history.entriesText')}
                       </div>
                       <div className='flex items-center space-x-2'>
                         <Button
