@@ -11,12 +11,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { Settings, LogOut, User } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useUser } from '@/app/dashboard/context/user-context';
+import { useUser } from '@/app/[locale]/dashboard/context/user-context';
 import { useState } from 'react';
 import { postLogout } from '@/app/api/auth/postLogout';
 import { useCredentials } from '@/hooks/use-credentials';
+import { useTranslations } from 'next-intl';
 
 interface HeaderProps {
   className?: string;
@@ -27,6 +28,8 @@ export function Header({ className }: HeaderProps) {
   const { user, loading, error } = useUser();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { clearCredentials } = useCredentials();
+
+  const tLogin = useTranslations('navbar');
 
   const handleLogout = async () => {
     try {
@@ -67,7 +70,6 @@ export function Header({ className }: HeaderProps) {
         <div className='flex flex-1 items-center gap-4'>
           <div className='flex items-center gap-2'>
             <h1 className='text-lg font-semibold'>Dashboard</h1>
-            {/* Debug info */}
             {error && (
               <span className='text-xs text-red-500'>Error: {error}</span>
             )}
@@ -107,7 +109,7 @@ export function Header({ className }: HeaderProps) {
                 onClick={() => router.push('/dashboard/profile')}
               >
                 <User className='mr-2 h-4 w-4' />
-                <span>Profile</span>
+                <span>{tLogin('header.profile')}</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout} disabled={isLoggingOut}>

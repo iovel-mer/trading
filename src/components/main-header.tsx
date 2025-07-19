@@ -7,6 +7,8 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { LanguageSwitcher } from './LanguageSwitcher';
+import { useTranslations } from 'next-intl';
 
 interface MainHeaderProps {
   className?: string;
@@ -18,6 +20,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
 
   const pathname = usePathname();
   const isHomePage = pathname === '/';
+  const tLogin = useTranslations('navbar');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +56,6 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
     >
       <div className='container mx-auto px-6 py-4'>
         <div className='flex items-center justify-between'>
-          {/* Logo */}
           <div className='flex items-center space-x-2'>
             <motion.div
               whileHover={{ rotate: 360 }}
@@ -62,17 +64,16 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
             >
               <Image
                 src='/Vector.png'
-                alt='SalesVault'
+                alt={process.env.NEXT_PUBLIC_BASE_NAME as any}
                 width={30}
                 height={30}
               />
             </motion.div>
             <span className='text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'>
-              SalesVault
+              {process.env.NEXT_PUBLIC_BASE_NAME}
             </span>
           </div>
 
-          {/* Desktop Navigation */}
           {isHomePage && (
             <div className='hidden lg:flex items-center space-x-8'>
               {navigationItems.map(item => (
@@ -88,7 +89,6 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
             </div>
           )}
 
-          {/* Desktop Auth Buttons */}
           <div className='hidden lg:flex items-center space-x-4'>
             <Link href='/login'>
               <motion.button
@@ -96,7 +96,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
                 whileTap={{ scale: 0.95 }}
                 className='px-6 py-2 text-gray-300 hover:text-white transition-colors'
               >
-                Log In
+                {tLogin('login')}
               </motion.button>
             </Link>
             <Link href='/register'>
@@ -105,12 +105,12 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
                 whileTap={{ scale: 0.95 }}
                 className='px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium'
               >
-                Get Started
+                {tLogin('getStarted')}
               </motion.button>
             </Link>
+            <LanguageSwitcher />
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className='lg:hidden'
@@ -120,7 +120,6 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div

@@ -4,7 +4,6 @@ import { apiFetcher } from '@/app/api/utils/api-fetcher';
 import type { RegisterUserData, RegisterResponse } from '@/app/api/types/auth';
 
 export const postRegistration = async (userData: RegisterUserData) => {
-  console.log(userData, 'USER DATA');
   return apiFetcher<RegisterResponse>(
     'identity/api/clients/create-client-via-web',
     {

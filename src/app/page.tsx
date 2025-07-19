@@ -1,9 +1,5 @@
-import LandingPage from '@/components/landing-page';
+import { redirect } from 'next/navigation';
 
-export default function Page() {
-  return (
-    <div className="">
-      <LandingPage />
-    </div>
-  );
+export default function RootPage() {
+  redirect('/en');
 }

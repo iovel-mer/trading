@@ -62,7 +62,6 @@ export function CustomTradingChart({ symbol }: TradingChartProps) {
       script.async = true;
 
       script.onload = () => {
-        console.log('TradingView v4.x library loaded successfully');
         setLibraryLoaded(true);
       };
 
@@ -186,8 +185,6 @@ export function CustomTradingChart({ symbol }: TradingChartProps) {
       return;
 
     try {
-      console.log('Initializing chart with v4.x...');
-
       const chart = window.LightweightCharts.createChart(
         chartContainerRef.current,
         {
@@ -231,8 +228,6 @@ export function CustomTradingChart({ symbol }: TradingChartProps) {
       chartRef.current = chart;
       candlestickSeriesRef.current = candlestickSeries;
 
-      console.log('Chart initialized successfully');
-
       const handleResize = () => {
         if (chartContainerRef.current && chart) {
           chart.applyOptions({
@@ -269,7 +264,6 @@ export function CustomTradingChart({ symbol }: TradingChartProps) {
   useEffect(() => {
     if (chartData.length > 0 && candlestickSeriesRef.current) {
       try {
-        console.log('Setting chart data:', chartData.length, 'candles');
         candlestickSeriesRef.current.setData(chartData);
         setIsLoading(false);
       } catch (error) {
@@ -399,7 +393,11 @@ export function CustomTradingChart({ symbol }: TradingChartProps) {
 
             <div
               ref={chartContainerRef}
-              className={`w-full rounded-lg ${isFullscreen ? 'h-screen' : 'h-[70vh] min-h-[500px] max-h-[800px]'}`}
+              className={`w-full rounded-lg ${
+                isFullscreen
+                  ? 'h-screen'
+                  : 'h-[70vh] min-h-[500px] max-h-[800px]'
+              }`}
             />
 
             {lastUpdateTime && (

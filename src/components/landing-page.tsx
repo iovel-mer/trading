@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,16 +27,22 @@ import type {
   TradingPair as BinanceTradingPair,
   Ticker as BinanceTicker,
 } from '@/app/api/types/binance';
-import ModernTradingAnimation from './Animation/Animation';
-import UltraModernTradingInterface from './Animation/Animation';
 import RealisticTradingPlatform from './Animation/Animation';
 import { MainHeader } from './main-header';
-import BTCTradingChart from './LandingChart/LandingChart';
+import { useLocale, useTranslations } from 'next-intl';
 
 const LandingPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);
+
+  const tNavbar = useTranslations('navbar');
+  const tHero = useTranslations('hero');
+  const tStats = useTranslations('stats');
+  const tFeatures = useTranslations('features');
+  const tMarkets = useTranslations('markets');
+  const tSecurity = useTranslations('security');
+  const tCta = useTranslations('cta');
 
   type MarketData = {
     symbol: string;
@@ -44,11 +50,14 @@ const LandingPage = () => {
     change: number;
     volume: string;
   };
+
   const [marketData, setMarketData] = useState<MarketData[]>([]);
+
   type TradingPair = { base: string; quote: string; volume: string };
   const [tradingPairs, setTradingPairs] = useState<TradingPair[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const locale = useLocale();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,7 +82,6 @@ const LandingPage = () => {
     const fetchInitialData = async () => {
       try {
         setLoading(true);
-
         const pairsResponse = await getTradingPairs('', 6, 0);
         const pairs = pairsResponse.success ? pairsResponse.data || [] : [];
 
@@ -96,8 +104,8 @@ const LandingPage = () => {
 
         const transformedMarketData = validTickers.map(ticker => ({
           symbol: ticker.symbol.replace('USDT', ''),
-          price: parseFloat(ticker.lastPrice),
-          change: parseFloat(ticker.priceChangePercent),
+          price: Number.parseFloat(ticker.lastPrice),
+          change: Number.parseFloat(ticker.priceChangePercent),
           volume: ticker.quoteVolume,
         }));
 
@@ -119,14 +127,14 @@ const LandingPage = () => {
         setError(null);
       } catch (err) {
         console.error('Failed to fetch market data:', err);
-        setError('Failed to load market data');
+        setError(tHero('loadingError'));
       } finally {
         setLoading(false);
       }
     };
 
     fetchInitialData();
-  }, []);
+  }, [tHero]);
 
   useEffect(() => {
     if (marketData.length === 0) return;
@@ -153,11 +161,10 @@ const LandingPage = () => {
         if (validTickers.length > 0) {
           const updatedMarketData = validTickers.map(ticker => ({
             symbol: ticker.symbol.replace('USDT', ''),
-            price: parseFloat(ticker.lastPrice),
-            change: parseFloat(ticker.priceChangePercent),
+            price: Number.parseFloat(ticker.lastPrice),
+            change: Number.parseFloat(ticker.priceChangePercent),
             volume: ticker.quoteVolume,
           }));
-
           setMarketData(updatedMarketData);
         }
       } catch (err) {
@@ -184,45 +191,80 @@ const LandingPage = () => {
   const features = [
     {
       icon: <BarChart3 className='w-8 h-8' />,
-      title: 'Advanced Trading Tools',
-      description:
-        'Professional charting, technical indicators, and real-time market data',
+      title: tFeatures('advancedTools'),
+      description: tFeatures('advancedToolsDesc'),
       image:
         'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80',
     },
     {
       icon: <Shield className='w-8 h-8' />,
-      title: 'Bank-Grade Security',
-      description:
-        'Multi-signature wallets, 2FA, and cold storage for maximum protection',
+      title: tFeatures('bankSecurity'),
+      description: tFeatures('bankSecurityDesc'),
       image:
         'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80',
     },
     {
       icon: <Zap className='w-8 h-8' />,
-      title: 'Lightning Fast Execution',
-      description:
-        'Ultra-low latency matching engine processing millions of orders per second',
+      title: tFeatures('fastExecution'),
+      description: tFeatures('fastExecutionDesc'),
       image:
         'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
     },
     {
       icon: <Globe className='w-8 h-8' />,
-      title: 'Global Markets Access',
-      description:
-        'Trade 500+ cryptocurrencies across spot and futures markets',
+      title: tFeatures('globalAccess'),
+      description: tFeatures('globalAccessDesc'),
       image:
         'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80',
     },
   ];
 
+  const navigationItems = [
+    { name: tNavbar('markets'), id: 'markets' },
+    { name: tNavbar('trade'), id: 'hero' },
+    { name: tNavbar('futures'), id: 'features' },
+    { name: tNavbar('security'), id: 'security' },
+  ];
+
+  const statsData = [
+    { value: '$2.8B+', label: tStats('dailyVolume') },
+    { value: '500K+', label: tStats('activeTraders') },
+    { value: '180+', label: tStats('countriesSupported') },
+    { value: '0.05%', label: tStats('lowestFees') },
+  ];
+
+  const securityFeatures = [
+    {
+      icon: <Shield />,
+      title: tSecurity('coldStorage'),
+      desc: tSecurity('coldStorageDesc'),
+    },
+    {
+      icon: <Lock />,
+      title: tSecurity('multiSig'),
+      desc: tSecurity('multiSigDesc'),
+    },
+    {
+      icon: <Smartphone />,
+      title: tSecurity('2fa'),
+      desc: tSecurity('2faDesc'),
+    },
+    {
+      icon: <Bot />,
+      title: tSecurity('aiMonitoring'),
+      desc: tSecurity('aiMonitoringDesc'),
+    },
+  ];
+
   return (
     <div className='min-h-screen bg-black text-white overflow-hidden'>
+      {/* Background Effects */}
       <div className='fixed inset-0 opacity-20'>
         <div className='absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20' />
         <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black to-black' />
       </div>
 
+      {/* Animated Background Particles */}
       <div className='fixed inset-0 overflow-hidden pointer-events-none'>
         {[...Array(50)].map((_, i) => {
           const seed = i * 12345;
@@ -247,7 +289,7 @@ const LandingPage = () => {
               }}
               transition={{
                 duration: duration,
-                repeat: Infinity,
+                repeat: Number.POSITIVE_INFINITY,
                 ease: 'linear',
               }}
             />
@@ -255,6 +297,7 @@ const LandingPage = () => {
         })}
       </div>
 
+      {/* Navigation */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -293,7 +336,7 @@ const LandingPage = () => {
                   whileTap={{ scale: 0.95 }}
                   className='px-6 py-2 text-gray-300 hover:text-white transition-colors'
                 >
-                  Log In
+                  {tNavbar('login')}
                 </motion.button>
               </Link>
               <Link href='/register'>
@@ -302,7 +345,7 @@ const LandingPage = () => {
                   whileTap={{ scale: 0.95 }}
                   className='px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium'
                 >
-                  Get Started
+                  {tNavbar('getStarted')}
                 </motion.button>
               </Link>
             </div>
@@ -325,12 +368,7 @@ const LandingPage = () => {
               className='lg:hidden bg-black/95 backdrop-blur-xl border-t border-gray-800'
             >
               <div className='container mx-auto px-6 py-4 space-y-4'>
-                {[
-                  { name: 'Markets', id: 'markets' },
-                  { name: 'Trade', id: 'hero' },
-                  { name: 'Futures', id: 'features' },
-                  { name: 'Security', id: 'security' },
-                ].map(item => (
+                {navigationItems.map(item => (
                   <button
                     key={item.name}
                     onClick={() => scrollToSection(item.id)}
@@ -342,12 +380,12 @@ const LandingPage = () => {
                 <div className='pt-4 space-y-2'>
                   <Link href='/login' className='block'>
                     <button className='w-full px-6 py-2 border border-gray-700 rounded-lg'>
-                      Log In
+                      {tNavbar('login')}
                     </button>
                   </Link>
                   <Link href='/register' className='block'>
                     <button className='w-full px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg'>
-                      Get Started
+                      {tNavbar('getStarted')}
                     </button>
                   </Link>
                 </div>
@@ -357,6 +395,7 @@ const LandingPage = () => {
         </AnimatePresence>
       </motion.nav>
 
+      {/* Hero Section */}
       <section
         id='hero'
         className='relative min-h-screen flex items-center justify-center px-6 pt-20'
@@ -369,15 +408,13 @@ const LandingPage = () => {
               transition={{ duration: 0.8 }}
             >
               <h1 className='text-5xl lg:text-7xl font-bold mb-6'>
-                Trade Crypto
+                {tHero('title')}
                 <span className='block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent'>
-                  Like a Pro
+                  {tHero('subtitle')}
                 </span>
               </h1>
               <p className='text-xl text-gray-400 mb-8'>
-                Experience the future of cryptocurrency trading with advanced
-                tools, lightning-fast execution, and institutional-grade
-                security.
+                {tHero('description')}
               </p>
 
               <div className='mb-8 p-4 bg-gray-900/50 backdrop-blur-xl rounded-xl border border-gray-800'>
@@ -385,7 +422,7 @@ const LandingPage = () => {
                   <div className='flex items-center justify-center py-4'>
                     <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500'></div>
                     <span className='ml-2 text-gray-400'>
-                      Loading market data...
+                      {tHero('loading')}
                     </span>
                   </div>
                 ) : error ? (
@@ -432,7 +469,7 @@ const LandingPage = () => {
                     whileTap={{ scale: 0.95 }}
                     className='px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl font-medium text-lg flex items-center justify-center space-x-2 w-full sm:w-auto'
                   >
-                    <span>Start Trading Now</span>
+                    <span>{tHero('startTrading')}</span>
                     <ArrowRight className='w-5 h-5' />
                   </motion.button>
                 </Link>
@@ -445,7 +482,7 @@ const LandingPage = () => {
 
         <motion.div
           animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
           className='absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer'
           onClick={() => scrollToSection('stats')}
         >
@@ -453,6 +490,7 @@ const LandingPage = () => {
         </motion.div>
       </section>
 
+      {/* Stats Section */}
       <section id='stats' className='py-20 px-6 relative'>
         <div className='container mx-auto'>
           <motion.div
@@ -461,12 +499,7 @@ const LandingPage = () => {
             viewport={{ once: true }}
             className='grid grid-cols-2 lg:grid-cols-4 gap-8'
           >
-            {[
-              { value: '$2.8B+', label: 'Daily Trading Volume' },
-              { value: '500K+', label: 'Active Traders' },
-              { value: '180+', label: 'Countries Supported' },
-              { value: '0.05%', label: 'Lowest Fees' },
-            ].map((stat, i) => (
+            {statsData.map((stat, i) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
@@ -485,6 +518,7 @@ const LandingPage = () => {
         </div>
       </section>
 
+      {/* Features Section */}
       <section id='features' className='py-20 px-6 relative'>
         <div className='container mx-auto'>
           <motion.div
@@ -494,14 +528,13 @@ const LandingPage = () => {
             className='text-center mb-16'
           >
             <h2 className='text-4xl lg:text-5xl font-bold mb-4'>
-              Everything You Need to
+              {tFeatures('title')}
               <span className='block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'>
-                Trade Successfully
+                {tFeatures('subtitle')}
               </span>
             </h2>
             <p className='text-xl text-gray-400 max-w-3xl mx-auto'>
-              Professional trading tools, real-time data, and advanced features
-              designed for both beginners and experts
+              {tFeatures('description')}
             </p>
           </motion.div>
 
@@ -568,6 +601,7 @@ const LandingPage = () => {
         </div>
       </section>
 
+      {/* Markets Section */}
       <section id='markets' className='py-20 px-6 relative'>
         <div className='container mx-auto'>
           <motion.div
@@ -577,11 +611,9 @@ const LandingPage = () => {
             className='text-center mb-16'
           >
             <h2 className='text-4xl lg:text-5xl font-bold mb-4'>
-              Trade Top Cryptocurrencies
+              {tMarkets('title')}
             </h2>
-            <p className='text-xl text-gray-400'>
-              Access the most liquid markets with tight spreads
-            </p>
+            <p className='text-xl text-gray-400'>{tMarkets('description')}</p>
           </motion.div>
 
           <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
@@ -602,7 +634,9 @@ const LandingPage = () => {
                       <div className='font-semibold text-lg'>
                         {pair.base}/{pair.quote}
                       </div>
-                      <div className='text-sm text-gray-400'>24h Volume</div>
+                      <div className='text-sm text-gray-400'>
+                        {tMarkets('volume24h')}
+                      </div>
                     </div>
                   </div>
                   <div className='text-right'>
@@ -611,7 +645,7 @@ const LandingPage = () => {
                 </div>
                 <Link href='/register'>
                   <button className='w-full py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors'>
-                    Trade Now
+                    {tMarkets('tradeNow')}
                   </button>
                 </Link>
               </motion.div>
@@ -620,9 +654,9 @@ const LandingPage = () => {
         </div>
       </section>
 
+      {/* Security Section */}
       <section id='security' className='py-20 px-6 relative overflow-hidden'>
         <div className='absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10' />
-
         <div className='container mx-auto relative'>
           <div className='grid lg:grid-cols-2 gap-12 items-center'>
             <motion.div
@@ -631,39 +665,17 @@ const LandingPage = () => {
               viewport={{ once: true }}
             >
               <h2 className='text-4xl lg:text-5xl font-bold mb-6'>
-                Your Security is Our
+                {tSecurity('title')}
                 <span className='block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'>
-                  Top Priority
+                  {tSecurity('subtitle')}
                 </span>
               </h2>
               <p className='text-xl text-gray-400 mb-8'>
-                We employ industry-leading security measures to ensure your
-                funds and data remain safe at all times.
+                {tSecurity('description')}
               </p>
 
               <div className='space-y-6'>
-                {[
-                  {
-                    icon: <Shield />,
-                    title: 'Cold Storage',
-                    desc: '95% of funds stored offline',
-                  },
-                  {
-                    icon: <Lock />,
-                    title: 'Multi-Sig Wallets',
-                    desc: 'Multiple signatures required',
-                  },
-                  {
-                    icon: <Smartphone />,
-                    title: '2FA Protection',
-                    desc: 'Two-factor authentication',
-                  },
-                  {
-                    icon: <Bot />,
-                    title: 'AI Monitoring',
-                    desc: '24/7 threat detection',
-                  },
-                ].map((item, i) => (
+                {securityFeatures.map((item, i) => (
                   <motion.div
                     key={item.title}
                     initial={{ opacity: 0, x: -20 }}
@@ -697,7 +709,7 @@ const LandingPage = () => {
                   animate={{ rotate: 360 }}
                   transition={{
                     duration: 20,
-                    repeat: Infinity,
+                    repeat: Number.POSITIVE_INFINITY,
                     ease: 'linear',
                   }}
                   className='absolute inset-0 flex items-center justify-center'
@@ -705,10 +717,12 @@ const LandingPage = () => {
                   <div className='w-80 h-80 rounded-full border border-blue-500/20' />
                   <div className='absolute w-60 h-60 rounded-full border border-purple-500/20' />
                   <div className='absolute w-40 h-40 rounded-full border border-pink-500/20' />
-
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
+                    transition={{
+                      duration: 2,
+                      repeat: Number.POSITIVE_INFINITY,
+                    }}
                     className='absolute'
                   >
                     <Shield className='w-20 h-20 text-blue-400' />
@@ -724,17 +738,17 @@ const LandingPage = () => {
                     }}
                     transition={{
                       duration: 4 + i,
-                      repeat: Infinity,
+                      repeat: Number.POSITIVE_INFINITY,
                       delay: i * 0.5,
                     }}
                     className={`absolute ${
                       i === 0
                         ? 'top-10 left-10'
                         : i === 1
-                          ? 'top-10 right-10'
-                          : i === 2
-                            ? 'bottom-10 left-10'
-                            : 'bottom-10 right-10'
+                        ? 'top-10 right-10'
+                        : i === 2
+                        ? 'bottom-10 left-10'
+                        : 'bottom-10 right-10'
                     }`}
                   >
                     <Icon className='w-8 h-8 text-gray-600' />
@@ -746,6 +760,7 @@ const LandingPage = () => {
         </div>
       </section>
 
+      {/* CTA Section */}
       <section id='cta' className='py-20 px-6 relative'>
         <div className='container mx-auto'>
           <motion.div
@@ -756,7 +771,6 @@ const LandingPage = () => {
           >
             <div className='absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600' />
             <div className='absolute inset-0 bg-black/20' />
-
             <div className='absolute inset-0 opacity-10'>
               <div
                 className='absolute inset-0'
@@ -774,7 +788,7 @@ const LandingPage = () => {
                 viewport={{ once: true }}
                 className='text-4xl lg:text-6xl font-bold mb-6'
               >
-                Ready to Start Trading?
+                {tCta('title')}
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -783,8 +797,7 @@ const LandingPage = () => {
                 transition={{ delay: 0.1 }}
                 className='text-xl lg:text-2xl mb-10 text-gray-200 max-w-3xl mx-auto'
               >
-                Join over 500,000 traders who trust our platform for their
-                cryptocurrency trading needs
+                {tCta('description')}
               </motion.p>
 
               <motion.div
@@ -800,7 +813,7 @@ const LandingPage = () => {
                     whileTap={{ scale: 0.95 }}
                     className='px-8 py-4 bg-white text-black rounded-xl font-medium text-lg hover:bg-gray-100 transition-colors'
                   >
-                    Create Free Account
+                    {tCta('createAccount')}
                   </motion.button>
                 </Link>
               </motion.div>
@@ -814,11 +827,11 @@ const LandingPage = () => {
               >
                 <div className='flex items-center space-x-2'>
                   <Check className='w-5 h-5 text-green-400' />
-                  <span>No credit card required</span>
+                  <span>{tCta('noCreditCard')}</span>
                 </div>
                 <div className='flex items-center space-x-2'>
                   <Check className='w-5 h-5 text-green-400' />
-                  <span>Start trading in minutes</span>
+                  <span>{tCta('quickStart')}</span>
                 </div>
               </motion.div>
             </div>

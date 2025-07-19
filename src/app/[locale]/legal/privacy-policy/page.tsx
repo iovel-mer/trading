@@ -1,24 +1,30 @@
+'use client';
+
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { MainHeader } from '@/components/main-header';
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function PrivacyPolicyPage() {
+  const locale = useLocale();
+  const tLegal = useTranslations('legal');
+  const tPrivacy = useTranslations('privacyPolicy');
+
   return (
     <div className='min-h-screen bg-black text-white'>
       <MainHeader />
-
       <div className='container mx-auto px-6 py-12 pt-30'>
         <div className='max-w-4xl mx-auto'>
           <div className='mb-8'>
             <Link
-              href='/'
+              href={`/${locale}`}
               className='inline-flex items-center text-gray-400 hover:text-white transition-colors mb-6'
             >
               <ArrowLeft className='w-4 h-4 mr-2' />
-              Back to Home
+              {tLegal('backToHome')}
             </Link>
             <h1 className='text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'>
-              Privacy Policy
+              {tPrivacy('title')}
             </h1>
           </div>
 
@@ -27,90 +33,66 @@ export default function PrivacyPolicyPage() {
             <div className='text-gray-300 leading-relaxed space-y-6'>
               <div>
                 <h3 className='text-xl font-semibold mb-4 text-white'>
-                  1. Information We Collect
+                  {tPrivacy('informationWeCollect.title')}
                 </h3>
                 <p className='mb-4'>
-                  We collect information you provide directly to us, such as
-                  when you create an account, make trades, or contact us for
-                  support.
+                  {tPrivacy('informationWeCollect.content')}
                 </p>
               </div>
 
               <div>
                 <h3 className='text-xl font-semibold mb-4 text-white'>
-                  2. How We Use Your Information
+                  {tPrivacy('howWeUseInfo.title')}
                 </h3>
-                <p className='mb-4'>
-                  We use your information to provide, maintain, and improve our
-                  services, process transactions, and communicate with you.
-                </p>
+                <p className='mb-4'>{tPrivacy('howWeUseInfo.content')}</p>
               </div>
 
               <div>
                 <h3 className='text-xl font-semibold mb-4 text-white'>
-                  3. Information Sharing
+                  {tPrivacy('informationSharing.title')}
                 </h3>
-                <p className='mb-4'>
-                  We do not sell, trade, or otherwise transfer your personal
-                  information to third parties without your consent, except as
-                  described in this policy.
-                </p>
+                <p className='mb-4'>{tPrivacy('informationSharing.content')}</p>
               </div>
 
               <div>
                 <h3 className='text-xl font-semibold mb-4 text-white'>
-                  4. Data Security
+                  {tPrivacy('dataSecurity.title')}
                 </h3>
-                <p className='mb-4'>
-                  We implement appropriate security measures to protect your
-                  personal information against unauthorized access, alteration,
-                  disclosure, or destruction.
-                </p>
+                <p className='mb-4'>{tPrivacy('dataSecurity.content')}</p>
               </div>
 
               <div>
                 <h3 className='text-xl font-semibold mb-4 text-white'>
-                  5. Cookies and Tracking
+                  {tPrivacy('cookiesAndTracking.title')}
                 </h3>
-                <p className='mb-4'>
-                  We use cookies and similar technologies to enhance your
-                  experience, analyze usage patterns, and personalize content.
-                </p>
+                <p className='mb-4'>{tPrivacy('cookiesAndTracking.content')}</p>
               </div>
 
               <div>
                 <h3 className='text-xl font-semibold mb-4 text-white'>
-                  6. Data Retention
+                  {tPrivacy('dataRetention.title')}
                 </h3>
-                <p className='mb-4'>
-                  We retain your information for as long as necessary to provide
-                  services and comply with legal obligations.
-                </p>
+                <p className='mb-4'>{tPrivacy('dataRetention.content')}</p>
               </div>
 
               <div>
                 <h3 className='text-xl font-semibold mb-4 text-white'>
-                  7. Your Rights
+                  {tPrivacy('yourRights.title')}
                 </h3>
-                <p className='mb-4'>
-                  You have the right to access, update, or delete your personal
-                  information. Contact us to exercise these rights.
-                </p>
+                <p className='mb-4'>{tPrivacy('yourRights.content')}</p>
               </div>
 
               <div>
                 <h3 className='text-xl font-semibold mb-4 text-white'>
-                  8. International Transfers
+                  {tPrivacy('internationalTransfers.title')}
                 </h3>
                 <p className='mb-4'>
-                  Your information may be transferred to and processed in
-                  countries other than your own, subject to appropriate
-                  safeguards.
+                  {tPrivacy('internationalTransfers.content')}
                 </p>
               </div>
 
               <p className='text-sm text-gray-400 mt-8'>
-                Last updated: January 2024
+                {tLegal('lastUpdated')}
               </p>
             </div>
           </div>
