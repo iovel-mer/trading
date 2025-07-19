@@ -23,9 +23,7 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
 
   const handleLanguageChange = (newLocale: string) => {
-    // Remove the current locale from the pathname
     const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/';
-    // Navigate to the new locale
     const newPath =
       newLocale === 'en'
         ? pathWithoutLocale
@@ -38,8 +36,11 @@ export function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='outline' size='sm' className='gap-2 bg-transparent'>
-          <Globe className='h-4 w-4' />
+        <Button
+          variant='outline'
+          size='sm'
+          className='gap-2 bg-transparent flex !items-center'
+        >
           <span className='hidden sm:inline'>
             {currentLanguage?.flag} {currentLanguage?.name}
           </span>

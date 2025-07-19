@@ -554,5 +554,87 @@
       "rejected": "Rejected",
       "unknown": "Unknown"
     }
+  },
+  "trading": {
+    "title": "Trading",
+    "subtitle": "Manage your trading accounts, create tickets, and view transaction history.",
+    "loading": "Loading trading data...",
+    "errorTitle": "Error Loading Trading Data",
+    "retry": "Retry",
+    "tabs": {
+      "accounts": "Trading Accounts",
+      "createAccount": "Create Account",
+      "create": "Create Ticket",
+      "history": "Ticket History"
+    },
+    "accounts": {
+      "title": "Select Trading Account",
+      "description": "Choose an account to view its wallets and balances.",
+      "selectLabel": "Trading Account",
+      "selectPlaceholder": "Select a trading account",
+      "available": "Available:",
+      "total": "Total:",
+      "locked": "Locked:",
+      "noAccountSelected": "No account selected"
+    },
+    "createAccount": {
+      "title": "Create New Trading Account",
+      "description": "Create a new trading account to start trading.",
+      "nameLabel": "Account Display Name",
+      "namePlaceholder": "e.g., Main Trading Account",
+      "nameHelp": "Choose a descriptive name for your trading account",
+      "creating": "Creating Account...",
+      "createButton": "Create Trading Account",
+      "existingAccounts": "Existing Accounts",
+      "account": "Account:",
+      "validationError": "Please enter an account name",
+      "successMessage": "Trading account created successfully!",
+      "errorMessage": "Failed to create trading account"
+    },
+    "createTicket": {
+      "title": "Create New Ticket",
+      "description": "Create a deposit or withdrawal ticket for your trading account.",
+      "accountLabel": "Trading Account",
+      "accountPlaceholder": "Select a trading account",
+      "walletLabel": "Wallet",
+      "walletPlaceholder": "Select a wallet",
+      "typeLabel": "Ticket Type",
+      "typePlaceholder": "Select ticket type",
+      "amountLabel": "Amount",
+      "amountPlaceholder": "Enter amount",
+      "creating": "Creating...",
+      "createButton": "Create Ticket",
+      "deposit": "Deposit",
+      "withdrawal": "Withdraw",
+      "validationError": "Please select a wallet and enter a valid amount",
+      "successMessage": "Ticket created successfully with ID:",
+      "errorMessage": "Unable to create ticket due to insufficient funds. Please check your balance and try again."
+    },
+    "history": {
+      "title": "Ticket History",
+      "description": "View all your deposit and withdrawal tickets.",
+      "showLabel": "Show:",
+      "entries": "entries",
+      "loading": "Loading...",
+      "noTickets": "No tickets found",
+      "ticketId": "Ticket ID:",
+      "showing": "Showing",
+      "to": "to",
+      "of": "of",
+      "entriesText": "entries"
+    },
+    "ticketStatus": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "failed": "Failed",
+      "rejected": "Rejected",
+      "unknown": "Unknown"
+    },
+    "accountStatus": {
+      "active": "Active",
+      "suspended": "Suspended"
+    }
   }
 }

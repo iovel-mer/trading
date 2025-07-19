@@ -556,5 +556,87 @@
       "rejected": "Abgelehnt",
       "unknown": "Unbekannt"
     }
+  },
+  "trading": {
+    "title": "Trading",
+    "subtitle": "Verwalten Sie Ihre Trading-Konten, erstellen Sie Tickets und sehen Sie die Transaktionshistorie.",
+    "loading": "Trading-Daten werden geladen...",
+    "errorTitle": "Fehler beim Laden der Trading-Daten",
+    "retry": "Wiederholen",
+    "tabs": {
+      "accounts": "Trading-Konten",
+      "createAccount": "Konto Erstellen",
+      "create": "Ticket Erstellen",
+      "history": "Ticket-Historie"
+    },
+    "accounts": {
+      "title": "Trading-Konto Auswählen",
+      "description": "Wählen Sie ein Konto aus, um dessen Wallets und Guthaben anzuzeigen.",
+      "selectLabel": "Trading-Konto",
+      "selectPlaceholder": "Wählen Sie ein Trading-Konto",
+      "available": "Verfügbar:",
+      "total": "Gesamt:",
+      "locked": "Gesperrt:",
+      "noAccountSelected": "Kein Konto ausgewählt"
+    },
+    "createAccount": {
+      "title": "Neues Trading-Konto Erstellen",
+      "description": "Erstellen Sie ein neues Trading-Konto, um mit dem Handel zu beginnen.",
+      "nameLabel": "Konto-Anzeigename",
+      "namePlaceholder": "z.B., Haupt-Trading-Konto",
+      "nameHelp": "Wählen Sie einen beschreibenden Namen für Ihr Trading-Konto",
+      "creating": "Konto wird erstellt...",
+      "createButton": "Trading-Konto Erstellen",
+      "existingAccounts": "Bestehende Konten",
+      "account": "Konto:",
+      "validationError": "Bitte geben Sie einen Kontonamen ein",
+      "successMessage": "Trading-Konto erfolgreich erstellt!",
+      "errorMessage": "Fehler beim Erstellen des Trading-Kontos"
+    },
+    "createTicket": {
+      "title": "Neues Ticket Erstellen",
+      "description": "Erstellen Sie ein Einzahlungs- oder Abhebungsticket für Ihr Trading-Konto.",
+      "accountLabel": "Trading-Konto",
+      "accountPlaceholder": "Wählen Sie ein Trading-Konto",
+      "walletLabel": "Wallet",
+      "walletPlaceholder": "Wählen Sie ein Wallet",
+      "typeLabel": "Ticket-Typ",
+      "typePlaceholder": "Wählen Sie einen Ticket-Typ",
+      "amountLabel": "Betrag",
+      "amountPlaceholder": "Betrag eingeben",
+      "creating": "Erstelle...",
+      "createButton": "Ticket Erstellen",
+      "deposit": "Einzahlung",
+      "withdrawal": "Abhebung",
+      "validationError": "Bitte wählen Sie ein Wallet und geben Sie einen gültigen Betrag ein",
+      "successMessage": "Ticket erfolgreich erstellt mit ID:",
+      "errorMessage": "Ticket konnte aufgrund unzureichender Mittel nicht erstellt werden. Bitte überprüfen Sie Ihr Guthaben und versuchen Sie es erneut."
+    },
+    "history": {
+      "title": "Ticket-Historie",
+      "description": "Sehen Sie alle Ihre Einzahlungs- und Abhebungstickets.",
+      "showLabel": "Zeigen:",
+      "entries": "Einträge",
+      "loading": "Lädt...",
+      "noTickets": "Keine Tickets gefunden",
+      "ticketId": "Ticket-ID:",
+      "showing": "Zeige",
+      "to": "bis",
+      "of": "von",
+      "entriesText": "Einträgen"
+    },
+    "ticketStatus": {
+      "pending": "Ausstehend",
+      "processing": "Wird bearbeitet",
+      "completed": "Abgeschlossen",
+      "cancelled": "Storniert",
+      "failed": "Fehlgeschlagen",
+      "rejected": "Abgelehnt",
+      "unknown": "Unbekannt"
+    },
+    "accountStatus": {
+      "active": "Aktiv",
+      "suspended": "Gesperrt"
+    }
   }
 }

@@ -54,7 +54,7 @@ export default function LoginPage() {
     }
 
     storeCredentials(credentials);
-    window.location.href = '/dashboard';
+    window.location.href = `/${locale}/dashboard`;
   };
 
   return (

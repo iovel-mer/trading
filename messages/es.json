@@ -609,5 +609,87 @@
       "rejected": "Rechazado",
       "unknown": "Desconocido"
     }
+  },
+  "trading": {
+    "title": "Trading",
+    "subtitle": "Gestiona tus cuentas de trading, crea tickets y ve el historial de transacciones.",
+    "loading": "Cargando datos de trading...",
+    "errorTitle": "Error al Cargar Datos de Trading",
+    "retry": "Reintentar",
+    "tabs": {
+      "accounts": "Cuentas de Trading",
+      "createAccount": "Crear Cuenta",
+      "create": "Crear Ticket",
+      "history": "Historial de Tickets"
+    },
+    "accounts": {
+      "title": "Seleccionar Cuenta de Trading",
+      "description": "Elige una cuenta para ver sus carteras y balances.",
+      "selectLabel": "Cuenta de Trading",
+      "selectPlaceholder": "Selecciona una cuenta de trading",
+      "available": "Disponible:",
+      "total": "Total:",
+      "locked": "Bloqueado:",
+      "noAccountSelected": "No hay cuenta seleccionada"
+    },
+    "createAccount": {
+      "title": "Crear Nueva Cuenta de Trading",
+      "description": "Crea una nueva cuenta de trading para comenzar a operar.",
+      "nameLabel": "Nombre de la Cuenta",
+      "namePlaceholder": "ej., Cuenta Principal de Trading",
+      "nameHelp": "Elige un nombre descriptivo para tu cuenta de trading",
+      "creating": "Creando Cuenta...",
+      "createButton": "Crear Cuenta de Trading",
+      "existingAccounts": "Cuentas Existentes",
+      "account": "Cuenta:",
+      "validationError": "Por favor ingresa un nombre de cuenta",
+      "successMessage": "¡Cuenta de trading creada exitosamente!",
+      "errorMessage": "Error al crear la cuenta de trading"
+    },
+    "createTicket": {
+      "title": "Crear Nuevo Ticket",
+      "description": "Crea un ticket de depósito o retiro para tu cuenta de trading.",
+      "accountLabel": "Cuenta de Trading",
+      "accountPlaceholder": "Selecciona una cuenta de trading",
+      "walletLabel": "Cartera",
+      "walletPlaceholder": "Selecciona una cartera",
+      "typeLabel": "Tipo de Ticket",
+      "typePlaceholder": "Selecciona el tipo de ticket",
+      "amountLabel": "Cantidad",
+      "amountPlaceholder": "Ingresa la cantidad",
+      "creating": "Creando...",
+      "createButton": "Crear Ticket",
+      "deposit": "Depósito",
+      "withdrawal": "Retiro",
+      "validationError": "Por favor selecciona una cartera e ingresa una cantidad válida",
+      "successMessage": "Ticket creado exitosamente con ID:",
+      "errorMessage": "No se pudo crear el ticket debido a fondos insuficientes. Por favor verifica tu balance e intenta de nuevo."
+    },
+    "history": {
+      "title": "Historial de Tickets",
+      "description": "Ve todos tus tickets de depósito y retiro.",
+      "showLabel": "Mostrar:",
+      "entries": "entradas",
+      "loading": "Cargando...",
+      "noTickets": "No se encontraron tickets",
+      "ticketId": "ID del Ticket:",
+      "showing": "Mostrando",
+      "to": "a",
+      "of": "de",
+      "entriesText": "entradas"
+    },
+    "ticketStatus": {
+      "pending": "Pendiente",
+      "processing": "Procesando",
+      "completed": "Completado",
+      "cancelled": "Cancelado",
+      "failed": "Fallido",
+      "rejected": "Rechazado",
+      "unknown": "Desconocido"
+    },
+    "accountStatus": {
+      "active": "Activo",
+      "suspended": "Suspendido"
+    }
   }
 }
