@@ -490,7 +490,6 @@ export default function TradingPage() {
                   <Button
                     onClick={handleCreateAccount}
                     disabled={creatingAccount || !newAccountName.trim()}
-                    className='w-full'
                   >
                     {creatingAccount && (
                       <Loader2 className='h-4 w-4 mr-2 animate-spin' />
@@ -650,7 +649,6 @@ export default function TradingPage() {
                     disabled={
                       creatingTicket || !selectedWallet || !ticketAmount
                     }
-                    className='w-full'
                   >
                     {creatingTicket
                       ? t('trading.createTicket.creating')
