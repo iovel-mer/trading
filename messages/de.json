@@ -81,7 +81,10 @@
   "footer": {
     "description": "Die vertrauenswürdigste Krypto-Handelsplattform mit fortschrittlichen Tools und Sicherheit.",
     "company": "Unternehmen",
-    "support": "Support",
+    "support": "Unterstützung",
+    "resources": "Ressourcen",
+    "blog": "Blog",
+    "documentation": "Documentation",
     "aboutUs": "Über Uns",
     "security": "Sicherheit",
     "helpCenter": "Hilfezentrum",

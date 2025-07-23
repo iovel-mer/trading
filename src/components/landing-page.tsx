@@ -31,7 +31,8 @@ import RealisticTradingPlatform from './Animation/Animation';
 import { MainHeader } from './main-header';
 import { useLocale, useTranslations } from 'next-intl';
 
-const LandingPage = () => {
+const 
+LandingPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);
