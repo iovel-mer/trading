@@ -8,7 +8,7 @@
   export default function DocumentationPage() {
     const locale = useLocale();
     const tLegal = useTranslations('legal');
-    const tDoc = useTranslations('resources.blog');
+    const tBlog = useTranslations('resources.blog');
 
     return (
       <div className="container mx-auto px-4 py-12 max-w-5xl">
@@ -21,47 +21,47 @@
               className="inline-flex items-center text-gray-400 hover:text-white transition-colors mb-6"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              {tLegal('backToHome')}
+              {tBlog('backToHome')}
             </Link>
 
             <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
-              {tDoc('title')}
+              {tBlog('title')}
             </h1>
           </div>
 
           {/* Documentation Intro */}
           <div className="text-center space-y-4">
             <h2 className="text-3xl font-semibold tracking-tight">
-              {tDoc('subtitle')}
+              {tBlog('subtitle')}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {tDoc('overview.content')}
+              {tBlog('overview.content')}
             </p>
           </div>
 
           {/* Sections */}
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-muted p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">{tDoc('quickStart.title')}</h3>
-              <p className="text-muted-foreground">{tDoc('quickStart.content')}</p>
+              <h3 className="text-xl font-semibold mb-4">{tBlog('quickStart.title')}</h3>
+              <p className="text-muted-foreground">{tBlog('quickStart.content')}</p>
             </div>
             <div className="bg-muted p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">{tDoc('authentication.title')}</h3>
-              <p className="text-muted-foreground">{tDoc('authentication.content')}</p>
+              <h3 className="text-xl font-semibold mb-4">{tBlog('authentication.title')}</h3>
+              <p className="text-muted-foreground">{tBlog('authentication.content')}</p>
             </div>
           </div>
 
           {/* FAQ */}
           <div className="bg-muted p-6 rounded-lg">
-            <h3 className="text-xl font-semibold mb-4">{tDoc('faq.title')}</h3>
+            <h3 className="text-xl font-semibold mb-4">{tBlog('faq.title')}</h3>
             <div className="space-y-4">
               <div>
-                <h4 className="font-medium mb-1">{tDoc('faq.apiUrl.question')}</h4>
-                <p className="text-sm text-muted-foreground">{tDoc('faq.apiUrl.answer')}</p>
+                <h4 className="font-medium mb-1">{tBlog('faq.apiUrl.question')}</h4>
+                <p className="text-sm text-muted-foreground">{tBlog('faq.apiUrl.answer')}</p>
               </div>
               <div>
-                <h4 className="font-medium mb-1">{tDoc('faq.reportBug.question')}</h4>
-                <p className="text-sm text-muted-foreground">{tDoc('faq.reportBug.answer')}</p>
+                <h4 className="font-medium mb-1">{tBlog('faq.reportBug.question')}</h4>
+                <p className="text-sm text-muted-foreground">{tBlog('faq.reportBug.answer')}</p>
               </div>
             </div>
           </div>

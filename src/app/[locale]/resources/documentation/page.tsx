@@ -8,7 +8,7 @@ import { useLocale, useTranslations } from 'next-intl';
 export default function DocumentationPage() {
   const locale = useLocale();
   const tLegal = useTranslations('legal');
-  const tDocumentation = useTranslations('resources.documentation');
+  const tDoc = useTranslations('resources.documentation');
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-5xl">
@@ -25,17 +25,17 @@ export default function DocumentationPage() {
           </Link>
 
           <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">
-            {tDocumentation('title')}
+            {tDoc('title')}
           </h1>
         </div>
 
         {/* Intro Section */}
         <div className="text-center space-y-4">
           <h2 className="text-3xl font-semibold tracking-tight">
-            {tDocumentation('subtitle')}
+            {tDoc('subtitle')}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {tDocumentation('description')}
+            {tDoc('description')}
           </p>
         </div>
 
@@ -43,28 +43,28 @@ export default function DocumentationPage() {
         <div className="space-y-12">
           <div>
             <h3 className="text-2xl font-semibold mb-4">
-              {tDocumentation('overview.title')}
+              {tDoc('overview.title')}
             </h3>
             <p className="text-muted-foreground leading-relaxed">
-              {tDocumentation('overview.content')}
+              {tDoc('overview.content')}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h4 className="text-xl font-semibold mb-3">
-                {tDocumentation('quickStart.title')}
+                {tDoc('quickStart.title')}
               </h4>
               <p className="text-muted-foreground">
-                {tDocumentation('quickStart.content')}
+                {tDoc('quickStart.content')}
               </p>
             </div>
             <div>
               <h4 className="text-xl font-semibold mb-3">
-                {tDocumentation('auth.title')}
+                {tDoc('auth.title')}
               </h4>
               <p className="text-muted-foreground">
-                {tDocumentation('auth.content')}
+                {tDoc('auth.content')}
               </p>
             </div>
           </div>
@@ -72,23 +72,23 @@ export default function DocumentationPage() {
           {/* FAQ or Resources */}
           <div className="bg-muted p-6 rounded-lg">
             <h3 className="text-xl font-semibold mb-4">
-              {tDocumentation('faq.title')}
+              {tDoc('faq.title')}
             </h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <h5 className="font-medium mb-1">
-                  {tDocumentation('faq.q1.question')}
+                  {tDoc('faq.q1.question')}
                 </h5>
                 <p className="text-sm text-muted-foreground">
-                  {tDocumentation('faq.q1.answer')}
+                  {tDoc('faq.q1.answer')}
                 </p>
               </div>
               <div>
                 <h5 className="font-medium mb-1">
-                  {tDocumentation('faq.q2.question')}
+                  {tDoc('faq.q2.question')}
                 </h5>
                 <p className="text-sm text-muted-foreground">
-                  {tDocumentation('faq.q2.answer')}
+                  {tDoc('faq.q2.answer')}
                 </p>
               </div>
             </div>

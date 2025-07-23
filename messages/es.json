@@ -9,7 +9,6 @@
     "logOut": "Cerrar sesión",
     "loggingOut": "Cerrando sesión..."
   },
-
   "navigation": {
     "dashboard": "Panel de Control",
     "finance": "Finanzas",
@@ -49,7 +48,6 @@
     "export": "Exportar",
     "import": "Importar"
   },
-
   "trading": {
     "title": "Plataforma de Trading",
     "portfolio": "Portafolio",
@@ -126,7 +124,7 @@
     "support": "Soporte",
     "resources": "Recursos",
     "blog": "Blog",
-    "documentation": "documentación",
+    "documentation": "Documentación",
     "aboutUs": "Sobre Nosotros",
     "security": "Seguridad",
     "helpCenter": "Centro de Ayuda",
@@ -739,6 +737,63 @@
       "refresh": "Actualizar",
       "retry": "Reintentar",
       "unknown": "Desconocido"
+    }
+  },
+  "resources": {
+    "blog": {
+      "title": "Nuestro Blog",
+      "subtitle": "Mantente al día con nuestras últimas noticias y perspectivas.",
+      "overview": {
+        "content": "Sumérgete en nuestros artículos sobre diversos temas, desde actualizaciones de productos hasta tendencias de la industria y guías útiles."
+      },
+      "quickStart": {
+        "title": "Guía de Inicio Rápido",
+        "content": "Aprende cómo empezar con nuestra plataforma en minutos. Esta sección cubre los conceptos básicos de configuración y los primeros pasos."
+      },
+      "authentication": {
+        "title": "Autenticación en Detalle",
+        "content": "Comprende nuestros mecanismos de autenticación, incluyendo cómo asegurar tus aplicaciones y gestionar el acceso de los usuarios."
+      },
+      "faq": {
+        "title": "Preguntas Frecuentes",
+        "apiUrl": {
+          "question": "¿Cuál es la URL de la API?",
+          "answer": "Nuestra API es accesible en https://api.example.com/v1. Consulta la documentación para puntos finales específicos."
+        },
+        "reportBug": {
+          "question": "¿Cómo reporto un error?",
+          "answer": "Puedes reportar errores a través de nuestro portal de soporte o enviando un correo electrónico a support@example.com. Por favor, incluye pasos detallados para la reproducción."
+        }
+      },
+      "backToHome": "Atrás"
+    },
+    "documentation": {
+      "title": "Documentación",
+      "subtitle": "Encuentra guías completas y referencias de API.",
+      "description": "Explora nuestra documentación detallada para empezar, entender funciones avanzadas y solucionar problemas comunes.",
+      "overview": {
+        "title": "Visión General",
+        "content": "Esta sección proporciona una introducción general a nuestra plataforma y sus funcionalidades principales. Aprende sobre la arquitectura y los componentes principales."
+      },
+      "quickStart": {
+        "title": "Guía de Inicio Rápido",
+        "content": "Sigue esta guía para configurar tu entorno y realizar tu primera llamada a la API en minutos. Perfecto para nuevos usuarios."
+      },
+      "auth": {
+        "title": "Autenticación y Autorización",
+        "content": "Comprende nuestros protocolos de seguridad, incluyendo la gestión de claves API, OAuth y permisos de roles de usuario."
+      },
+      "faq": {
+        "title": "Preguntas Frecuentes",
+        "q1": {
+          "question": "¿Cómo me integro con su API?",
+          "answer": "Nuestra API es RESTful y se puede integrar utilizando métodos HTTP estándar. Consulta la sección de Referencia de API para ejemplos detallados."
+        },
+        "q2": {
+          "question": "¿Cuáles son los límites de tasa de la API?",
+          "answer": "Nuestra API tiene un límite de tasa predeterminado de 100 solicitudes por minuto por clave API. Se pueden solicitar límites más altos para planes Enterprise."
+        }
+      }
     }
   }
 }

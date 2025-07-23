@@ -9,6 +9,9 @@ import { getCountries } from "@/app/api/countries/getCountries"
 import { getLanguages } from "@/app/api/languages/getLanguages"
 import type { Country } from "@/app/api/types/countries"
 import type { Language } from "@/app/api/types/languages"
+import DatePicker from "react-datepicker"
+import { Calendar } from "lucide-react"
+
 import { useLocale, useTranslations } from "next-intl"
 
 export default function RegisterPage() {
@@ -24,7 +27,7 @@ export default function RegisterPage() {
     telephone: "",
     country: "",
     language: "",
-    dateOfBirth: "", // This will store DD/MM/YYYY string
+    dateOfBirth: "", 
     source: "",
   })
   const [isLoading, setIsLoading] = useState(false)
@@ -169,7 +172,7 @@ export default function RegisterPage() {
           }
         }
 
-        // Reorder languages: English first, then German, then others
+        
         const englishLanguage = languagesData.find(
           (lang) => lang.code === "en" || lang.name.toLowerCase() === "english",
         )
@@ -196,7 +199,7 @@ export default function RegisterPage() {
 
         setLanguages(sortedLanguages)
 
-        // Set default language to English if available, otherwise the first in the sorted list
+        
         if (englishLanguage) {
           setFormData((prev) => ({
             ...prev,
@@ -507,22 +510,26 @@ export default function RegisterPage() {
                 )}
               </div>
             </div>
+
             <div>
               <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-300 mb-1">
                 {t("register.dateOfBirth")}
               </label>
-              <input
-                type="date"
-                id="dateOfBirth"
-                name="dateOfBirth"
-                value={formData.dateOfBirth || ""}
-                onChange={handleInputChange}
-                required
-                disabled={isLoading}
-                className="w-full px-3 py-2 border border-gray-400 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
-                placeholder="YYYY-MM-DD"
-              />
+             <input
+  type="text"
+  id="dateOfBirth"
+  name="dateOfBirth"
+  value={formData.dateOfBirth || ""}
+  onChange={handleInputChange}
+  required
+  disabled={isLoading}
+  className="w-full px-3 py-2 border border-gray-400 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed bg-[#1b1f7b] placeholder-gray-500"
+  placeholder="DD/MM/YYYY"
+/>
             </div>
+
+
+            
             <button
               type="submit"
               disabled={isLoading}
