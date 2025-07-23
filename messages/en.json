@@ -1,0 +1,799 @@
+{
+  "header": {
+    "dashboard": "Dashboard",
+    "error": "Error",
+    "loading": "Loading...",
+    "user": "User",
+    "noEmail": "No Email",
+    "profile": "Profile",
+    "logOut": "Log Out",
+    "loggingOut": "Logging out..."
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "finance": "Finance",
+    "trading": "Trading",
+    "profile": "My Profile",
+    "documents": "Documents"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?"
+  },
+  "common": {
+    "welcome": "Welcome",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "export": "Export",
+    "import": "Import"
+  },
+  "trading": {
+    "title": "Trading Platform",
+    "portfolio": "Portfolio",
+    "orders": "Orders",
+    "history": "History",
+    "balance": "Balance",
+    "buy": "Buy",
+    "sell": "Sell"
+  },
+  "navbar": {
+    "login": "Login",
+    "getStarted": "Get Started",
+    "markets": "Markets",
+    "trade": "Trade",
+    "futures": "Futures",
+    "security": "Security"
+  },
+  "hero": {
+    "title": "Trade Crypto",
+    "subtitle": "Like a Pro",
+    "description": "Experience the future of cryptocurrency trading with advanced tools, lightning-fast execution, and institutional-grade security.",
+    "loading": "Loading market data...",
+    "startTrading": "Start Trading Now",
+    "loadingError": "Error loading market data"
+  },
+  "stats": {
+    "dailyVolume": "Daily Trading Volume",
+    "activeTraders": "Active Traders",
+    "countriesSupported": "Countries Supported",
+    "lowestFees": "Lowest Fees"
+  },
+  "features": {
+    "title": "Everything You Need to",
+    "subtitle": "Trade Successfully",
+    "description": "Professional trading tools, real-time data, and advanced features designed for beginners and experts alike",
+    "advancedTools": "Advanced Trading Tools",
+    "advancedToolsDesc": "Professional charting, technical indicators, and real-time market data",
+    "bankSecurity": "Bank-Grade Security",
+    "bankSecurityDesc": "Multi-signature wallets, 2FA, and cold storage for maximum protection",
+    "fastExecution": "Lightning-Fast Execution",
+    "fastExecutionDesc": "Ultra-low latency matching engine processes millions of orders per second",
+    "globalAccess": "Global Market Access",
+    "globalAccessDesc": "Trade over 500 cryptocurrencies on spot and futures markets"
+  },
+  "markets": {
+    "title": "Trade Top Cryptocurrencies",
+    "description": "Access the most liquid markets with tight spreads",
+    "tradeNow": "Trade Now",
+    "volume24h": "24h Volume"
+  },
+  "security": {
+    "title": "Your Security is Our",
+    "subtitle": "Top Priority",
+    "description": "We employ industry-leading security measures to ensure your funds and data remain safe at all times.",
+    "coldStorage": "Cold Storage",
+    "coldStorageDesc": "95% of funds stored offline",
+    "multiSig": "Multi-Sig Wallets",
+    "multiSigDesc": "Multiple signatures required",
+    "2fa": "2FA Protection",
+    "2faDesc": "Two-factor authentication",
+    "aiMonitoring": "AI Monitoring",
+    "aiMonitoringDesc": "24/7 threat detection"
+  },
+  "cta": {
+    "title": "Ready to Start Trading?",
+    "description": "Join over 500,000 traders who trust our platform for their cryptocurrency trading needs",
+    "createAccount": "Create Free Account",
+    "noCreditCard": "No credit card required",
+    "quickStart": "Start trading in minutes"
+  },
+  "footer": {
+    "description": "The most trusted cryptocurrency trading platform with advanced tools and security.",
+    "company": "Company",
+    "support": "Support",
+    "resources": "Resources",
+    "blog": "Blog",
+    "documentation": "Documentation",
+    "aboutUs": "About Us",
+    "security": "Security",
+    "helpCenter": "Help Center",
+    "contactUs": "Contact Us",
+    "terms": {
+      "title": "Terms of Service",
+      "content": "<h3 class=\"text-xl font-semibold mb-4 text-white\">1. Acceptance of Terms</h3><p class=\"mb-4\">By accessing and using SalesVault, you accept and agree to be bound by the terms and provisions of this agreement.</p>..."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "content": "<h3 class=\"text-xl font-semibold mb-4 text-white\">1. Information We Collect</h3><p class=\"mb-4\">We collect information you provide directly to us...</p>..."
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "content": "<h3 class=\"text-xl font-semibold mb-4 text-white\">1. What are Cookies</h3><p class=\"mb-4\">Cookies are small text files stored on your device...</p>..."
+    },
+    "legal": {
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy"
+    },
+    "rights": "All rights reserved.",
+    "close": "Close"
+  },
+  "legal": {
+    "backToHome": "Back to Home",
+    "lastUpdated": "Last Updated: January 2024"
+  },
+  "cookiePolicy": {
+    "title": "Cookie Policy",
+    "whatAreCookies": {
+      "title": "1. What Are Cookies",
+      "content": "Cookies are small text files stored on your device when you visit our website. They help us provide you with a better experience."
+    },
+    "typesOfCookies": {
+      "title": "2. Types of Cookies We Use",
+      "essential": "Essential Cookies: Required for the website to function properly, including authentication and security features.",
+      "analytics": "Analytics Cookies: Help us understand how visitors interact with our website by collecting anonymous information.",
+      "functional": "Functional Cookies: Enable enhanced functionality and personalization, such as remembering your preferences.",
+      "marketing": "Marketing Cookies: Used to track visitors across websites to display relevant advertisements."
+    },
+    "thirdPartyCookies": {
+      "title": "3. Third-Party Cookies",
+      "content": "We may use third-party services that set cookies on your device, including Google Analytics and advertising partners."
+    },
+    "managingCookies": {
+      "title": "4. Managing Cookies",
+      "content": "You can control cookies through your browser settings. However, disabling certain cookies may affect website functionality."
+    },
+    "cookieConsent": {
+      "title": "5. Cookie Consent",
+      "content": "By continuing to use our website, you consent to our use of cookies as described in this policy."
+    },
+    "updates": {
+      "title": "6. Updates to This Policy",
+      "content": "We may update this Cookie Policy from time to time. Changes will be posted on this page with an updated revision date."
+    }
+  },
+  "termsOfService": {
+    "title": "Terms of Service",
+    "acceptance": {
+      "title": "1. Acceptance of Terms",
+      "content": "By accessing and using SalesVault, you accept and agree to be bound by the terms and provisions of this agreement."
+    },
+    "tradingServices": {
+      "title": "2. Trading Services",
+      "content": "SalesVault provides cryptocurrency trading services. All trades are executed at your own risk."
+    },
+    "accountSecurity": {
+      "title": "3. Account Security",
+      "content": "You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account."
+    },
+    "riskDisclosure": {
+      "title": "4. Risk Disclosure",
+      "content": "Cryptocurrency trading involves substantial risk of loss and is not suitable for all investors. Past performance is not indicative of future results."
+    },
+    "feesAndCharges": {
+      "title": "5. Fees and Charges",
+      "content": "Trading fees apply to all transactions. Fee schedules are available on our website and may be updated from time to time."
+    },
+    "prohibitedActivities": {
+      "title": "6. Prohibited Activities",
+      "content": "Users may not engage in market manipulation, money laundering, or any other illegal activities on our platform."
+    },
+    "limitationOfLiability": {
+      "title": "7. Limitation of Liability",
+      "content": "SalesVault shall not be liable for any indirect, incidental, special, consequential, or punitive damages."
+    },
+    "termination": {
+      "title": "8. Termination",
+      "content": "We reserve the right to terminate or suspend your account at any time for violation of these terms."
+    }
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "informationWeCollect": {
+      "title": "1. Information We Collect",
+      "content": "We collect information you provide directly to us, such as when you create an account, make trades, or communicate with us for support."
+    },
+    "howWeUseInfo": {
+      "title": "2. How We Use Your Information",
+      "content": "We use your information to provide, maintain, and improve our services, process transactions, and communicate with you."
+    },
+    "informationSharing": {
+      "title": "3. Information Sharing",
+      "content": "We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy."
+    },
+    "dataSecurity": {
+      "title": "4. Data Security",
+      "content": "We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction."
+    },
+    "cookiesAndTracking": {
+      "title": "5. Cookies and Tracking",
+      "content": "We use cookies and similar technologies to enhance your experience, analyze usage patterns, and personalize content."
+    },
+    "dataRetention": {
+      "title": "6. Data Retention",
+      "content": "We retain your information for as long as necessary to provide services and comply with legal obligations."
+    },
+    "yourRights": {
+      "title": "7. Your Rights",
+      "content": "You have the right to access, update, or delete your personal information. Contact us to exercise these rights."
+    },
+    "internationalTransfers": {
+      "title": "8. International Transfers",
+      "content": "Your information may be transferred to and processed in countries other than your own, subject to appropriate safeguards."
+    }
+  },
+  "support": {
+    "contactUs": {
+      "title": "Contact Us",
+      "subtitle": "We're here to help. Reach out through any of these channels and we'll get back to you quickly.",
+      "getInTouch": "Get in Touch",
+      "customerSupport": {
+        "title": "Customer Support",
+        "description": "For account issues, trading questions, and technical support",
+        "email": "Email: support@platform.com",
+        "phone": "Phone: +1 (555) 123-4567",
+        "availability": "Available 24/7"
+      },
+      "businessInquiries": {
+        "title": "Business Inquiries",
+        "description": "Partnerships, institutional services, and media requests",
+        "email": "Email: business@platform.com",
+        "phone": "Phone: +1 (555) 123-4568",
+        "availability": "Monday-Friday, 9 AM - 6 PM EST"
+      },
+      "complianceLegal": {
+        "title": "Compliance & Legal",
+        "description": "Regulatory matters and legal inquiries",
+        "email": "Email: legal@platform.com",
+        "availability": "Response within 48 hours"
+      },
+      "sendMessage": "Send Us a Message",
+      "form": {
+        "name": "Name",
+        "namePlaceholder": "Your full name",
+        "email": "Email",
+        "emailPlaceholder": "your@email.com",
+        "subject": "Subject",
+        "message": "Message",
+        "messagePlaceholder": "How can we help you?",
+        "sendButton": "Send Message",
+        "subjects": {
+          "general": "General Inquiry",
+          "support": "Account Support",
+          "technical": "Technical Issue",
+          "partnership": "Partnership",
+          "media": "Media Inquiry"
+        }
+      },
+      "offices": {
+        "title": "Our Offices",
+        "newYork": "New York (Headquarters)",
+        "london": "London",
+        "singapore": "Singapore"
+      },
+      "responseTimes": {
+        "title": "Response Times",
+        "liveChat": "Live Chat: Instant response during business hours",
+        "emailSupport": "Email Support: Within 2 hours for urgent matters",
+        "phoneSupport": "Phone Support: No wait time, 24/7 availability",
+        "businessInquiries": "Business Inquiries: Within 1 business day"
+      }
+    },
+    "helpCenter": {
+      "title": "Help Center",
+      "subtitle": "Find quick answers to common questions or get personalized support from our team.",
+      "liveChat": {
+        "title": "Live Chat",
+        "description": "Get instant help from our support team",
+        "availability": "Available 24/7"
+      },
+      "emailSupport": {
+        "title": "Email Support",
+        "description": "Detailed responses within 2 hours",
+        "email": "support@platform.com"
+      },
+      "phoneSupport": {
+        "title": "Phone Support",
+        "description": "Speak directly with our experts",
+        "phone": "+1 (555) 123-4567"
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "fundAccount": {
+          "question": "How do I fund my account?",
+          "answer": "You can fund your account via bank transfer, credit card, or cryptocurrency deposit. Bank transfers typically take 1-2 business days, while crypto deposits are usually instant after network confirmation."
+        },
+        "tradingFees": {
+          "question": "What are your trading fees?",
+          "answer": "Our fee structure is transparent and competitive. Spot trading fees start at 0.1% for makers and 0.15% for takers. Futures trading fees are as low as 0.02% for makers. Volume discounts are available for high-frequency traders."
+        },
+        "withdrawals": {
+          "question": "How long do withdrawals take?",
+          "answer": "Cryptocurrency withdrawals are processed within 30 minutes during business hours. Bank withdrawals typically take 1-3 business days depending on your bank and location."
+        },
+        "insurance": {
+          "question": "Is my account insured?",
+          "answer": "Yes, we maintain comprehensive insurance coverage for digital assets and operational risks. Additionally, fiat deposits are protected by FDIC insurance up to $250,000 per account."
+        }
+      },
+      "gettingStarted": {
+        "title": "Getting Started",
+        "verification": "Account Verification Guide",
+        "firstTrade": "How to Make Your First Trade",
+        "orderTypes": "Understanding Order Types",
+        "tutorials": "Platform Tutorial Videos"
+      },
+      "advancedTopics": {
+        "title": "Advanced Topics",
+        "marginTrading": "Margin Trading Explained",
+        "optionsStrategies": "Options Strategies Guide",
+        "apiDocs": "API Documentation",
+        "taxReporting": "Tax Reporting Tools"
+      },
+      "cantFind": {
+        "title": "Can't Find What You're Looking For?",
+        "description": "Our support team is here to help with any questions not covered in our FAQ. We pride ourselves on quick response times and knowledgeable assistance.",
+        "contactButton": "Contact Support"
+      }
+    },
+    "aboutUs": {
+      "title": "About Us",
+      "subtitle": "We're building the future of financial markets, making sophisticated trading tools accessible to everyone.",
+      "mission": {
+        "title": "Our Mission",
+        "content": "Financial markets have traditionally been the domain of large institutions and wealthy individuals. We believe everyone deserves access to the same powerful trading tools and opportunities. Our platform combines institutional-grade technology with an intuitive user interface, bringing professional trading capabilities to retail investors globally."
+      },
+      "founded": {
+        "title": "Founded in 2019",
+        "content": "Started by a team of ex-Wall Street traders and Silicon Valley engineers who saw the need for better retail trading infrastructure. We've grown from a small startup to serving over 2 million traders globally."
+      },
+      "globalReach": {
+        "title": "Global Reach",
+        "content": "With offices in New York, London, and Singapore, we provide 24/7 support and maintain regulatory compliance across multiple jurisdictions. Our diverse team speaks over 20 languages."
+      },
+      "values": {
+        "title": "Our Values",
+        "transparency": {
+          "title": "Transparency",
+          "description": "Clear pricing, no hidden fees, open communication"
+        },
+        "innovation": {
+          "title": "Innovation",
+          "description": "Cutting-edge technology, continuous improvement"
+        },
+        "security": {
+          "title": "Security",
+          "description": "Bank-grade security, regulatory compliance"
+        }
+      }
+    },
+    "security": {
+      "title": "Security First",
+      "subtitle": "Your assets and data are protected by institutional-grade security measures and regulatory oversight.",
+      "assetProtection": {
+        "title": "Asset Protection",
+        "coldStorage": {
+          "title": "Cold Storage",
+          "description": "95% of digital assets stored offline in military-grade secured facilities"
+        },
+        "insurance": {
+          "title": "Insurance Coverage",
+          "description": "$100M insurance policy covering digital assets and operational risks"
+        },
+        "segregatedAccounts": {
+          "title": "Segregated Accounts",
+          "description": "Client funds held separately from company assets in regulated banks"
+        }
+      },
+      "technicalSecurity": {
+        "title": "Technical Security",
+        "multiSig": {
+          "title": "Multi-Signature Wallets",
+          "description": "Multiple keys required for all cryptocurrency transactions"
+        },
+        "encryption": {
+          "title": "End-to-End Encryption",
+          "description": "All data encrypted in transit and at rest using AES-256"
+        },
+        "monitoring": {
+          "title": "24/7 Monitoring",
+          "description": "Real-time threat detection and incident response team"
+        }
+      },
+      "compliance": {
+        "title": "Regulatory Compliance",
+        "fca": "FCA Regulated",
+        "fcaDesc": "UK Financial Conduct Authority",
+        "cftc": "CFTC Registered",
+        "cftcDesc": "US Commodity Futures Trading Commission",
+        "mas": "MAS Licensed",
+        "masDesc": "Monetary Authority of Singapore"
+      },
+      "securityTips": {
+        "title": "Account Security Tips",
+        "tip1": "Enable two-factor authentication on your account",
+        "tip2": "Use a unique, strong password with a password manager",
+        "tip3": "Never share your login credentials with anyone",
+        "tip4": "Regularly review your account activity and statements",
+        "tip5": "Contact support immediately if you notice suspicious activity"
+      },
+      "audits": {
+        "title": "Security Audits",
+        "description": "Our systems undergo quarterly security audits by leading cybersecurity firms including Deloitte and PwC. All audit reports are available upon request."
+      }
+    }
+  },
+  "login": {
+    "backToHome": "Back to Home",
+    "title": "Login",
+    "subtitle": "Welcome back to your trading platform",
+    "emailOrUsername": "Email or Username",
+    "emailOrUsernamePlaceholder": "Enter your email or username",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "twoFactorCode": "Two-Factor Code",
+    "twoFactorCodePlaceholder": "Enter 2FA code",
+    "rememberMe": "Remember Me",
+    "signingIn": "Signing in...",
+    "signIn": "Sign In",
+    "dontHaveAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "rightSide": {
+      "title": "Start Trading Today",
+      "feature1": "Access to over 100 cryptocurrency trading pairs",
+      "feature2": "Advanced trading tools and real-time market data",
+      "feature3": "Secure wallet with industry-leading protection",
+      "feature4": "24/7 customer support and educational resources",
+      "totalVolume": "Total Trading Volume",
+      "totalVolumeValue": "$2.8B+",
+      "activeTraders": "Active Traders",
+      "activeTradersValue": "500K+",
+      "countries": "Countries",
+      "countriesValue": "180+"
+    }
+  },
+  "register": {
+    "backToHome": "Back to Home",
+    "title": "Create Account",
+    "subtitle": "Join our trading platform today",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "First Name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Last Name",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "username": "Username",
+    "usernamePlaceholder": "Choose a username",
+    "password": "Password",
+    "passwordPlaceholder": "Create a password",
+    "phoneNumber": "Phone Number",
+    "phoneNumberPlaceholder": "Enter your phone number",
+    "country": "Country",
+    "selectCountry": "Select your country",
+    "yourLocation": "Your Location",
+    "searchCountries": "Search countries...",
+    "noCountriesFound": "No countries found",
+    "language": "Language",
+    "selectLanguage": "Select your language",
+    "searchLanguages": "Search languages...",
+    "noLanguagesFound": "No languages found",
+    "dateOfBirth": "Date of Birth",
+    "creatingAccount": "Creating account...",
+    "createAccount": "Create Account",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "rightSide": {
+      "title": "Start Trading Today",
+      "feature1": "Access to over 100 cryptocurrency trading pairs",
+      "feature2": "Advanced trading tools and real-time market data",
+      "feature3": "Secure wallet with industry-leading protection",
+      "feature4": "24/7 customer support and educational resources",
+      "totalVolume": "Total Trading Volume",
+      "totalVolumeValue": "$2.8B+",
+      "activeTraders": "Active Traders",
+      "activeTradersValue": "500K+",
+      "countries": "Countries",
+      "countriesValue": "180+"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "Overview",
+    "analytics": "Analytics",
+    "reports": "Reports",
+    "settings": "Settings",
+    "loading": "Loading dashboard...",
+    "errorTitle": "Error Loading Dashboard",
+    "retry": "Retry",
+    "welcomeBack": "Welcome back, ",
+    "welcomeBackDefault": "Welcome back, User!",
+    "subtitle": "Here's what's happening with your trading account today.",
+    "primaryBalance": "Primary Balance",
+    "totalUsdValue": "Total USD Value",
+    "activeTickets": "Active Tickets",
+    "tradingActivity": "Trading Activity",
+    "totalDeposits": "Total Deposits",
+    "totalWithdrawals": "Total Withdrawals",
+    "lockedBalance": "Locked Balance",
+    "recentTickets": "Recent Tickets",
+    "recentTicketsDescription": "Your latest deposit and withdrawal requests.",
+    "noRecentTickets": "No recent tickets",
+    "depositRequest": "Deposit Request",
+    "withdrawalRequest": "Withdrawal Request",
+    "currencyBreakdown": "Currency Breakdown",
+    "currencyBreakdownDescription": "Your balances by currency.",
+    "noCurrenciesFound": "No currencies found",
+    "available": "Available:",
+    "locked": "Locked:",
+    "wallet": "Wallet",
+    "wallets": "Wallets",
+    "account": "Account",
+    "accounts": "Accounts",
+    "totalTickets": "Total Tickets",
+    "currenciesAvailable": "Currencies Available",
+    "active": "Active",
+    "ticketStatus": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "failed": "Failed",
+      "rejected": "Rejected"
+    }
+  },
+  "finance": {
+    "title": "Finance",
+    "subtitle": "Manage your financial accounts, transactions, and investments.",
+    "loading": "Loading finance data...",
+    "errorTitle": "Error Loading Finance Data",
+    "retry": "Retry",
+    "cashBalance": "Cash Balance",
+    "investments": "Investments",
+    "holdings": "Holdings",
+    "tradingAccounts": "Trading Accounts",
+    "tradingAccountsDescription": "Overview of your trading accounts and their status.",
+    "noTradingAccountsFound": "No trading accounts found",
+    "account": "Account:",
+    "wallet": "Wallet",
+    "wallets": "Wallets",
+    "recentTransactions": "Recent Transactions",
+    "recentTransactionsDescription": "Latest deposit and withdrawal activities.",
+    "noRecentTransactions": "No recent transactions",
+    "deposit": "Deposit",
+    "withdrawal": "Withdrawal",
+    "walletBreakdown": "Wallet Breakdown",
+    "walletBreakdownDescription": "Detailed view of all your wallet balances by currency and account.",
+    "noWalletsFound": "No wallets found",
+    "available": "Available:",
+    "locked": "Locked:",
+    "accountStatus": {
+      "active": "Active",
+      "suspended": "Suspended"
+    },
+    "transactionStatus": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "failed": "Failed",
+      "rejected": "Rejected",
+      "unknown": "Unknown"
+    }
+  },
+  "trading": {
+    "title": "Trading",
+    "subtitle": "Manage your trading accounts, create tickets, and view transaction history.",
+    "loading": "Loading trading data...",
+    "errorTitle": "Error Loading Trading Data",
+    "retry": "Retry",
+    "tabs": {
+      "accounts": "Trading Accounts",
+      "createAccount": "Create Account",
+      "create": "Create Ticket",
+      "history": "Ticket History"
+    },
+    "accounts": {
+      "title": "Select Trading Account",
+      "description": "Choose an account to view its wallets and balances.",
+      "selectLabel": "Trading Account",
+      "selectPlaceholder": "Select a trading account",
+      "available": "Available:",
+      "total": "Total:",
+      "locked": "Locked:",
+      "noAccountSelected": "No account selected"
+    },
+    "createAccount": {
+      "title": "Create New Trading Account",
+      "description": "Create a new trading account to start trading.",
+      "nameLabel": "Account Display Name",
+      "namePlaceholder": "e.g., Main Trading Account",
+      "nameHelp": "Choose a descriptive name for your trading account",
+      "creating": "Creating Account...",
+      "createButton": "Create Trading Account",
+      "existingAccounts": "Existing Accounts",
+      "account": "Account:",
+      "validationError": "Please enter an account name",
+      "successMessage": "Trading account created successfully!",
+      "errorMessage": "Error creating trading account"
+    },
+    "createTicket": {
+      "title": "Create New Ticket",
+      "description": "Create a deposit or withdrawal ticket for your trading account.",
+      "accountLabel": "Trading Account",
+      "accountPlaceholder": "Select a trading account",
+      "walletLabel": "Wallet",
+      "walletPlaceholder": "Select a wallet",
+      "typeLabel": "Ticket Type",
+      "typePlaceholder": "Select ticket type",
+      "amountLabel": "Amount",
+      "amountPlaceholder": "Enter amount",
+      "creating": "Creating...",
+      "createButton": "Create Ticket",
+      "deposit": "Deposit",
+      "withdrawal": "Withdrawal",
+      "validationError": "Please select a wallet and enter a valid amount",
+      "successMessage": "Ticket created successfully with ID:",
+      "errorMessage": "Could not create ticket due to insufficient funds. Please check your balance and try again."
+    },
+    "history": {
+      "title": "Ticket History",
+      "description": "View all your deposit and withdrawal tickets.",
+      "showLabel": "Show:",
+      "entries": "entries",
+      "loading": "Loading...",
+      "noTickets": "No tickets found",
+      "ticketId": "Ticket ID:",
+      "showing": "Showing",
+      "to": "to",
+      "of": "of",
+      "entriesText": "entries"
+    },
+    "ticketStatus": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "failed": "Failed",
+      "rejected": "Rejected",
+      "unknown": "Unknown"
+    },
+    "accountStatus": {
+      "active": "Active",
+      "suspended": "Suspended"
+    }
+  },
+  "profile": {
+    "title": "My Profile",
+    "subtitle": "Manage your account settings and personal information.",
+    "loading": "Loading...",
+    "personalInformation": "Personal Information",
+    "personalInformationDescription": "Update your personal details and contact information.",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "username": "Username",
+    "saving": "Saving...",
+    "saveChanges": "Save Changes",
+    "successMessage": "Profile updated successfully!",
+    "errorMessage": "Error updating profile"
+  },
+  "documents": {
+    "title": "Documents",
+    "subtitle": "Upload and manage your documents securely.",
+    "tabs": {
+      "upload": "Upload Documents",
+      "manage": "Manage Documents"
+    },
+    "upload": {
+      "title": "Upload Document",
+      "description": "Select a file to upload to your document library.",
+      "dragAndDrop": "Drag and drop your file here, or click to select",
+      "selectFile": "Select File",
+      "uploading": "Uploading...",
+      "uploadDocument": "Upload Document",
+      "uploadSuccess": "File uploaded successfully!",
+      "uploadFailed": "Upload failed",
+      "removeFile": "Remove file"
+    },
+    "table": {
+      "title": "Documents",
+      "description": "Your uploaded documents will appear here.",
+      "detailedDescription": "Your uploaded documents and their details.",
+      "loadingDocuments": "Loading documents...",
+      "noDocumentsYet": "No documents uploaded yet",
+      "fileId": "File ID:",
+      "refresh": "Refresh",
+      "retry": "Retry",
+      "unknown": "Unknown"
+    }
+  },
+  "resources": {
+    "blog": {
+      "title": "Our Blog",
+      "subtitle": "Stay up-to-date with our latest news and insights.",
+      "overview": {
+        "content": "Dive into our articles covering various topics, from product updates to industry trends and helpful guides."
+      },
+      "quickStart": {
+        "title": "Quick Start Guide",
+        "content": "Learn how to get started with our platform in minutes. This section covers the basics of setup and initial steps."
+      },
+      "authentication": {
+        "title": "Authentication in Detail",
+        "content": "Understand our authentication mechanisms, including securing your applications and managing user access."
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "apiUrl": {
+          "question": "What is the API URL?",
+          "answer": "Our API is accessible at https://api.example.com/v1. Please refer to the documentation for specific endpoints."
+        },
+        "reportBug": {
+          "question": "How do I report a bug?",
+          "answer": "You can report bugs through our support portal or by sending an email to support@example.com. Please include detailed reproduction steps."
+        }
+      },
+      "backToHome": "Back to Home"
+    },
+    "documentation": {
+      "title": "Documentation",
+      "subtitle": "Find comprehensive guides and API references.",
+      "description": "Explore our detailed documentation to get started, understand advanced features, and troubleshoot common issues.",
+      "overview": {
+        "title": "Overview",
+        "content": "This section provides a general introduction to our platform and its core functionalities. Learn about the architecture and main components."
+      },
+      "quickStart": {
+        "title": "Quick Start Guide",
+        "content": "Follow this guide to set up your environment and make your first API call in minutes. Perfect for new users."
+      },
+      "auth": {
+        "title": "Authentication & Authorization",
+        "content": "Understand our security protocols, including API key management, OAuth, and user role permissions."
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "q1": {
+          "question": "How do I integrate with your API?",
+          "answer": "Our API is RESTful and can be integrated using standard HTTP methods. Refer to the API Reference section for detailed examples."
+        },
+        "q2": {
+          "question": "What are the API rate limits?",
+          "answer": "Our API has a default rate limit of 100 requests per minute per API key. Higher limits can be requested for Enterprise plans."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+name: Deploy Next.js Application
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  APP_NAME: 'trading-platform-v2'
+  NODE_VERSION: '20.x'
+  PORT: '4699'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🧰 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }} 
+
+      - name: 📦 Install Dependencies & Build
+        run: |
+          pnpm install
+          pnpm run build
+
+          APP_NAME_LOWER=$(echo "${{ env.APP_NAME }}" | tr '[:upper:]' '[:lower:]')
+          DEPLOY_PATH="/www/wwwroot/${APP_NAME_LOWER}.crm-system.com"
+          echo "DEPLOY_PATH=${DEPLOY_PATH}" >> $GITHUB_ENV
+
+      - name: 🔐 Setup SSH Access
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: 🚀 Deploy via SSH
+        run: |
+          rsync -avz --delete \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            --exclude='.env.*' \
+            --exclude='.github' \
+            ./ ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ env.DEPLOY_PATH }}/
+
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << EOF
+            cd ${{ env.DEPLOY_PATH }}
+            npm install --omit=dev
+
+            cat > start-app.sh << 'EOT'
+            #!/bin/bash
+            cd $(dirname "$0")
+            exec npx next start -p ${{ env.PORT }}
+            EOT
+
+            chmod +x start-app.sh
+            EOF
+
+      - name: 🧹 Cleanup SSH Keys
+        if: always()
+        run: rm -rf ~/.ssh

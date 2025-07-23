@@ -1,0 +1,799 @@
+{
+  "header": {
+    "dashboard": "Dashboard",
+    "error": "Fehler",
+    "loading": "Lädt...",
+    "user": "Benutzer",
+    "noEmail": "Keine E-Mail",
+    "profile": "Profil",
+    "logOut": "Abmelden",
+    "loggingOut": "Meldet ab..."
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "finance": "Finanzen",
+    "trading": "Handel",
+    "profile": "Mein Profil",
+    "documents": "Dokumente"
+  },
+  "auth": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "forgotPassword": "Passwort vergessen?",
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "alreadyHaveAccount": "Bereits ein Konto?",
+    "dontHaveAccount": "Noch kein Konto?"
+  },
+  "common": {
+    "welcome": "Willkommen",
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "sort": "Sortieren",
+    "export": "Exportieren",
+    "import": "Importieren"
+  },
+  "trading": {
+    "title": "Handelsplattform",
+    "portfolio": "Portfolio",
+    "orders": "Bestellungen",
+    "history": "Verlauf",
+    "balance": "Guthaben",
+    "buy": "Kaufen",
+    "sell": "Verkaufen"
+  },
+  "navbar": {
+    "login": "Anmelden",
+    "getStarted": "Loslegen",
+    "markets": "Märkte",
+    "trade": "Handel",
+    "futures": "Futures",
+    "security": "Sicherheit"
+  },
+  "hero": {
+    "title": "Krypto handeln",
+    "subtitle": "Wie ein Profi",
+    "description": "Erleben Sie die Zukunft des Kryptowährungshandels mit fortschrittlichen Tools, blitzschneller Ausführung und Sicherheit auf institutionellem Niveau.",
+    "loading": "Marktdaten werden geladen...",
+    "startTrading": "Jetzt mit dem Handel beginnen",
+    "loadingError": "Fehler beim Laden der Marktdaten"
+  },
+  "stats": {
+    "dailyVolume": "Tägliches Handelsvolumen",
+    "activeTraders": "Aktive Trader",
+    "countriesSupported": "Unterstützte Länder",
+    "lowestFees": "Niedrigste Gebühren"
+  },
+  "features": {
+    "title": "Alles, was Sie brauchen, um",
+    "subtitle": "Erfolgreich zu handeln",
+    "description": "Professionelle Handelstools, Echtzeitdaten und erweiterte Funktionen für Anfänger und Experten",
+    "advancedTools": "Fortgeschrittene Handelstools",
+    "advancedToolsDesc": "Professionelle Charting, technische Indikatoren und Echtzeit-Marktdaten",
+    "bankSecurity": "Sicherheit auf Bankniveau",
+    "bankSecurityDesc": "Multi-Signatur-Wallets, 2FA und Cold Storage für maximalen Schutz",
+    "fastExecution": "Blitzschnelle Ausführung",
+    "fastExecutionDesc": "Ultra-niedrige Latenz-Matching-Engine verarbeitet Millionen von Aufträgen pro Sekunde",
+    "globalAccess": "Globaler Marktzugang",
+    "globalAccessDesc": "Handeln Sie über 500 Kryptowährungen auf Spot- und Futures-Märkten"
+  },
+  "markets": {
+    "title": "Handeln Sie Top-Kryptowährungen",
+    "description": "Greifen Sie auf die liquidesten Märkte mit engen Spreads zu",
+    "tradeNow": "Jetzt handeln",
+    "volume24h": "24h Volumen"
+  },
+  "security": {
+    "title": "Ihre Sicherheit ist unsere",
+    "subtitle": "Höchste Priorität",
+    "description": "Wir setzen branchenführende Sicherheitsmaßnahmen ein, um sicherzustellen, dass Ihre Gelder und Daten jederzeit sicher bleiben.",
+    "coldStorage": "Cold Storage",
+    "coldStorageDesc": "95% der Gelder offline gespeichert",
+    "multiSig": "Multi-Sig Wallets",
+    "multiSigDesc": "Mehrere Signaturen erforderlich",
+    "2fa": "2FA Schutz",
+    "2faDesc": "Zwei-Faktor-Authentifizierung",
+    "aiMonitoring": "KI-Überwachung",
+    "aiMonitoringDesc": "24/7 Bedrohungserkennung"
+  },
+  "cta": {
+    "title": "Bereit, mit dem Handel zu beginnen?",
+    "description": "Schließen Sie sich über 500.000 Tradern an, die unserer Plattform für ihre Kryptowährungshandelsbedürfnisse vertrauen",
+    "createAccount": "Kostenloses Konto erstellen",
+    "noCreditCard": "Keine Kreditkarte erforderlich",
+    "quickStart": "In wenigen Minuten mit dem Handel beginnen"
+  },
+  "footer": {
+    "description": "Die vertrauenswürdigste Kryptowährungshandelsplattform mit fortschrittlichen Tools und Sicherheit.",
+    "company": "Unternehmen",
+    "support": "Support",
+    "resources": "Ressourcen",
+    "blog": "Blog",
+    "documentation": "Dokumentation",
+    "aboutUs": "Über uns",
+    "security": "Sicherheit",
+    "helpCenter": "Hilfe-Center",
+    "contactUs": "Kontakt",
+    "terms": {
+      "title": "Nutzungsbedingungen",
+      "content": "<h3 class=\"text-xl font-semibold mb-4 text-white\">1. Annahme der Bedingungen</h3><p class=\"mb-4\">Durch den Zugriff und die Nutzung von SalesVault akzeptieren und stimmen Sie den Bestimmungen dieser Vereinbarung zu.</p>..."
+    },
+    "privacy": {
+      "title": "Datenschutzrichtlinie",
+      "content": "<h3 class=\"text-xl font-semibold mb-4 text-white\">1. Informationen, die wir sammeln</h3><p class=\"mb-4\">Wir sammeln Informationen, die Sie uns direkt zur Verfügung stellen...</p>..."
+    },
+    "cookies": {
+      "title": "Cookie-Richtlinie",
+      "content": "<h3 class=\"text-xl font-semibold mb-4 text-white\">1. Was sind Cookies</h3><p class=\"mb-4\">Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden...</p>..."
+    },
+    "legal": {
+      "terms": "Nutzungsbedingungen",
+      "privacy": "Datenschutzrichtlinie",
+      "cookies": "Cookie-Richtlinie"
+    },
+    "rights": "Alle Rechte vorbehalten.",
+    "close": "Schließen"
+  },
+  "legal": {
+    "backToHome": "Zurück zur Startseite",
+    "lastUpdated": "Zuletzt aktualisiert: Januar 2024"
+  },
+  "cookiePolicy": {
+    "title": "Cookie-Richtlinie",
+    "whatAreCookies": {
+      "title": "1. Was sind Cookies",
+      "content": "Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, wenn Sie unsere Website besuchen. Sie helfen uns, Ihnen eine bessere Erfahrung zu bieten."
+    },
+    "typesOfCookies": {
+      "title": "2. Arten von Cookies, die wir verwenden",
+      "essential": "Essentielle Cookies: Erforderlich für die ordnungsgemäße Funktion der Website, einschließlich Authentifizierungs- und Sicherheitsfunktionen.",
+      "analytics": "Analyse-Cookies: Helfen uns zu verstehen, wie Besucher mit unserer Website interagieren, indem sie anonyme Informationen sammeln.",
+      "functional": "Funktionale Cookies: Ermöglichen erweiterte Funktionalität und Personalisierung, wie das Speichern Ihrer Präferenzen.",
+      "marketing": "Marketing-Cookies: Werden verwendet, um Besucher über Websites hinweg zu verfolgen, um relevante Werbung anzuzeigen."
+    },
+    "thirdPartyCookies": {
+      "title": "3. Cookies von Drittanbietern",
+      "content": "Wir können Dienste von Drittanbietern nutzen, die Cookies auf Ihrem Gerät setzen, einschließlich Google Analytics und Werbepartner."
+    },
+    "managingCookies": {
+      "title": "4. Cookies verwalten",
+      "content": "Sie können Cookies über Ihre Browsereinstellungen steuern. Das Deaktivieren bestimmter Cookies kann jedoch die Funktionalität der Website beeinträchtigen."
+    },
+    "cookieConsent": {
+      "title": "5. Cookie-Zustimmung",
+      "content": "Durch die weitere Nutzung unserer Website stimmen Sie unserer Verwendung von Cookies gemäß dieser Richtlinie zu."
+    },
+    "updates": {
+      "title": "6. Aktualisierungen dieser Richtlinie",
+      "content": "Wir können diese Cookie-Richtlinie von Zeit zu Zeit aktualisieren. Änderungen werden auf dieser Seite mit einem aktualisierten Überarbeitungsdatum veröffentlicht."
+    }
+  },
+  "termsOfService": {
+    "title": "Nutzungsbedingungen",
+    "acceptance": {
+      "title": "1. Annahme der Bedingungen",
+      "content": "Durch den Zugriff und die Nutzung von SalesVault akzeptieren und stimmen Sie den Bestimmungen dieser Vereinbarung zu."
+    },
+    "tradingServices": {
+      "title": "2. Handelsdienstleistungen",
+      "content": "SalesVault bietet Kryptowährungshandelsdienstleistungen an. Alle Trades werden auf Ihr eigenes Risiko ausgeführt."
+    },
+    "accountSecurity": {
+      "title": "3. Kontosicherheit",
+      "content": "Sie sind verantwortlich für die Vertraulichkeit Ihrer Kontodaten und für alle Aktivitäten, die unter Ihrem Konto stattfinden."
+    },
+    "riskDisclosure": {
+      "title": "4. Risikooffenlegung",
+      "content": "Der Handel mit Kryptowährungen birgt ein erhebliches Verlustrisiko und ist nicht für alle Anleger geeignet. Die Wertentwicklung in der Vergangenheit ist kein Indikator für zukünftige Ergebnisse."
+    },
+    "feesAndCharges": {
+      "title": "5. Gebühren und Entgelte",
+      "content": "Handelsgebühren fallen für alle Transaktionen an. Gebührenpläne sind auf unserer Website verfügbar und können von Zeit zu Zeit aktualisiert werden."
+    },
+    "prohibitedActivities": {
+      "title": "6. Verbotene Aktivitäten",
+      "content": "Benutzer dürfen keine Marktmanipulation, Geldwäsche oder andere illegale Aktivitäten auf unserer Plattform durchführen."
+    },
+    "limitationOfLiability": {
+      "title": "7. Haftungsbeschränkung",
+      "content": "SalesVault haftet nicht für indirekte, zufällige, besondere, Folge- oder Strafschäden."
+    },
+    "termination": {
+      "title": "8. Kündigung",
+      "content": "Wir behalten uns das Recht vor, Ihr Konto jederzeit bei Verstoß gegen diese Bedingungen zu kündigen oder zu sperren."
+    }
+  },
+  "privacyPolicy": {
+    "title": "Datenschutzrichtlinie",
+    "informationWeCollect": {
+      "title": "1. Informationen, die wir sammeln",
+      "content": "Wir sammeln Informationen, die Sie uns direkt zur Verfügung stellen, z. B. wenn Sie ein Konto erstellen, Trades tätigen oder uns für den Support kontaktieren."
+    },
+    "howWeUseInfo": {
+      "title": "2. Wie wir Ihre Informationen verwenden",
+      "content": "Wir verwenden Ihre Informationen, um unsere Dienste bereitzustellen, zu warten und zu verbessern, Transaktionen zu verarbeiten und mit Ihnen zu kommunizieren."
+    },
+    "informationSharing": {
+      "title": "3. Informationsweitergabe",
+      "content": "Wir verkaufen, tauschen oder übertragen Ihre persönlichen Daten nicht an Dritte ohne Ihre Zustimmung, außer wie in dieser Richtlinie beschrieben."
+    },
+    "dataSecurity": {
+      "title": "4. Datensicherheit",
+      "content": "Wir implementieren geeignete Sicherheitsmaßnahmen, um Ihre persönlichen Daten vor unbefugtem Zugriff, Änderung, Offenlegung oder Zerstörung zu schützen."
+    },
+    "cookiesAndTracking": {
+      "title": "5. Cookies und Tracking",
+      "content": "Wir verwenden Cookies und ähnliche Technologien, um Ihre Erfahrung zu verbessern, Nutzungsmuster zu analysieren und Inhalte zu personalisieren."
+    },
+    "dataRetention": {
+      "title": "6. Datenaufbewahrung",
+      "content": "Wir bewahren Ihre Informationen so lange auf, wie es zur Bereitstellung von Diensten und zur Einhaltung gesetzlicher Verpflichtungen erforderlich ist."
+    },
+    "yourRights": {
+      "title": "7. Ihre Rechte",
+      "content": "Sie haben das Recht, auf Ihre persönlichen Daten zuzugreifen, diese zu aktualisieren oder zu löschen. Kontaktieren Sie uns, um diese Rechte auszuüben."
+    },
+    "internationalTransfers": {
+      "title": "8. Internationale Übertragungen",
+      "content": "Ihre Informationen können in andere Länder als Ihr eigenes übertragen und dort verarbeitet werden, vorbehaltlich geeigneter Schutzmaßnahmen."
+    }
+  },
+  "support": {
+    "contactUs": {
+      "title": "Kontaktieren Sie uns",
+      "subtitle": "Wir sind für Sie da. Kontaktieren Sie uns über einen dieser Kanäle und wir werden uns schnell bei Ihnen melden.",
+      "getInTouch": "Kontakt aufnehmen",
+      "customerSupport": {
+        "title": "Kundensupport",
+        "description": "Für Kontoprobleme, Handelsfragen und technischen Support",
+        "email": "E-Mail: support@platform.com",
+        "phone": "Telefon: +1 (555) 123-4567",
+        "availability": "24/7 verfügbar"
+      },
+      "businessInquiries": {
+        "title": "Geschäftsanfragen",
+        "description": "Partnerschaften, institutionelle Dienstleistungen und Medienanfragen",
+        "email": "E-Mail: business@platform.com",
+        "phone": "Telefon: +1 (555) 123-4568",
+        "availability": "Montag-Freitag, 9:00 - 18:00 Uhr EST"
+      },
+      "complianceLegal": {
+        "title": "Compliance & Rechtliches",
+        "description": "Regulatorische Angelegenheiten und rechtliche Anfragen",
+        "email": "E-Mail: legal@platform.com",
+        "availability": "Antwort innerhalb von 48 Stunden"
+      },
+      "sendMessage": "Senden Sie uns eine Nachricht",
+      "form": {
+        "name": "Name",
+        "namePlaceholder": "Ihr vollständiger Name",
+        "email": "E-Mail",
+        "emailPlaceholder": "ihre@email.com",
+        "subject": "Betreff",
+        "message": "Nachricht",
+        "messagePlaceholder": "Wie können wir Ihnen helfen?",
+        "sendButton": "Nachricht senden",
+        "subjects": {
+          "general": "Allgemeine Anfrage",
+          "support": "Kontosupport",
+          "technical": "Technisches Problem",
+          "partnership": "Partnerschaft",
+          "media": "Medienanfrage"
+        }
+      },
+      "offices": {
+        "title": "Unsere Büros",
+        "newYork": "New York (Hauptsitz)",
+        "london": "London",
+        "singapore": "Singapur"
+      },
+      "responseTimes": {
+        "title": "Antwortzeiten",
+        "liveChat": "Live-Chat: Sofortige Antwort während der Geschäftszeiten",
+        "emailSupport": "E-Mail-Support: Innerhalb von 2 Stunden für dringende Angelegenheiten",
+        "phoneSupport": "Telefon-Support: Keine Wartezeit, 24/7 Verfügbarkeit",
+        "businessInquiries": "Geschäftsanfragen: Innerhalb von 1 Werktag"
+      }
+    },
+    "helpCenter": {
+      "title": "Hilfe-Center",
+      "subtitle": "Finden Sie schnelle Antworten auf häufig gestellte Fragen oder erhalten Sie personalisierten Support von unserem Team.",
+      "liveChat": {
+        "title": "Live-Chat",
+        "description": "Erhalten Sie sofortige Hilfe von unserem Support-Team",
+        "availability": "24/7 verfügbar"
+      },
+      "emailSupport": {
+        "title": "E-Mail-Support",
+        "description": "Detaillierte Antworten innerhalb von 2 Stunden",
+        "email": "support@platform.com"
+      },
+      "phoneSupport": {
+        "title": "Telefon-Support",
+        "description": "Sprechen Sie direkt mit unseren Experten",
+        "phone": "+1 (555) 123-4567"
+      },
+      "faq": {
+        "title": "Häufig gestellte Fragen",
+        "fundAccount": {
+          "question": "Wie lade ich mein Konto auf?",
+          "answer": "Sie können Ihr Konto per Banküberweisung, Kreditkarte oder Kryptowährungseinzahlung aufladen. Banküberweisungen dauern in der Regel 1-2 Werktage, während Krypto-Einzahlungen nach Netzwerkbestätigung in der Regel sofort erfolgen."
+        },
+        "tradingFees": {
+          "question": "Wie hoch sind Ihre Handelsgebühren?",
+          "answer": "Unsere Gebührenstruktur ist transparent und wettbewerbsfähig. Spot-Handelsgebühren beginnen bei 0,1% für Maker und 0,15% für Taker. Futures-Handelsgebühren sind so niedrig wie 0,02% für Maker. Volumenrabatte sind für Vieltrader verfügbar."
+        },
+        "withdrawals": {
+          "question": "Wie lange dauern Auszahlungen?",
+          "answer": "Kryptowährungsabhebungen werden innerhalb von 30 Minuten während der Geschäftszeiten bearbeitet. Bankabhebungen dauern in der Regel 1-3 Werktage, abhängig von Ihrer Bank und Ihrem Standort."
+        },
+        "insurance": {
+          "question": "Ist mein Konto versichert?",
+          "answer": "Ja, wir unterhalten eine umfassende Versicherungsdeckung für digitale Vermögenswerte und Betriebsrisiken. Darüber hinaus sind Fiat-Einlagen durch die FDIC-Versicherung bis zu 250.000 US-Dollar pro Konto geschützt."
+        }
+      },
+      "gettingStarted": {
+        "title": "Erste Schritte",
+        "verification": "Anleitung zur Kontoverifizierung",
+        "firstTrade": "Wie Sie Ihren ersten Trade tätigen",
+        "orderTypes": "Ordertypen verstehen",
+        "tutorials": "Plattform-Tutorial-Videos"
+      },
+      "advancedTopics": {
+        "title": "Fortgeschrittene Themen",
+        "marginTrading": "Margin-Handel erklärt",
+        "optionsStrategies": "Leitfaden für Optionsstrategien",
+        "apiDocs": "API-Dokumentation",
+        "taxReporting": "Steuerberichts-Tools"
+      },
+      "cantFind": {
+        "title": "Können Sie nicht finden, wonach Sie suchen?",
+        "description": "Unser Support-Team hilft Ihnen gerne bei allen Fragen, die nicht in unseren FAQs behandelt werden. Wir sind stolz auf schnelle Antwortzeiten und kompetente Unterstützung.",
+        "contactButton": "Support kontaktieren"
+      }
+    },
+    "aboutUs": {
+      "title": "Über uns",
+      "subtitle": "Wir gestalten die Zukunft der Finanzmärkte und machen anspruchsvolle Handelstools für jedermann zugänglich.",
+      "mission": {
+        "title": "Unsere Mission",
+        "content": "Finanzmärkte waren traditionell die Domäne großer Institutionen und wohlhabender Einzelpersonen. Wir glauben, dass jeder Zugang zu denselben leistungsstarken Handelstools und -möglichkeiten verdient. Unsere Plattform kombiniert Technologie auf institutionellem Niveau mit einer intuitiven Benutzeroberfläche und bringt professionelle Handelsfähigkeiten zu Privatanlegern weltweit."
+      },
+      "founded": {
+        "title": "Gegründet im Jahr 2019",
+        "content": "Gegründet von einem Team ehemaliger Wall Street Trader und Silicon Valley Ingenieure, die den Bedarf an einer besseren Infrastruktur für den Einzelhandelshandel sahen. Wir sind von einem kleinen Startup zu einem Unternehmen gewachsen, das weltweit über 2 Millionen Trader bedient."
+      },
+      "globalReach": {
+        "title": "Globale Reichweite",
+        "content": "Mit Büros in New York, London und Singapur bieten wir 24/7 Support und halten die regulatorische Compliance in mehreren Gerichtsbarkeiten ein. Unser vielfältiges Team spricht über 20 Sprachen."
+      },
+      "values": {
+        "title": "Unsere Werte",
+        "transparency": {
+          "title": "Transparenz",
+          "description": "Klare Preise, keine versteckten Gebühren, offene Kommunikation"
+        },
+        "innovation": {
+          "title": "Innovation",
+          "description": "Spitzentechnologie, kontinuierliche Verbesserung"
+        },
+        "security": {
+          "title": "Sicherheit",
+          "description": "Sicherheit auf Bankniveau, Einhaltung gesetzlicher Vorschriften"
+        }
+      }
+    },
+    "security": {
+      "title": "Sicherheit zuerst",
+      "subtitle": "Ihre Vermögenswerte und Daten sind durch Sicherheitsmaßnahmen auf institutionellem Niveau und behördliche Aufsicht geschützt.",
+      "assetProtection": {
+        "title": "Vermögensschutz",
+        "coldStorage": {
+          "title": "Cold Storage",
+          "description": "95% der digitalen Vermögenswerte werden offline in militärisch gesicherten Einrichtungen gespeichert"
+        },
+        "insurance": {
+          "title": "Versicherungsschutz",
+          "description": "100 Millionen US-Dollar Versicherungspolice für digitale Vermögenswerte und Betriebsrisiken"
+        },
+        "segregatedAccounts": {
+          "title": "Getrennte Konten",
+          "description": "Kundengelder werden getrennt von Unternehmensvermögen in regulierten Banken gehalten"
+        }
+      },
+      "technicalSecurity": {
+        "title": "Technische Sicherheit",
+        "multiSig": {
+          "title": "Multi-Signatur-Wallets",
+          "description": "Mehrere Schlüssel für alle Kryptowährungstransaktionen erforderlich"
+        },
+        "encryption": {
+          "title": "End-to-End-Verschlüsselung",
+          "description": "Alle Daten werden während der Übertragung und im Ruhezustand mit AES-256 verschlüsselt"
+        },
+        "monitoring": {
+          "title": "24/7 Überwachung",
+          "description": "Echtzeit-Bedrohungserkennung und Incident-Response-Team"
+        }
+      },
+      "compliance": {
+        "title": "Regulatorische Compliance",
+        "fca": "FCA reguliert",
+        "fcaDesc": "UK Financial Conduct Authority",
+        "cftc": "CFTC registriert",
+        "cftcDesc": "US Commodity Futures Trading Commission",
+        "mas": "MAS lizenziert",
+        "masDesc": "Monetary Authority of Singapore"
+      },
+      "securityTips": {
+        "title": "Tipps zur Kontosicherheit",
+        "tip1": "Aktivieren Sie die Zwei-Faktor-Authentifizierung für Ihr Konto",
+        "tip2": "Verwenden Sie ein einzigartiges, starkes Passwort mit einem Passwort-Manager",
+        "tip3": "Geben Sie Ihre Anmeldedaten niemals an Dritte weiter",
+        "tip4": "Überprüfen Sie regelmäßig Ihre Kontoaktivitäten und -auszüge",
+        "tip5": "Kontaktieren Sie den Support sofort, wenn Sie verdächtige Aktivitäten bemerken"
+      },
+      "audits": {
+        "title": "Sicherheitsaudits",
+        "description": "Unsere Systeme werden vierteljährlich von führenden Cybersicherheitsfirmen, darunter Deloitte und PwC, Sicherheitsaudits unterzogen. Alle Auditberichte sind auf Anfrage erhältlich."
+      }
+    }
+  },
+  "login": {
+    "backToHome": "Zurück zur Startseite",
+    "title": "Anmelden",
+    "subtitle": "Willkommen zurück auf Ihrer Handelsplattform",
+    "emailOrUsername": "E-Mail oder Benutzername",
+    "emailOrUsernamePlaceholder": "Geben Sie Ihre E-Mail oder Ihren Benutzernamen ein",
+    "password": "Passwort",
+    "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+    "twoFactorCode": "Zwei-Faktor-Code",
+    "twoFactorCodePlaceholder": "Geben Sie den 2FA-Code ein",
+    "rememberMe": "Angemeldet bleiben",
+    "signingIn": "Meldet an...",
+    "signIn": "Anmelden",
+    "dontHaveAccount": "Noch kein Konto?",
+    "signUp": "Registrieren",
+    "rightSide": {
+      "title": "Beginnen Sie noch heute mit dem Handel",
+      "feature1": "Zugang zu über 100 Kryptowährungshandelspaaren",
+      "feature2": "Fortgeschrittene Handelstools und Echtzeit-Marktdaten",
+      "feature3": "Sichere Wallet mit branchenführendem Schutz",
+      "feature4": "24/7 Kundensupport und Bildungsressourcen",
+      "totalVolume": "Gesamtes Handelsvolumen",
+      "totalVolumeValue": "2,8 Mrd. $+",
+      "activeTraders": "Aktive Trader",
+      "activeTradersValue": "500K+",
+      "countries": "Länder",
+      "countriesValue": "180+"
+    }
+  },
+  "register": {
+    "backToHome": "Zurück zur Startseite",
+    "title": "Konto erstellen",
+    "subtitle": "Treten Sie noch heute unserer Handelsplattform bei",
+    "firstName": "Vorname",
+    "firstNamePlaceholder": "Vorname",
+    "lastName": "Nachname",
+    "lastNamePlaceholder": "Nachname",
+    "email": "E-Mail",
+    "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+    "username": "Benutzername",
+    "usernamePlaceholder": "Wählen Sie einen Benutzernamen",
+    "password": "Passwort",
+    "passwordPlaceholder": "Erstellen Sie ein Passwort",
+    "phoneNumber": "Telefonnummer",
+    "phoneNumberPlaceholder": "Geben Sie Ihre Telefonnummer ein",
+    "country": "Land",
+    "selectCountry": "Wählen Sie Ihr Land",
+    "yourLocation": "Ihr Standort",
+    "searchCountries": "Länder suchen...",
+    "noCountriesFound": "Keine Länder gefunden",
+    "language": "Sprache",
+    "selectLanguage": "Wählen Sie Ihre Sprache",
+    "searchLanguages": "Sprachen suchen...",
+    "noLanguagesFound": "Keine Sprachen gefunden",
+    "dateOfBirth": "Geburtsdatum",
+    "creatingAccount": "Konto wird erstellt...",
+    "createAccount": "Konto erstellen",
+    "alreadyHaveAccount": "Bereits ein Konto?",
+    "signIn": "Anmelden",
+    "rightSide": {
+      "title": "Beginnen Sie noch heute mit dem Handel",
+      "feature1": "Zugang zu über 100 Kryptowährungshandelspaaren",
+      "feature2": "Fortgeschrittene Handelstools und Echtzeit-Marktdaten",
+      "feature3": "Sichere Wallet mit branchenführendem Schutz",
+      "feature4": "24/7 Kundensupport und Bildungsressourcen",
+      "totalVolume": "Gesamtes Handelsvolumen",
+      "totalVolumeValue": "2,8 Mrd. $+",
+      "activeTraders": "Aktive Trader",
+      "activeTradersValue": "500K+",
+      "countries": "Länder",
+      "countriesValue": "180+"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "Übersicht",
+    "analytics": "Analysen",
+    "reports": "Berichte",
+    "settings": "Einstellungen",
+    "loading": "Dashboard wird geladen...",
+    "errorTitle": "Fehler beim Laden des Dashboards",
+    "retry": "Wiederholen",
+    "welcomeBack": "Willkommen zurück, ",
+    "welcomeBackDefault": "Willkommen zurück, Benutzer!",
+    "subtitle": "Hier ist, was heute mit Ihrem Handelskonto passiert.",
+    "primaryBalance": "Primäres Guthaben",
+    "totalUsdValue": "Gesamtwert in USD",
+    "activeTickets": "Aktive Tickets",
+    "tradingActivity": "Handelsaktivität",
+    "totalDeposits": "Gesamte Einzahlungen",
+    "totalWithdrawals": "Gesamte Auszahlungen",
+    "lockedBalance": "Gesperrtes Guthaben",
+    "recentTickets": "Aktuelle Tickets",
+    "recentTicketsDescription": "Ihre letzten Ein- und Auszahlungsanfragen.",
+    "noRecentTickets": "Keine aktuellen Tickets",
+    "depositRequest": "Einzahlungsanfrage",
+    "withdrawalRequest": "Auszahlungsanfrage",
+    "currencyBreakdown": "Währungsaufschlüsselung",
+    "currencyBreakdownDescription": "Ihre Guthaben nach Währung.",
+    "noCurrenciesFound": "Keine Währungen gefunden",
+    "available": "Verfügbar:",
+    "locked": "Gesperrt:",
+    "wallet": "Wallet",
+    "wallets": "Wallets",
+    "account": "Konto",
+    "accounts": "Konten",
+    "totalTickets": "Gesamtzahl der Tickets",
+    "currenciesAvailable": "Verfügbare Währungen",
+    "active": "Aktiv",
+    "ticketStatus": {
+      "pending": "Ausstehend",
+      "processing": "In Bearbeitung",
+      "completed": "Abgeschlossen",
+      "cancelled": "Storniert",
+      "failed": "Fehlgeschlagen",
+      "rejected": "Abgelehnt"
+    }
+  },
+  "finance": {
+    "title": "Finanzen",
+    "subtitle": "Verwalten Sie Ihre Finanzkonten, Transaktionen und Investitionen.",
+    "loading": "Finanzdaten werden geladen...",
+    "errorTitle": "Fehler beim Laden der Finanzdaten",
+    "retry": "Wiederholen",
+    "cashBalance": "Kassenbestand",
+    "investments": "Investitionen",
+    "holdings": "Bestände",
+    "tradingAccounts": "Handelskonten",
+    "tradingAccountsDescription": "Übersicht über Ihre Handelskonten und deren Status.",
+    "noTradingAccountsFound": "Keine Handelskonten gefunden",
+    "account": "Konto:",
+    "wallet": "Wallet",
+    "wallets": "Wallets",
+    "recentTransactions": "Aktuelle Transaktionen",
+    "recentTransactionsDescription": "Letzte Ein- und Auszahlungsaktivitäten.",
+    "noRecentTransactions": "Keine aktuellen Transaktionen",
+    "deposit": "Einzahlung",
+    "withdrawal": "Auszahlung",
+    "walletBreakdown": "Wallet-Aufschlüsselung",
+    "walletBreakdownDescription": "Detaillierte Ansicht aller Ihrer Wallet-Guthaben nach Währung und Konto.",
+    "noWalletsFound": "Keine Wallets gefunden",
+    "available": "Verfügbar:",
+    "locked": "Gesperrt:",
+    "accountStatus": {
+      "active": "Aktiv",
+      "suspended": "Gesperrt"
+    },
+    "transactionStatus": {
+      "pending": "Ausstehend",
+      "processing": "In Bearbeitung",
+      "completed": "Abgeschlossen",
+      "cancelled": "Storniert",
+      "failed": "Fehlgeschlagen",
+      "rejected": "Abgelehnt",
+      "unknown": "Unbekannt"
+    }
+  },
+  "trading": {
+    "title": "Handel",
+    "subtitle": "Verwalten Sie Ihre Handelskonten, erstellen Sie Tickets und sehen Sie den Transaktionsverlauf ein.",
+    "loading": "Handelsdaten werden geladen...",
+    "errorTitle": "Fehler beim Laden der Handelsdaten",
+    "retry": "Wiederholen",
+    "tabs": {
+      "accounts": "Handelskonten",
+      "createAccount": "Konto erstellen",
+      "create": "Ticket erstellen",
+      "history": "Ticket-Verlauf"
+    },
+    "accounts": {
+      "title": "Handelskonto auswählen",
+      "description": "Wählen Sie ein Konto aus, um dessen Wallets und Guthaben anzuzeigen.",
+      "selectLabel": "Handelskonto",
+      "selectPlaceholder": "Handelskonto auswählen",
+      "available": "Verfügbar:",
+      "total": "Gesamt:",
+      "locked": "Gesperrt:",
+      "noAccountSelected": "Kein Konto ausgewählt"
+    },
+    "createAccount": {
+      "title": "Neues Handelskonto erstellen",
+      "description": "Erstellen Sie ein neues Handelskonto, um mit dem Handel zu beginnen.",
+      "nameLabel": "Anzeigename des Kontos",
+      "namePlaceholder": "z.B. Haupt-Handelskonto",
+      "nameHelp": "Wählen Sie einen aussagekräftigen Namen für Ihr Handelskonto",
+      "creating": "Konto wird erstellt...",
+      "createButton": "Handelskonto erstellen",
+      "existingAccounts": "Bestehende Konten",
+      "account": "Konto:",
+      "validationError": "Bitte geben Sie einen Kontonamen ein",
+      "successMessage": "Handelskonto erfolgreich erstellt!",
+      "errorMessage": "Fehler beim Erstellen des Handelskontos"
+    },
+    "createTicket": {
+      "title": "Neues Ticket erstellen",
+      "description": "Erstellen Sie ein Ein- oder Auszahlungsticket für Ihr Handelskonto.",
+      "accountLabel": "Handelskonto",
+      "accountPlaceholder": "Handelskonto auswählen",
+      "walletLabel": "Wallet",
+      "walletPlaceholder": "Wallet auswählen",
+      "typeLabel": "Ticket-Typ",
+      "typePlaceholder": "Ticket-Typ auswählen",
+      "amountLabel": "Betrag",
+      "amountPlaceholder": "Betrag eingeben",
+      "creating": "Wird erstellt...",
+      "createButton": "Ticket erstellen",
+      "deposit": "Einzahlung",
+      "withdrawal": "Auszahlung",
+      "validationError": "Bitte wählen Sie eine Wallet aus und geben Sie einen gültigen Betrag ein",
+      "successMessage": "Ticket erfolgreich erstellt mit ID:",
+      "errorMessage": "Ticket konnte aufgrund unzureichender Mittel nicht erstellt werden. Bitte überprüfen Sie Ihr Guthaben und versuchen Sie es erneut."
+    },
+    "history": {
+      "title": "Ticket-Verlauf",
+      "description": "Sehen Sie alle Ihre Ein- und Auszahlungstickets ein.",
+      "showLabel": "Anzeigen:",
+      "entries": "Einträge",
+      "loading": "Lädt...",
+      "noTickets": "Keine Tickets gefunden",
+      "ticketId": "Ticket-ID:",
+      "showing": "Zeigt",
+      "to": "bis",
+      "of": "von",
+      "entriesText": "Einträgen"
+    },
+    "ticketStatus": {
+      "pending": "Ausstehend",
+      "processing": "In Bearbeitung",
+      "completed": "Abgeschlossen",
+      "cancelled": "Storniert",
+      "failed": "Fehlgeschlagen",
+      "rejected": "Abgelehnt",
+      "unknown": "Unbekannt"
+    },
+    "accountStatus": {
+      "active": "Aktiv",
+      "suspended": "Gesperrt"
+    }
+  },
+  "profile": {
+    "title": "Mein Profil",
+    "subtitle": "Verwalten Sie Ihre Kontoeinstellungen und persönlichen Informationen.",
+    "loading": "Lädt...",
+    "personalInformation": "Persönliche Informationen",
+    "personalInformationDescription": "Aktualisieren Sie Ihre persönlichen Daten und Kontaktinformationen.",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "phoneNumber": "Telefonnummer",
+    "username": "Benutzername",
+    "saving": "Speichert...",
+    "saveChanges": "Änderungen speichern",
+    "successMessage": "Profil erfolgreich aktualisiert!",
+    "errorMessage": "Fehler beim Aktualisieren des Profils"
+  },
+  "documents": {
+    "title": "Dokumente",
+    "subtitle": "Laden und verwalten Sie Ihre Dokumente sicher.",
+    "tabs": {
+      "upload": "Dokumente hochladen",
+      "manage": "Dokumente verwalten"
+    },
+    "upload": {
+      "title": "Dokument hochladen",
+      "description": "Wählen Sie eine Datei zum Hochladen in Ihre Dokumentenbibliothek aus.",
+      "dragAndDrop": "Ziehen Sie Ihre Datei hierher oder klicken Sie zum Auswählen",
+      "selectFile": "Datei auswählen",
+      "uploading": "Lädt hoch...",
+      "uploadDocument": "Dokument hochladen",
+      "uploadSuccess": "Datei erfolgreich hochgeladen!",
+      "uploadFailed": "Upload fehlgeschlagen",
+      "removeFile": "Datei entfernen"
+    },
+    "table": {
+      "title": "Dokumente",
+      "description": "Ihre hochgeladenen Dokumente werden hier angezeigt.",
+      "detailedDescription": "Ihre hochgeladenen Dokumente und deren Details.",
+      "loadingDocuments": "Dokumente werden geladen...",
+      "noDocumentsYet": "Noch keine Dokumente hochgeladen",
+      "fileId": "Datei-ID:",
+      "refresh": "Aktualisieren",
+      "retry": "Wiederholen",
+      "unknown": "Unbekannt"
+    }
+  },
+  "resources": {
+    "blog": {
+      "title": "Unser Blog",
+      "subtitle": "Bleiben Sie auf dem Laufenden mit unseren neuesten Nachrichten und Einblicken.",
+      "overview": {
+        "content": "Tauchen Sie ein in unsere Artikel zu verschiedenen Themen, von Produktaktualisierungen über Branchentrends bis hin zu hilfreichen Anleitungen."
+      },
+      "quickStart": {
+        "title": "Schnellstartanleitung",
+        "content": "Erfahren Sie, wie Sie in wenigen Minuten mit unserer Plattform beginnen können. Dieser Abschnitt behandelt die Grundlagen der Einrichtung und die ersten Schritte."
+      },
+      "authentication": {
+        "title": "Authentifizierung im Detail",
+        "content": "Verstehen Sie unsere Authentifizierungsmechanismen, einschließlich der Sicherung Ihrer Anwendungen und der Verwaltung des Benutzerzugriffs."
+      },
+      "faq": {
+        "title": "Häufig gestellte Fragen",
+        "apiUrl": {
+          "question": "Was ist die API-URL?",
+          "answer": "Unsere API ist unter https://api.example.com/v1 zugänglich. Bitte beachten Sie die Dokumentation für spezifische Endpunkte."
+        },
+        "reportBug": {
+          "question": "Wie melde ich einen Fehler?",
+          "answer": "Sie können Fehler über unser Support-Portal melden oder eine E-Mail an support@example.com senden. Bitte fügen Sie detaillierte Schritte zur Reproduktion bei."
+        }
+      },
+      "backToHome": "Zurück"
+    },
+    "documentation": {
+      "title": "Dokumentation",
+      "subtitle": "Finden Sie umfassende Anleitungen und API-Referenzen.",
+      "description": "Erkunden Sie unsere detaillierte Dokumentation, um loszulegen, erweiterte Funktionen zu verstehen und häufige Probleme zu beheben.",
+      "overview": {
+        "title": "Übersicht",
+        "content": "Dieser Abschnitt bietet eine allgemeine Einführung in unsere Plattform und ihre Kernfunktionen. Erfahren Sie mehr über die Architektur und die Hauptkomponenten."
+      },
+      "quickStart": {
+        "title": "Schnellstartanleitung",
+        "content": "Befolgen Sie diese Anleitung, um Ihre Umgebung einzurichten und Ihren ersten API-Aufruf in wenigen Minuten zu tätigen. Perfekt für neue Benutzer."
+      },
+      "auth": {
+        "title": "Authentifizierung & Autorisierung",
+        "content": "Verstehen Sie unsere Sicherheitsprotokolle, einschließlich API-Schlüsselverwaltung, OAuth und Benutzerrollenberechtigungen."
+      },
+      "faq": {
+        "title": "Häufig gestellte Fragen",
+        "q1": {
+          "question": "Wie integriere ich mich in Ihre API?",
+          "answer": "Unsere API ist RESTful und kann mit Standard-HTTP-Methoden integriert werden. Detaillierte Beispiele finden Sie im Abschnitt API-Referenz."
+        },
+        "q2": {
+          "question": "Welche Ratenbegrenzungen gelten für die API?",
+          "answer": "Unsere API hat eine Standard-Ratenbegrenzung von 100 Anfragen pro Minute pro API-Schlüssel. Höhere Limits können für Enterprise-Pläne angefordert werden."
+        }
+      }
+    }
+  }
+}
