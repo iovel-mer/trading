@@ -90,7 +90,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
           )}
 
           <div className='hidden lg:flex items-center space-x-4'>
-            <Link href={`${locale}/login`}>
+            <Link href={'/login'}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -99,7 +99,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ className = '' }) => {
                 {tLogin('login')}
               </motion.button>
             </Link>
-            <Link href={`${locale}/register`}>
+            <Link href={'/register'}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
